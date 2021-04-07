@@ -17,7 +17,7 @@ jobs:
       matrix:
         # とりあえずBigSurでRubyがインストールできるようになるまでは2.6の最新verを利用
         # ruby-version: ['2.6', '2.7', '3.0']
-        ruby-version: ['2.6']
+        ruby-version: ['2.6.3']
 
     steps:
     - uses: actions/checkout@v2
