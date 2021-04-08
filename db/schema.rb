@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_07_013028) do
+ActiveRecord::Schema.define(version: 2021_04_08_043243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "label_tasks", force: :cascade do |t|
+    t.integer "label_id", null: false
+    t.integer "task_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "labels", force: :cascade do |t|
     t.string "label"
@@ -51,4 +58,9 @@ ActiveRecord::Schema.define(version: 2021_04_07_013028) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "label_tasks", "labels"
+  add_foreign_key "label_tasks", "tasks"
+  add_foreign_key "tasks", "priorities"
+  add_foreign_key "tasks", "statuses"
+  add_foreign_key "tasks", "users"
 end
