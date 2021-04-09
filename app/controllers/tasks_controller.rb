@@ -4,4 +4,8 @@ class TasksController < ApplicationController
 
     @tasks = Task.where(user_id: user_id)
   end
+
+  def show
+    @tasks = Task.find(params[:id])
+  end
 end
