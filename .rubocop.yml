@@ -1,0 +1,60 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rake
+  - rubocop-rspec
+
+AllCops:
+  Exclude:
+    - "db/*schema.rb"
+    - "node_modules/**/*"
+    - "vendor/bundle/**/*"
+    - "public/packs/**/*"
+    - "public/packs-test/**/*"
+    - "tmp/**/*"
+    - "bin/*"
+    - "config/**/*"
+
+# コメント系は必要ない
+Style/Documentation:
+  Enabled: false
+Style/AsciiComments:
+  Enabled: false
+
+# gitの差分が少ない方を良しとする
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+# RSpecの `and`, `or` と衝突する
+Layout/MultilineMethodCallIndentation:
+  Exclude:
+    - "spec/**/*"
+
+# 長さについては既定の倍とする、抵触しないよう日頃からリファクタリングを行うこと
+Metrics/BlockLength:
+  Max: 50
+  Exclude:
+    - "config/**/*"
+    - "spec/**/*"
+Layout/LineLength:
+  Max: 240
+Metrics/AbcSize:
+  Max: 30
+Metrics/ClassLength:
+  Max: 200
+Metrics/MethodLength:
+  Max: 20
+Metrics/ModuleLength:
+  Max: 200
+
+# テストの長さに囚われる必要はない
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/ContextWording:
+  Enabled: false
