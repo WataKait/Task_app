@@ -11,6 +11,8 @@ on: push
 
 jobs:
   test:
+    env:
+      RAILS_ENV: test
 
     runs-on: ubuntu-latest
     strategy:
