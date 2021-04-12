@@ -5,11 +5,7 @@ class TasksController < ApplicationController
     @tasks = Task.where(user_id: user_id)
   end
 
-  def dummy_action_hoge
-    puts 'this action is dummy'
-  end
-
   def show
-    @task = Task.where(user_id: user_id).first
+    @task = Task.find(params[:id])
   end
 end

@@ -1,0 +1,35 @@
+<head>
+  <style>
+    ul, li{
+      list-style-type: none
+    }
+    li {
+      display: flex
+    }
+  </style>
+</head>
+
+<h1>タスク詳細</h1>
+
+<ul>
+  <li>
+    <p>タスク：</p>
+    <p><%= @task.name %></p>
+  </li>
+  <li>
+    <p>優先度：</p>
+    <p><%= @task.priority.priority %></p>
+  </li>
+  <li>
+    <p>終了期限：</p>
+    <p><%= @task.time_limit %></p>
+  </li>
+  <li>
+    <p>ステータス：</p>
+    <p><%= @task.status.status %></p>
+  </li>
+  <li>
+    <p>説明：</p>
+    <p><%= @task.description %></p>
+  </li>
+</ul>
