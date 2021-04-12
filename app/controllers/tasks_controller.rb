@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
+  before_action :set_priority, only: %i[new create]
+  before_action :set_status, only: %i[new create]
+
   def index
     user_id = 1 # ログイン機能実装後、ログインIDを user_id に格納
 
@@ -13,8 +16,28 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @priority = Priority.all
     @status = Status.all
-    @task.build_status
-    @task.build_priority
+    @label = Label.new
+  end
+
+  def create
+    @task = Task.new(task_params)
+    @task.save
+    redirect_to tasks_path
+  end
+
+  private
+
+  def task_params
+    params[:task].permit(:user_id, :name, :comparison_val, :priority_id, :time_limit, :status_id, :description, :label)
+  end
+
+  def set_priority
+    @priority = Priority.all
+  end
+
+  def set_status
+    @status = Status.all
   end
 end

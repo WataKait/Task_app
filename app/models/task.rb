@@ -10,4 +10,5 @@ class Task < ApplicationRecord
   validates :user_id, presence: true
   validates :priority_id, presence: true
   validates :status_id, presence: true
+  accepts_nested_attributes_for :label_tasks
 end
