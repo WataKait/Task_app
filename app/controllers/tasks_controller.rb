@@ -10,4 +10,11 @@ class TasksController < ApplicationController
   def show
     @task = Task.find(params[:id])
   end
+
+  def new
+    @task = Task.new
+    @status = Status.all
+    @task.build_status
+    @task.build_priority
+  end
 end

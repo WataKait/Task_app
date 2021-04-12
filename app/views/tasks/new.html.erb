@@ -1,0 +1,40 @@
+<h1>タスク作成</h1>
+
+<%= form_for(@task, :url => {:action => 'create'} ) do |f| %>
+  <%#= render :partial => 'error_message' %>
+
+  <%# TODO: ログイン機能実装後、ログインIDを value に持たせる %>
+  <%= f.hidden_field :user_id, :value => 1 %>
+
+  <table>
+    <tr>
+      <td><%= f.label :タスク %></td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :優先度（数値） %></td>
+      <td><%#= f.text_field :comparison_val %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :優先度 %></td>
+      <td><%#= f.text_field :priority %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :終了期限 %></td>
+      <td><%= f.datetime_field :time_limit %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :ステータス %></td>
+      <td><%= f.collection_select :status, @status, :id, :status, :prompt => "ステータスを選択" %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :説明 %></td>
+      <td><%= f.text_area :description %></td>
+    </tr>
+    <tr>
+      <td><%= f.label :ラベル %></td>
+      <td><%#= f.text_field :label %></td>
+    </tr>
+    </table>
+    <%= f.submit "登録" %>
+<% end %>
