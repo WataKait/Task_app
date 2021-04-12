@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Label_Task < ApplicationRecord
+class LabelTask < ApplicationRecord
   belongs_to :task
   belongs_to :label
   validates :label_id, presence: true

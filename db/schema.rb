@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,56 +10,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_408_043_243) do
+ActiveRecord::Schema.define(version: 2021_04_12_021140) do
+
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'label_tasks', force: :cascade do |t|
-    t.integer 'label_id', null: false
-    t.integer 'task_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "label_tasks", force: :cascade do |t|
+    t.integer "label_id", null: false
+    t.integer "task_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'labels', force: :cascade do |t|
-    t.string 'label'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "labels", force: :cascade do |t|
+    t.string "label"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'priorities', force: :cascade do |t|
-    t.integer 'comparison_val', null: false
-    t.string 'priority', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "priorities", force: :cascade do |t|
+    t.integer "comparison_val", null: false
+    t.string "priority", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comparison_val"], name: "index_priorities_on_comparison_val", unique: true
+    t.index ["priority"], name: "index_priorities_on_priority", unique: true
   end
 
-  create_table 'statuses', force: :cascade do |t|
-    t.string 'status', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "statuses", force: :cascade do |t|
+    t.string "status", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'tasks', force: :cascade do |t|
-    t.string 'name', null: false
-    t.integer 'user_id', null: false
-    t.integer 'priority_id', null: false
-    t.datetime 'time_limit'
-    t.text 'description'
-    t.integer 'status_id', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "tasks", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "user_id", null: false
+    t.integer "priority_id", null: false
+    t.datetime "time_limit"
+    t.text "description"
+    t.integer "status_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'name', null: false
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key 'label_tasks', 'labels'
-  add_foreign_key 'label_tasks', 'tasks'
-  add_foreign_key 'tasks', 'priorities'
-  add_foreign_key 'tasks', 'statuses'
-  add_foreign_key 'tasks', 'users'
+  add_foreign_key "label_tasks", "labels"
+  add_foreign_key "label_tasks", "tasks"
+  add_foreign_key "tasks", "priorities"
+  add_foreign_key "tasks", "statuses"
+  add_foreign_key "tasks", "users"
 end
