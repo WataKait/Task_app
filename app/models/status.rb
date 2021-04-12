@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 class Status < ApplicationRecord
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   validates :status, presence: true, length: { maximum: 10 }
 end
