@@ -24,13 +24,19 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.save
+    @label = Label.new(label_params)
+    @label.save
     redirect_to tasks_path
   end
 
   private
 
   def task_params
-    params[:task].permit(:user_id, :name, :comparison_val, :priority_id, :time_limit, :status_id, :description, :label)
+    params[:task].permit(:user_id, :name, :comparison_val, :priority_id, :time_limit, :status_id, :description)
+  end
+
+  def label_params
+    params[:label].permit(:label)
   end
 
   def set_priority
