@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :set_priority, only: %i[new create]
-  before_action :set_status, only: %i[new create]
+  before_action :set_priority, only: %i[new]
+  before_action :set_status, only: %i[new]
 
   def index
     user_id = 1 # ログイン機能実装後、ログインIDを user_id に格納
@@ -16,8 +16,6 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-    @priority = Priority.all
-    @status = Status.all
     @label = Label.new
   end
 
