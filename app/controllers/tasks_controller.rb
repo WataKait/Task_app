@@ -21,9 +21,8 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task.labels.build(label_params)
     @task.save
-    @label = Label.new(label_params)
-    @label.save
     redirect_to tasks_path
   end
 
