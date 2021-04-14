@@ -1,8 +1,10 @@
+<% if flash[:alert] %>
+  <p><%= flash[:alert] %></p>
+<% end %>
+
 <h1>タスク作成</h1>
 
 <%= form_for(@task, :url => {:action => 'create'} ) do |task_form| %>
-  <%#= render :partial => 'error_message' %>
-
   <%# TODO: ログイン機能実装後、ログインIDを value に持たせる %>
   <%= task_form.hidden_field :user_id, :value => 1 %>
 
