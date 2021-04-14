@@ -21,14 +21,12 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @label = Label.new(label_params)
     @task.labels.build(label_params)
     if @task.save
       redirect_to tasks_path, notice: 'タスクが作成されました'
     else
-      # redirect_to new_task_path, notice: '作成に失敗しました'
-      @task = Task.new(task_params)
-      @label = Label.new(label_params)
-      flash.now[:alert] = 'バリデーションエラーが発生しました'
+      flash.now[:alert] = 'タスクの作成に失敗しました'
       render :new
     end
   end
