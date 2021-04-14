@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    models:
+      task: タスク
+      priority: 優先度
+      status: ステータス
+      label: ラベル
+    attributes:
+      task:
+        name: タスク
+  attributes:
+    priority: 優先度
+    status: ステータス
+    labels: ラベル
