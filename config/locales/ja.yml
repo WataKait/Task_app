@@ -2,13 +2,12 @@ ja:
   activerecord:
     models:
       task: タスク
-      priority: 優先度
-      status: ステータス
-      label: ラベル
     attributes:
       task:
         name: タスク
+        priority_id: 優先度
+        status_id: ステータス
+        priority: 優先度名
+        status: ステータス名
   attributes:
-    priority: 優先度
-    status: ステータス
     labels: ラベル
