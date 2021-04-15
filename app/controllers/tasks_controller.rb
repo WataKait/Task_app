@@ -17,12 +17,13 @@ class TasksController < ApplicationController
   def new
     @task = Task.new
     @label = Label.new
+    @task.labels.build
   end
 
   def create
     @task = Task.new(task_params)
     @label = Label.new(label_params)
-    @task.labels.build(label_params)
+    @task.labels.build(label_params) if label_params[:label] != ''
     if @task.save
       redirect_to tasks_path, notice: 'タスクが作成されました'
     else

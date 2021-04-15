@@ -5,9 +5,7 @@
 </style>
 
 <% if task.errors.any? %>
-  <ul>
-    <% task.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
+  <% task.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
 <% end %>
