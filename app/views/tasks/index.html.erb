@@ -6,7 +6,13 @@
  </style>
 </head>
 
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
 <h1>タスク一覧</h1>
+
+<%= link_to "+ タスクの作成", new_task_path %>
 
 <table>
   <thead>
