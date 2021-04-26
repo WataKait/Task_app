@@ -2,6 +2,6 @@ class Task < ApplicationRecord
   belongs_to :user
   belongs_to :priority
   belongs_to :status
-  belongs_to :label
+  has_one :label, dependent: :nullify
   validates :name, presence: true
 end
