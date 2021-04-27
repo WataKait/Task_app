@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Priority < ApplicationRecord
   has_many :tasks, dependent: :destroy
   validates :name, presence: true, uniqueness: true

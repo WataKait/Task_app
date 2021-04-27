@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeColumnTasksName < ActiveRecord::Migration[6.1]
   def change
     change_column(:tasks, :name, :string, limit: 255)
