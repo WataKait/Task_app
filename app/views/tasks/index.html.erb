@@ -8,6 +8,7 @@
       <th>優先度</th>
       <th>ステータス</th>
       <th>終了期限</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -18,6 +19,7 @@
         <td><%= task.priority.name %></td>
         <td><%= task.status.name %></td>
         <td><%= task.time_limit %></td>
+        <td><%= link_to '詳細', task %></td>
       </tr>
     <% end %>
   </tbody>
