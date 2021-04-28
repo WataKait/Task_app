@@ -2,6 +2,8 @@
 
 <h1>タスク作成</h1>
 
+<%= render partial: 'error_message', locals: {task: @task} %>
+
 <%= form_with(model: @task, url: {action: "create"}) do |task| %>
   <%# TODO ログイン機能実装後、user_id を取得してくる %>
   <%= task.hidden_field :user_id, value: 1 %>
