@@ -1,3 +1,5 @@
+<%= flash[:alert] if flash[:alert] %>
+
 <h1>タスク作成</h1>
 
 <%= form_with(model: @task, url: {action: "create"}) do |task| %>
