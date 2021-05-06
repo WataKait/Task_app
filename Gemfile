@@ -35,6 +35,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
   gem 'parser', '~> 2.6.3.0'
+  gem 'rails-i18n'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
