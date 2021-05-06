@@ -12,7 +12,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
+    task
   end
 
   def new
@@ -30,12 +30,12 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+    task
   end
 
   def update
-    @task = Task.find(params[:id])
-    if @task.update(task_params)
+    task
+    if task.update(task_params)
       redirect_to tasks_path, notice: 'タスクを更新しました'
     else
       flash.now[:alert] = 'タスクを更新できませんでした'
@@ -44,6 +44,12 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def task
+    return @task if @task
+
+    @task = Task.find(params[:id])
+  end
 
   def task_params
     params.require(:task).permit(:name, :user_id, :label_id, :priority_id, :status_id, :time_limit, :description)
