@@ -1,28 +1,28 @@
-<h1>タスク詳細</h1>
+<h1><%= t :task_detail %></h1>
 
 <table>
   <tr>
-    <th>タスク：</th>
+    <th><%= t :task %>：</th>
     <td><%= @task.name %></td>
   </tr>
   <tr>
-    <th>ラベル：</th>
+    <th><%= t :label %>：</th>
     <td><%= @task.label&.name %></td>
   </tr>
   <tr>
-    <th>優先度：</th>
+    <th><%= t :priority %>：</th>
     <td><%= @task.priority.name %></td>
   </tr>
   <tr>
-    <th>ステータス：</th>
+    <th><%= t :status %>：</th>
     <td><%= @task.status.name %></td>
   </tr>
   <tr>
-    <th>終了期限：</th>
+    <th><%= t :time_limit %>：</th>
     <td><%= @task.time_limit %></td>
   </tr>
   <tr>
-    <th>説明：</th>
+    <th><%= t :description %>：</th>
     <td><%= @task.description %></td>
   </tr>
 </table>
