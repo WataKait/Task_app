@@ -1,4 +1,25 @@
 ja:
+  task_list: タスク一覧
+  task_detail: タスク詳細
+  task_create: タスク作成
+  task: タスク
+  label: ラベル
+  priority: 優先度
+  status: ステータス
+  time_limit: 終了期限
+  description: 説明
+  select_label: ラベルを選択
+  select_priority: 優先度を選択
+  select_status: ステータスを選択
+  transition_create: + タスク作成
+  transition_detail: 詳細
+  helpers:
+    submit:
+      create: "作成"
+  tasks:
+    create:
+      notice: タスクを作成しました
+      alert: タスクを作成できませんでした
   activerecord:
     attributes:
       task:
