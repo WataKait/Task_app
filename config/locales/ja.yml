@@ -1,0 +1,8 @@
+ja:
+  activerecord:
+    attributes:
+      task:
+        name: タスク
+  attributes:
+    priority: 優先度
+    status: ステータス

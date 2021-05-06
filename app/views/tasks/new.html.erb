@@ -1,0 +1,39 @@
+<%= flash[:alert] if flash[:alert] %>
+
+<h1>タスク作成</h1>
+
+<%= render partial: 'error_message', locals: {task: @task} %>
+
+<%= form_with(model: @task, url: {action: "create"}) do |task| %>
+  <%# TODO ログイン機能実装後、user_id を取得してくる %>
+  <%= task.hidden_field :user_id, value: 1 %>
+
+  <table>
+    <tr>
+      <th><%= task.label :タスク %></th>
+      <td><%= task.text_field :name %></td>
+    </tr>
+    <tr>
+      <th><%= task.label :ラベル %></th>
+      <td><%= task.collection_select :label_id, @labels, :id, :name, prompt: "ラベルを選択" %></td>
+    </tr>
+    <tr>
+      <th><%= task.label :優先度 %></th>
+      <td><%= task.collection_select :priority_id, @priorities, :id, :name, prompt: "優先度を選択" %></td>
+    </tr>
+    <tr>
+      <th><%= task.label :ステータス %></th>
+      <td><%= task.collection_select :status_id, @statuses, :id, :name, prompt: "ステータスを選択" %></td>
+    </tr>
+    <tr>
+      <th><%= task.label :終了期限 %></th>
+      <td><%= task.datetime_field :time_limit %></td>
+    </tr>
+    <tr>
+      <th><%= task.label :説明 %></th>
+      <td><%= task.text_area :description %></td>
+    </tr>
+  </table>
+
+  <%= task.submit :作成 %>
+<% end %>

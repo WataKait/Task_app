@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :set_labels, only: %i[edit update]
-  before_action :set_priorities, only: %i[edit update]
-  before_action :set_statuses, only: %i[edit update]
+  before_action :set_labels, only: %i[new create edit update]
+  before_action :set_priorities, only: %i[new create edit update]
+  before_action :set_statuses, only: %i[new create edit update]
 
   def index
     # TODO: ログイン機能実装後、user_idを取得してくる
@@ -13,6 +13,20 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find(params[:id])
+  end
+
+  def new
+    @task = Task.new
+  end
+
+  def create
+    @task = Task.new(task_params)
+    if @task.save
+      redirect_to tasks_path, notice: 'タスクを作成しました'
+    else
+      flash.now[:alert] = 'タスクを作成できませんでした'
+      render :new
+    end
   end
 
   def edit
