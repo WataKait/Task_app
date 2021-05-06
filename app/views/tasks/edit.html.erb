@@ -1,3 +1,5 @@
+<%= flash[:alert] if flash[:alert] %>
+
 <h1>タスク編集</h1>
 
 <%= form_with(model: @task, url: {action: "update"}) do |task| %>
