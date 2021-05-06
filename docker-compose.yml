@@ -1,0 +1,22 @@
+version: '3'
+services:
+  db:
+    image: postgres:13.2
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - data:/var/lib/postgresql/data
+  web:
+    build: .
+    environment:
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: db
+      LESSCHARSET: utf-8
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+volumes:
+  data:
