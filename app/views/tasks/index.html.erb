@@ -11,6 +11,7 @@
       <th>ステータス</th>
       <th>終了期限</th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +23,7 @@
         <td><%= task.status.name %></td>
         <td><%= task.time_limit %></td>
         <td><%= link_to '詳細', task %></td>
+        <td><%= link_to '編集', edit_task_path(task) %></td>
       </tr>
     <% end %>
   </tbody>
