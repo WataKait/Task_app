@@ -36,9 +36,9 @@ class TasksController < ApplicationController
   def update
     task
     if task.update(task_params)
-      redirect_to tasks_path, notice: 'タスクを更新しました'
+      redirect_to tasks_path, notice: t('.notice')
     else
-      flash.now[:alert] = 'タスクを更新できませんでした'
+      flash.now[:alert] = t('.alert')
       render :edit
     end
   end
