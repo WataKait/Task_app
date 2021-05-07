@@ -13,6 +13,7 @@ ja:
   select_status: ステータスを選択
   transition_create: + タスク作成
   transition_detail: 詳細
+  call_delete: 削除
   helpers:
     submit:
       create: "作成"
