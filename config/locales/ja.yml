@@ -16,6 +16,7 @@ ja:
   transition_detail: 詳細
   transition_create: + タスク作成
   transition_edit: 編集
+  transition_label_index: ラベル一覧へ →
   call_delete: 削除
   helpers:
     submit:
