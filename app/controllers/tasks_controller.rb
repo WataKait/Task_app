@@ -22,9 +22,9 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to tasks_path, notice: 'タスクを作成しました'
+      redirect_to tasks_path, notice: t('.notice')
     else
-      flash.now[:alert] = 'タスクを作成できませんでした'
+      flash.now[:alert] = t('.alert')
       render :new
     end
   end

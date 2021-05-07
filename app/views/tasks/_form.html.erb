@@ -3,27 +3,29 @@
 
 <table>
   <tr>
-    <th><%= task.label :タスク %></th>
+    <th><%= t :task %></th>
     <td><%= task.text_field :name %></td>
   </tr>
   <tr>
-    <th><%= task.label :ラベル %></th>
-    <td><%= task.collection_select :label_id, @labels, :id, :name, prompt: "ラベルを選択" %></td>
+    <th><%= t :label %></th>
+    <td><%= task.collection_select :label_id, @labels, :id, :name, prompt: t(:select_label) %></td>
   </tr>
   <tr>
-    <th><%= task.label :優先度 %></th>
-    <td><%= task.collection_select :priority_id, @priorities, :id, :name, prompt: "優先度を選択" %></td>
+    <th><%= t :priority %></th>
+    <td><%= task.collection_select :priority_id, @priorities, :id, :name, prompt: t(:select_priority) %></td>
   </tr>
   <tr>
-    <th><%= task.label :ステータス %></th>
-    <td><%= task.collection_select :status_id, @statuses, :id, :name, prompt: "ステータスを選択" %></td>
+    <th><%= t :status %></th>
+    <td><%= task.collection_select :status_id, @statuses, :id, :name, prompt: t(:select_status) %></td>
   </tr>
   <tr>
-    <th><%= task.label :終了期限 %></th>
+    <th><%= t :time_limit %></th>
     <td><%= task.datetime_field :time_limit %></td>
   </tr>
   <tr>
-    <th><%= task.label :説明 %></th>
+    <th><%= t :description %></th>
     <td><%= task.text_area :description %></td>
   </tr>
 </table>
+
+<%= task.submit %>
