@@ -21,6 +21,8 @@ ja:
     create:
       notice: タスクを作成しました
       alert: タスクを作成できませんでした
+    destroy:
+      notice: タスクを削除しました
   activerecord:
     attributes:
       task:
