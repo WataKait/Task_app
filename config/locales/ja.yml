@@ -3,6 +3,7 @@ ja:
   task_detail: タスク詳細
   task_create: タスク作成
   task_edit: タスク編集
+  label_list: ラベル一覧
   task: タスク
   label: ラベル
   priority: 優先度
@@ -15,6 +16,7 @@ ja:
   transition_detail: 詳細
   transition_create: + タスク作成
   transition_edit: 編集
+  transition_label_index: ラベル一覧へ →
   call_delete: 削除
   helpers:
     submit:
