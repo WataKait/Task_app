@@ -3,6 +3,7 @@ ja:
   task_detail: タスク詳細
   task_create: タスク作成
   task_edit: タスク編集
+  label_list: ラベル一覧
   task: タスク
   label: ラベル
   priority: 優先度
