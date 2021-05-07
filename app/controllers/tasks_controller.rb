@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :task, only: %i[show edit update]
+  before_action :task, only: %i[show edit]
   before_action :set_labels, only: %i[new create edit update]
   before_action :set_priorities, only: %i[new create edit update]
   before_action :set_statuses, only: %i[new create edit update]
@@ -39,12 +39,15 @@ class TasksController < ApplicationController
     end
   end
 
+  def destroy
+    task.destroy
+    redirect_to tasks_path, notice: t('.notice')
+  end
+
   private
 
   def task
-    return @task if @task
-
-    @task = Task.find(params[:id])
+    @task ||= Task.find(params[:id])
   end
 
   def task_params
