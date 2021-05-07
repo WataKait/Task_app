@@ -15,6 +15,7 @@
       <th><%= t :status %></th>
       <th><%= t :time_limit %></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -26,6 +27,7 @@
         <td><%= task.status.name %></td>
         <td><%= task.time_limit %></td>
         <td><%= link_to t(:transition_detail), task %></td>
+        <td><%= link_to t(:transition_edit), edit_task_path(task) %></td>
       </tr>
     <% end %>
   </tbody>

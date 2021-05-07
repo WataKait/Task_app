@@ -1,9 +1,9 @@
 <%= flash[:alert] if flash[:alert] %>
 
-<h1><%= t :task_create %></h1>
+<h1><%= t :task_edit %></h1>
 
 <%= render partial: 'error_message', locals: {task: @task} %>
 
-<%= form_with(model: @task, url: {action: "create"}) do |task| %>
+<%= form_with(model: @task, url: {action: "update"}) do |task| %>
   <%= render partial: 'form', locals: {task: task} %>
 <% end %>
