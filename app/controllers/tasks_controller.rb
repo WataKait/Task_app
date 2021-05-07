@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :task, only: %i[show edit update]
+  before_action :task, only: %i[show edit]
   before_action :set_labels, only: %i[new create edit update]
   before_action :set_priorities, only: %i[new create edit update]
   before_action :set_statuses, only: %i[new create edit update]
@@ -40,7 +40,6 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task = Task.find(params[:id])
     task.destroy
     redirect_to tasks_path, notice: t('.notice')
   end
