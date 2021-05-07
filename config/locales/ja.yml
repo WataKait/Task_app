@@ -15,6 +15,7 @@ ja:
   transition_detail: 詳細
   transition_create: + タスク作成
   transition_edit: 編集
+  call_delete: 削除
   helpers:
     submit:
       create: "作成"
@@ -26,6 +27,8 @@ ja:
     update:
       notice: タスクを更新しました
       alert: タスクを更新できませんでした
+    destroy:
+      notice: タスクを削除しました
   activerecord:
     attributes:
       task:
