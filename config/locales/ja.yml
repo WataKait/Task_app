@@ -2,6 +2,7 @@ ja:
   task_list: タスク一覧
   task_detail: タスク詳細
   task_create: タスク作成
+  task_edit: タスク編集
   task: タスク
   label: ラベル
   priority: 優先度
@@ -11,16 +12,21 @@ ja:
   select_label: ラベルを選択
   select_priority: 優先度を選択
   select_status: ステータスを選択
-  transition_create: + タスク作成
   transition_detail: 詳細
+  transition_create: + タスク作成
+  transition_edit: 編集
   call_delete: 削除
   helpers:
     submit:
       create: "作成"
+      update: "更新"
   tasks:
     create:
       notice: タスクを作成しました
       alert: タスクを作成できませんでした
+    update:
+      notice: タスクを更新しました
+      alert: タスクを更新できませんでした
     destroy:
       notice: タスクを削除しました
   activerecord:
