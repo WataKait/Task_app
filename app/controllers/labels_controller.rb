@@ -8,6 +8,6 @@ class LabelsController < ApplicationController
   def destroy
     label = Label.find(params[:id])
     label.destroy
-    redirect_to labels_path
+    redirect_to labels_path, notice: t('.notice')
   end
 end
