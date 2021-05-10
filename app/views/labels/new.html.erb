@@ -1,4 +1,4 @@
-<%= flash[:alert] if flash[:alert] %>
+<%= flash[:alert] if flash[:alert].present? %>
 
 <h1><%= t :label_create %></h1>
 
