@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class LabelsController < ApplicationController
-  before_action :label, only: %i[edit]
-
   def index
     @labels = Label.all
   end
@@ -21,10 +19,13 @@ class LabelsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @label = Label.find(params[:id])
+  end
 
   def update
-    if label.update(label_params)
+    @label = Label.find(params[:id])
+    if @label.update(label_params)
       redirect_to labels_path, notice: t('.notice')
     else
       flash.now[:alert] = t('.alert')
@@ -33,10 +34,6 @@ class LabelsController < ApplicationController
   end
 
   private
-
-  def label
-    @label ||= Label.find(params[:id])
-  end
 
   def label_params
     params.require(:label).permit(:name)

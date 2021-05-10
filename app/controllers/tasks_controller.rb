@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :task, only: %i[show edit]
   before_action :set_labels, only: %i[new create edit update]
   before_action :set_priorities, only: %i[new create edit update]
   before_action :set_statuses, only: %i[new create edit update]
@@ -12,7 +11,9 @@ class TasksController < ApplicationController
     @tasks = Task.where(user_id: user_id)
   end
 
-  def show; end
+  def show
+    @task = Task.find(params[:id])
+  end
 
   def new
     @task = Task.new
@@ -28,10 +29,13 @@ class TasksController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @task = Task.find(params[:id])
+  end
 
   def update
-    if task.update(task_params)
+    @task = Task.find(params[:id])
+    if @task.update(task_params)
       redirect_to tasks_path, notice: t('.notice')
     else
       flash.now[:alert] = t('.alert')
@@ -45,10 +49,6 @@ class TasksController < ApplicationController
   end
 
   private
-
-  def task
-    @task ||= Task.find(params[:id])
-  end
 
   def task_params
     params.require(:task).permit(:name, :user_id, :label_id, :priority_id, :status_id, :time_limit, :description)
