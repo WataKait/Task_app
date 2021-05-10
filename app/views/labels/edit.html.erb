@@ -5,5 +5,5 @@
 <%= render partial: 'error_message', locals: { label: @label } %>
 
 <%= form_with(model: @label, url: { action: "update" }) do |label| %>
-  <%= render partial: 'form', locals: { label:l abel } %>
+  <%= render partial: 'form', locals: { label: label } %>
 <% end %>
