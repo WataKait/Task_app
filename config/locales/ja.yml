@@ -4,6 +4,7 @@ ja:
   task_create: タスク作成
   task_edit: タスク編集
   label_list: ラベル一覧
+  label_create: ラベル作成
   label_edit: ラベル編集
   task: タスク
   label: ラベル
@@ -18,6 +19,7 @@ ja:
   transition_create: + タスク作成
   transition_edit: 編集
   transition_label_index: ラベル一覧へ →
+  transition_label_create: + ラベル作成
   transition_label_edit: 編集
   call_delete: 削除
   helpers:
@@ -34,6 +36,9 @@ ja:
     destroy:
       notice: タスクを削除しました
   labels:
+    create:
+      notice: ラベルを作成しました
+      alert: ラベルを作成できませんでした
     update:
       notice: ラベルを更新しました
       alert: ラベルを更新できませんでした

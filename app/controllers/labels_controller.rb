@@ -5,6 +5,20 @@ class LabelsController < ApplicationController
     @labels = Label.all
   end
 
+  def new
+    @label = Label.new
+  end
+
+  def create
+    @label = Label.new(label_params)
+    if @label.save
+      redirect_to labels_path, notice: t('.notice')
+    else
+      flash.now[:alert] = t('.alert')
+      render :new
+    end
+  end
+
   def edit
     @label = Label.find(params[:id])
   end
