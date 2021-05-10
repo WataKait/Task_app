@@ -17,7 +17,7 @@
     <% @labels.each do |label| %>
       <tr>
         <td><%= label.name %></td>
-        <td><%= link_to t(:transition_label_edit), edit_label_path(label) %></td>
+        <td><%= link_to t(:transition_edit), edit_label_path(label) %></td>
       </tr>
     <% end %>
   </tbody>

@@ -20,7 +20,6 @@ ja:
   transition_edit: 編集
   transition_label_index: ラベル一覧へ →
   transition_label_create: + ラベル作成
-  transition_label_edit: 編集
   call_delete: 削除
   helpers:
     submit:
