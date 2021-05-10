@@ -6,12 +6,14 @@
   <thead>
     <tr>
       <th><%= t :label %></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @labels.each do |label| %>
       <tr>
         <td><%= label.name %></td>
+        <td><%= link_to t(:transition_label_edit), edit_label_path(label) %></td>
       </tr>
     <% end %>
   </tbody>

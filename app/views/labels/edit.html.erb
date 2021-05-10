@@ -1,0 +1,12 @@
+<h1><%= t :label_edit %></h1>
+
+<%= form_with(model: @label, url: {action: "update"}) do |label| %>
+  <table>
+    <tr>
+      <th><%= t :label %></th>
+      <td><%= label.text_field :name %></td>
+    </tr>
+  </table>
+
+  <%= label.submit%>
+<% end %>
