@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag "labels" %>
 
-<%= flash[:notice] if flash[:notice] %>
+<%= flash[:notice] if flash[:notice].present? %>
 
 <h1><%= t :label_list %></h1>
 
