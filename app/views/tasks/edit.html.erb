@@ -1,4 +1,4 @@
-<%= flash[:alert] if flash[:alert] %>
+<%= flash[:alert] if flash[:alert].present? %>
 
 <h1><%= t :task_edit %></h1>
 
