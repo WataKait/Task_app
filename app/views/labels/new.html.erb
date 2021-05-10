@@ -2,8 +2,8 @@
 
 <h1><%= t :label_create %></h1>
 
-<%= render partial: 'error_message', locals: {label: @label} %>
+<%= render partial: 'error_message', locals: { label: @label } %>
 
-<%= form_with(model: @label, url: {action: "create"}) do |label| %>
-  <%= render partial: 'form', locals: {label:label} %>
+<%= form_with(model: @label, url: { action: "create" }) do |label| %>
+  <%= render partial: 'form', locals: { label: label } %>
 <% end %>
