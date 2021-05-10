@@ -5,12 +5,5 @@
 <%= render partial: 'error_message', locals: {label: @label} %>
 
 <%= form_with(model: @label, url: {action: "update"}) do |label| %>
-  <table>
-    <tr>
-      <th><%= t :label %></th>
-      <td><%= label.text_field :name %></td>
-    </tr>
-  </table>
-
-  <%= label.submit%>
+  <%= render partial: 'form', locals: {label:label} %>
 <% end %>
