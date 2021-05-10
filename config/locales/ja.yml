@@ -41,6 +41,8 @@ ja:
     attributes:
       task:
         name: タスク
+      label:
+        name: ラベル
   attributes:
     priority: 優先度
     status: ステータス
