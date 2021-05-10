@@ -1,6 +1,10 @@
 <%= stylesheet_link_tag "labels" %>
 
+<%= flash[:notice] if flash[:notice] %>
+
 <h1><%= t :label_list %></h1>
+
+<p><%= link_to t(:transition_label_create), new_label_path %></p>
 
 <table>
   <thead>

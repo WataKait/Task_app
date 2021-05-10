@@ -4,6 +4,7 @@ ja:
   task_create: タスク作成
   task_edit: タスク編集
   label_list: ラベル一覧
+  label_create: ラベル作成
   task: タスク
   label: ラベル
   priority: 優先度
@@ -17,6 +18,7 @@ ja:
   transition_create: + タスク作成
   transition_edit: 編集
   transition_label_index: ラベル一覧へ →
+  transition_label_create: + ラベル作成
   call_delete: 削除
   helpers:
     submit:
@@ -31,10 +33,16 @@ ja:
       alert: タスクを更新できませんでした
     destroy:
       notice: タスクを削除しました
+  labels:
+    create:
+      notice: ラベルを作成しました
+      alert: ラベルを作成できませんでした
   activerecord:
     attributes:
       task:
         name: タスク
+      label:
+        name: ラベル
   attributes:
     priority: 優先度
     status: ステータス
