@@ -1,3 +1,5 @@
+<%= flash[:alert] if flash[:alert] %>
+
 <h1><%= t :label_edit %></h1>
 
 <%= form_with(model: @label, url: {action: "update"}) do |label| %>

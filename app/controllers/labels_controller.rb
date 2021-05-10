@@ -12,8 +12,9 @@ class LabelsController < ApplicationController
   def update
     @label = Label.find(params[:id])
     if @label.update(label_params)
-      redirect_to labels_path
+      redirect_to labels_path, notice: t('.notice')
     else
+      flash.now[:alert] = t('.alert')
       render :edit
     end
   end

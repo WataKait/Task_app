@@ -33,6 +33,10 @@ ja:
       alert: タスクを更新できませんでした
     destroy:
       notice: タスクを削除しました
+  labels:
+    update:
+      notice: ラベルを更新しました
+      alert: ラベルを更新できませんでした
   activerecord:
     attributes:
       task:
