@@ -1,3 +1,5 @@
+<%= flash[:alert] if flash[:alert] %>
+
 <h1><%= t :label_create %></h1>
 
 <%= render partial: 'error_message', locals: {label: @label} %>
