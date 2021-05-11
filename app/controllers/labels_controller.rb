@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LabelsController < ApplicationController
-  before_action :set_label, only: %i[edit update]
+  before_action :set_label, only: %i[edit update destroy]
 
   def index
     @labels = Label.all
@@ -33,8 +33,7 @@ class LabelsController < ApplicationController
   end
 
   def destroy
-    label = Label.find(params[:id])
-    label.destroy
+    @label.destroy
     redirect_to labels_path, notice: t('.notice')
   end
 
