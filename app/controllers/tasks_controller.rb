@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :task, only: %i[show edit]
+  before_action :set_task, only: %i[show edit update destroy]
   before_action :set_labels, only: %i[new create edit update]
   before_action :set_priorities, only: %i[new create edit update]
   before_action :set_statuses, only: %i[new create edit update]
@@ -31,7 +31,7 @@ class TasksController < ApplicationController
   def edit; end
 
   def update
-    if task.update(task_params)
+    if @task.update(task_params)
       redirect_to tasks_path, notice: t('.notice')
     else
       flash.now[:alert] = t('.alert')
@@ -40,14 +40,14 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task.destroy
+    @task.destroy
     redirect_to tasks_path, notice: t('.notice')
   end
 
   private
 
-  def task
-    @task ||= Task.find(params[:id])
+  def set_task
+    @task = Task.find(params[:id])
   end
 
   def task_params
