@@ -2,20 +2,20 @@
 
 <%= flash[:notice] if flash[:notice].present? %>
 
-<h1><%= t(:task_list) %></h1>
+<h1><%= t('.task_list') %></h1>
 
-<p><%= link_to t(:transition_label_index), labels_path %></p>
+<p><%= link_to t('.transition_label_index'), labels_path %></p>
 
-<p><%= link_to t(:transition_create), new_task_path %></p>
+<p><%= link_to t('.transition_create'), new_task_path %></p>
 
 <table>
   <thead>
     <tr>
-      <th><%= t(:task) %></th>
-      <th><%= t(:label) %></th>
-      <th><%= t(:priority) %></th>
-      <th><%= t(:status) %></th>
-      <th><%= t(:time_limit) %></th>
+      <th><%= t('.task') %></th>
+      <th><%= t('.label') %></th>
+      <th><%= t('.priority') %></th>
+      <th><%= t('.status') %></th>
+      <th><%= t('.time_limit') %></th>
       <th></th>
       <th></th>
     </tr>
@@ -28,9 +28,9 @@
         <td><%= task.priority.name %></td>
         <td><%= task.status.name %></td>
         <td><%= task.time_limit %></td>
-        <td><%= link_to t(:transition_detail), task %></td>
-        <td><%= link_to t(:transition_edit), edit_task_path(task) %></td>
-        <td><%= link_to t(:call_delete), task, method: :delete %></td>
+        <td><%= link_to t('.transition_detail'), task %></td>
+        <td><%= link_to t('.transition_edit'), edit_task_path(task) %></td>
+        <td><%= link_to t('.call_delete'), task, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
