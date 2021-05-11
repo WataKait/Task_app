@@ -1,9 +1,9 @@
 <%= flash[:alert] if flash[:alert].present? %>
 
-<h1><%= t(:label_create) %></h1>
+<h1><%= t(:label_edit) %></h1>
 
 <%= render partial: 'error_message', locals: { label: @label } %>
 
-<%= form_with(model: @label, url: { action: "create" }) do |label| %>
+<%= form_with(model: @label, url: { action: "update" }) do |label| %>
   <%= render partial: 'form', locals: { label: label } %>
 <% end %>

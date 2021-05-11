@@ -5,6 +5,7 @@ ja:
   task_edit: タスク編集
   label_list: ラベル一覧
   label_create: ラベル作成
+  label_edit: ラベル編集
   task: タスク
   label: ラベル
   priority: 優先度
@@ -37,6 +38,9 @@ ja:
     create:
       notice: ラベルを作成しました
       alert: ラベルを作成できませんでした
+    update:
+      notice: ラベルを更新しました
+      alert: ラベルを更新できませんでした
   activerecord:
     attributes:
       task:

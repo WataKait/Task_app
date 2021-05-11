@@ -2,7 +2,7 @@
 
 <%= flash[:notice] if flash[:notice].present? %>
 
-<h1><%= t :task_list %></h1>
+<h1><%= t(:task_list) %></h1>
 
 <p><%= link_to t(:transition_label_index), labels_path %></p>
 
@@ -11,11 +11,11 @@
 <table>
   <thead>
     <tr>
-      <th><%= t :task %></th>
-      <th><%= t :label %></th>
-      <th><%= t :priority %></th>
-      <th><%= t :status %></th>
-      <th><%= t :time_limit %></th>
+      <th><%= t(:task) %></th>
+      <th><%= t(:label) %></th>
+      <th><%= t(:priority) %></th>
+      <th><%= t(:status) %></th>
+      <th><%= t(:time_limit) %></th>
       <th></th>
       <th></th>
     </tr>

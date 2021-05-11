@@ -2,20 +2,22 @@
 
 <%= flash[:notice] if flash[:notice].present? %>
 
-<h1><%= t :label_list %></h1>
+<h1><%= t(:label_list) %></h1>
 
 <p><%= link_to t(:transition_label_create), new_label_path %></p>
 
 <table>
   <thead>
     <tr>
-      <th><%= t :label %></th>
+      <th><%= t(:label) %></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @labels.each do |label| %>
       <tr>
         <td><%= label.name %></td>
+        <td><%= link_to t(:transition_edit), edit_label_path(label) %></td>
       </tr>
     <% end %>
   </tbody>
