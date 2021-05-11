@@ -19,7 +19,7 @@
       <tr>
         <td><%= label.name %></td>
         <td><%= link_to t('.transition_edit'), edit_label_path(label) %></td>
-        <td><%= link_to t('.call_delete'), label, method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
+        <td><%= link_to t('.delete_label'), label, method: :delete, data: { confirm: t('.delete_confirm') } %></td>
       </tr>
     <% end %>
   </tbody>

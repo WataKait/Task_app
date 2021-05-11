@@ -14,7 +14,7 @@ ja:
       transition_detail: 詳細
       transition_create: + タスク作成
       transition_edit: 編集
-      call_delete: 削除
+      delete_label: 削除
       transition_label_index: ラベル一覧へ →
     show:
       task: タスク
@@ -49,7 +49,8 @@ ja:
       label: ラベル
       transition_label_create: + ラベル作成
       transition_edit: 編集
-      call_delete: 削除
+      delete_label: 削除
+      delete_confirm: 本当に削除しますか？
     new:
       label_create: ラベル作成
     edit:
