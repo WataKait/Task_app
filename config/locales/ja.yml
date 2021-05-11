@@ -1,31 +1,40 @@
 ja:
-  task_list: タスク一覧
-  task_detail: タスク詳細
-  task_create: タスク作成
-  task_edit: タスク編集
-  label_list: ラベル一覧
-  label_create: ラベル作成
-  label_edit: ラベル編集
-  task: タスク
-  label: ラベル
-  priority: 優先度
-  status: ステータス
-  time_limit: 終了期限
-  description: 説明
-  select_label: ラベルを選択
-  select_priority: 優先度を選択
-  select_status: ステータスを選択
-  transition_detail: 詳細
-  transition_create: + タスク作成
-  transition_edit: 編集
-  transition_label_index: ラベル一覧へ →
-  transition_label_create: + ラベル作成
-  call_delete: 削除
   helpers:
     submit:
       create: "作成"
       update: "更新"
   tasks:
+    index:
+      task: タスク
+      label: ラベル
+      priority: 優先度
+      status: ステータス
+      time_limit: 終了期限
+      task_list: タスク一覧
+      transition_detail: 詳細
+      transition_create: + タスク作成
+      transition_edit: 編集
+      delete_label: 削除
+      transition_label_index: ラベル一覧へ →
+    show:
+      task: タスク
+      label: ラベル
+      priority: 優先度
+      status: ステータス
+      time_limit: 終了期限
+      description: 説明
+      task_detail: タスク詳細
+    new:
+      task_create: タスク作成
+    edit:
+      task_edit: タスク編集
+    form:
+      task: タスク
+      label: ラベル
+      priority: 優先度
+      status: ステータス
+      time_limit: 終了期限
+      description: 説明
     create:
       notice: タスクを作成しました
       alert: タスクを作成できませんでした
@@ -35,12 +44,27 @@ ja:
     destroy:
       notice: タスクを削除しました
   labels:
+    index:
+      label_list: ラベル一覧
+      label: ラベル
+      transition_label_create: + ラベル作成
+      transition_edit: 編集
+      delete_label: 削除
+      delete_confirm: 本当に削除しますか？
+    new:
+      label_create: ラベル作成
+    edit:
+      label_edit: ラベル編集
+    form:
+      label: ラベル
     create:
       notice: ラベルを作成しました
       alert: ラベルを作成できませんでした
     update:
       notice: ラベルを更新しました
       alert: ラベルを更新できませんでした
+    destroy:
+      notice: ラベルを削除しました
   activerecord:
     attributes:
       task:

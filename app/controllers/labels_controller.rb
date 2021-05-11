@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class LabelsController < ApplicationController
-  before_action :set_label, only: %i[edit update]
+  before_action :set_label, only: %i[edit update destroy]
 
   def index
     @labels = Label.all
@@ -30,6 +30,11 @@ class LabelsController < ApplicationController
       flash.now[:alert] = t('.alert')
       render :edit
     end
+  end
+
+  def destroy
+    @label.destroy
+    redirect_to labels_path, notice: t('.notice')
   end
 
   private
