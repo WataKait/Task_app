@@ -15,6 +15,7 @@ ja:
       transition_create: + タスク作成
       transition_edit: 編集
       delete_label: 削除
+      delete_confirm: 本当に削除しますか？
       transition_label_index: ラベル一覧へ →
     show:
       task: タスク
