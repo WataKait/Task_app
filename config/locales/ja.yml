@@ -51,6 +51,7 @@ ja:
       transition_edit: 編集
       delete_label: 削除
       delete_confirm: 本当に削除しますか？
+      transition_task_index: ← タスク一覧へ
     new:
       label_create: ラベル作成
     edit:
