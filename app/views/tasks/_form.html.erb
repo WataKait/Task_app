@@ -8,15 +8,15 @@
   </tr>
   <tr>
     <th><%= t('.label') %></th>
-    <td><%= task.collection_select :label_id, @labels, :id, :name, prompt: t(:select_label) %></td>
+    <td><%= task.collection_select :label_id, @labels, :id, :name, prompt: t('.select_label') %></td>
   </tr>
   <tr>
     <th><%= t('.priority') %></th>
-    <td><%= task.collection_select :priority_id, @priorities, :id, :name, prompt: t(:select_priority) %></td>
+    <td><%= task.collection_select :priority_id, @priorities, :id, :name, prompt: t('.select_priority') %></td>
   </tr>
   <tr>
     <th><%= t('.status') %></th>
-    <td><%= task.collection_select :status_id, @statuses, :id, :name, prompt: t(:select_status) %></td>
+    <td><%= task.collection_select :status_id, @statuses, :id, :name, prompt: t('.select_status') %></td>
   </tr>
   <tr>
     <th><%= t('.time_limit') %></th>
