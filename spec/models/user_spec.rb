@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
   let(:user) { build(:user, name: name) }
 
   describe 'name' do
-    context '正常系' do
+    context '正常な値の場合' do
       let(:name) { 'user_name' }
 
       it 'エラーにならない' do

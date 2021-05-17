@@ -6,7 +6,7 @@ RSpec.describe Status, type: :model do
   let(:status) { build(:status, name: name) }
 
   describe 'name' do
-    context '正常系' do
+    context '正常な値の場合' do
       let(:name) { 'status_name' }
 
       it 'エラーにならない' do

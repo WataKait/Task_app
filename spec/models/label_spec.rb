@@ -6,7 +6,7 @@ RSpec.describe Label, type: :model do
   let(:label) { build(:label, name: name) }
 
   describe 'name' do
-    context '正常系' do
+    context '正常な値の場合' do
       let(:name) { 'label_name' }
 
       it 'エラーにならない' do

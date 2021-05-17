@@ -6,7 +6,7 @@ RSpec.describe Priority, type: :model do
   let(:priority) { build(:priority, name: name, priority: priority_value) }
 
   describe 'name, priority' do
-    context '正常系' do
+    context '正常な値の場合' do
       let(:name) { 'priority_name' }
       let(:priority_value) { 1 }
 

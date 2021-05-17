@@ -9,7 +9,7 @@ RSpec.describe Task, type: :model do
   let(:task) { build(:task, name: name, user: user, priority: priority, status: status) }
 
   describe 'name, user, priority, status' do
-    context '正常系' do
+    context '正常な値の場合' do
       let(:name) { 'task_name' }
 
       it 'エラーにならない' do
