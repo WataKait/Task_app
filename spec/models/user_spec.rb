@@ -3,36 +3,50 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { build(:user) }
+  let(:user) { build(:user, name: name) }
 
   describe 'name' do
     context '正常系' do
+      let(:name) { 'user_name' }
+
       it 'エラーにならない' do
         expect(user).to be_valid
       end
     end
 
     context 'nil の場合' do
-      it 'エラーになる' do
-        user.name = nil
+      let(:name) { nil }
+
+      before do
         user.valid?
+      end
+
+      it 'エラーになる' do
         expect(user.errors[:name]).to include(I18n.t('errors.messages.blank'))
       end
     end
 
     context '登録済みの場合' do
-      it 'エラーになる' do
-        first_user = create(:user)
-        user.name = first_user.name
+      let!(:persisted_user) { create(:user) }
+      let(:name) { persisted_user.name }
+
+      before do
         user.valid?
+      end
+
+      it 'エラーになる' do
         expect(user.errors[:name]).to include(I18n.t('errors.messages.taken'))
       end
     end
 
     context '256 文字以上の場合' do
-      it 'エラーになる' do
-        user.name = SecureRandom.alphanumeric(256)
+      let(:name) { SecureRandom.alphanumeric(256) }
+
+      before do
         user.valid?
+      end
+
+      it 'エラーになる' do
         expect(user.errors[:name]).to include(I18n.t('errors.messages.too_long', count: 255))
       end
     end

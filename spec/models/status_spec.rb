@@ -3,36 +3,50 @@
 require 'rails_helper'
 
 RSpec.describe Status, type: :model do
-  let(:status) { build(:status) }
+  let(:status) { build(:status, name: name) }
 
   describe 'name' do
     context '正常系' do
+      let(:name) { 'status_name' }
+
       it 'エラーにならない' do
         expect(status).to be_valid
       end
     end
 
     context 'nil の場合' do
-      it 'エラーになる' do
-        status.name = nil
+      let(:name) { nil }
+
+      before do
         status.valid?
+      end
+
+      it 'エラーになる' do
         expect(status.errors[:name]).to include(I18n.t('errors.messages.blank'))
       end
     end
 
     context '登録済みの場合' do
-      it 'エラーになる' do
-        first_status = create(:status)
-        status.name = first_status.name
+      let(:persisted_status) { create(:status) }
+      let(:name) { persisted_status.name }
+
+      before do
         status.valid?
+      end
+
+      it 'エラーになる' do
         expect(status.errors[:name]).to include(I18n.t('errors.messages.taken'))
       end
     end
 
     context '256 文字以上の場合' do
-      it 'エラーになる' do
-        status.name = SecureRandom.alphanumeric(256)
+      let(:name) { SecureRandom.alphanumeric(256) }
+
+      before do
         status.valid?
+      end
+
+      it 'エラーになる' do
         expect(status.errors[:name]).to include(I18n.t('errors.messages.too_long', count: 255))
       end
     end
