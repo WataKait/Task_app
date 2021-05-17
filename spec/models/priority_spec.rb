@@ -8,7 +8,7 @@ RSpec.describe Priority, type: :model do
   describe 'name, priority' do
     context '正常系' do
       let(:name) { 'priority_name' }
-      let(:priority_value) { Random.rand(100) }
+      let(:priority_value) { 1 }
 
       it 'エラーにならない' do
         expect(priority).to be_valid
@@ -17,7 +17,7 @@ RSpec.describe Priority, type: :model do
   end
 
   describe 'name' do
-    let(:priority_value) { Random.rand(100) }
+    let(:priority_value) { 1 }
 
     context 'nilの場合' do
       let(:name) { nil }
@@ -45,7 +45,7 @@ RSpec.describe Priority, type: :model do
     end
 
     context '256 文字以上の場合' do
-      let(:name) { SecureRandom.alphanumeric(256) }
+      let(:name) { 'a' * 256 }
 
       before do
         priority.valid?

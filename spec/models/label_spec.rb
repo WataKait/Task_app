@@ -40,7 +40,7 @@ RSpec.describe Label, type: :model do
     end
 
     context '256 文字以上の場合' do
-      let(:name) { SecureRandom.alphanumeric(256) }
+      let(:name) { 'a' * 256 }
 
       before do
         label.valid?
