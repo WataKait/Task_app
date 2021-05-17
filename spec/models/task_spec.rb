@@ -3,17 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  let(:task) { build(:task, name: name, user: task_user, priority: task_priority, status: task_status) }
   let(:user) { create(:user) }
   let(:priority) { create(:priority) }
   let(:status) { create(:status) }
+  let(:task) { build(:task, name: name, user: user, priority: priority, status: status) }
 
   describe 'name, user, priority, status' do
     context '正常系' do
       let(:name) { 'task_name' }
-      let(:task_user) { user }
-      let(:task_priority) { priority }
-      let(:task_status) { status }
 
       it 'エラーにならない' do
         expect(task).to be_valid
@@ -22,10 +19,6 @@ RSpec.describe Task, type: :model do
   end
 
   describe 'name' do
-    let(:task_user) { user }
-    let(:task_priority) { priority }
-    let(:task_status) { status }
-
     context 'nil の場合' do
       let(:name) { nil }
 
@@ -54,9 +47,7 @@ RSpec.describe Task, type: :model do
   describe 'user' do
     context 'nil の場合' do
       let(:name) { 'task_name' }
-      let(:task_user) { nil }
-      let(:task_priority) { priority }
-      let(:task_status) { status }
+      let(:user) { nil }
 
       before do
         task.valid?
@@ -71,9 +62,7 @@ RSpec.describe Task, type: :model do
   describe 'priority' do
     context 'nil の場合' do
       let(:name) { 'task_name' }
-      let(:task_user) { user }
-      let(:task_priority) { nil }
-      let(:task_status) { status }
+      let(:priority) { nil }
 
       before do
         task.valid?
@@ -88,9 +77,7 @@ RSpec.describe Task, type: :model do
   describe 'status' do
     context 'nil の場合' do
       let(:name) { 'task_name' }
-      let(:task_user) { user }
-      let(:task_priority) { priority }
-      let(:task_status) { nil }
+      let(:status) { nil }
 
       before do
         task.valid?
