@@ -21,6 +21,20 @@ jobs:
         # ruby-version: ['2.6', '2.7', '3.0']
         ruby-version: ['2.6.3']
 
+    services:
+      postgres:
+        image: postgres:13.2
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: task_app_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
@@ -33,5 +47,9 @@ jobs:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Run Rubocop
       run: bundle exec rubocop
-    # - name: Run RSpec
-    #   run: bundle exec rspec spec
+
+    - name: DB migration
+      run: bundle exec rake db:migrate
+
+    - name: Run RSpec
+      run: bundle exec rspec spec
