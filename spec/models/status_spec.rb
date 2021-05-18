@@ -12,13 +12,11 @@ RSpec.describe Status, type: :model do
       expect(build(:status, name: 'a' * 256).valid?).to be(false)
     end
 
-    context '一意性が保たれていること' do
-      let!(:persisted_status) { create(:status) }
+    it '一意性が保たれていること' do
+      create(:status, name: 'foo')
 
-      it '登録済みでないこと' do
-        expect(build(:status, name: 'hoge').valid?).to be(true)
-        expect(build(:status, name: persisted_status.name).valid?).to be(false)
-      end
+      expect(build(:status, name: 'hoge').valid?).to be(true)
+      expect(build(:status, name: 'foo').valid?).to be(false)
     end
   end
 end

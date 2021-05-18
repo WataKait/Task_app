@@ -12,13 +12,11 @@ RSpec.describe Priority, type: :model do
       expect(build(:priority, name: 'a' * 256).valid?).to be(false)
     end
 
-    context '一意性が保たれていること' do
-      let!(:persisted_priority) { create(:priority) }
+    it '一意性が保たれていること' do
+      create(:priority, name: 'foo')
 
-      it '登録済みでないこと' do
-        expect(build(:priority, name: 'hoge').valid?).to be(true)
-        expect(build(:priority, name: persisted_priority.name).valid?).to be(false)
-      end
+      expect(build(:priority, name: 'hoge').valid?).to be(true)
+      expect(build(:priority, name: 'foo').valid?).to be(false)
     end
   end
 
@@ -34,13 +32,11 @@ RSpec.describe Priority, type: :model do
       expect(build(:priority, priority: 'hoge').valid?).to be(false)
     end
 
-    context '一意性が保たれていること' do
-      let!(:persisted_priority) { create(:priority) }
+    it '一意性が保たれていること' do
+      create(:priority, priority: 1)
 
-      it '登録済みでないこと' do
-        expect(build(:priority, priority: 100).valid?).to be(true)
-        expect(build(:priority, priority: persisted_priority.priority).valid?).to be(false)
-      end
+      expect(build(:priority, priority: 100).valid?).to be(true)
+      expect(build(:priority, priority: 1).valid?).to be(false)
     end
   end
 end

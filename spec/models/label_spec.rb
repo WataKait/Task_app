@@ -12,13 +12,11 @@ RSpec.describe Label, type: :model do
       expect(build(:label, name: 'a' * 256).valid?).to be(false)
     end
 
-    context '一意性が保たれていること' do
-      let!(:persisted_label) { create(:label) }
+    it '一意性が保たれていること' do
+      create(:label, name: 'foo')
 
-      it '登録済みでないこと' do
-        expect(build(:label, name: 'hoge').valid?).to be(true)
-        expect(build(:label, name: persisted_label.name).valid?).to be(false)
-      end
+      expect(build(:label, name: 'hoge').valid?).to be(true)
+      expect(build(:label, name: 'foo').valid?).to be(false)
     end
   end
 end
