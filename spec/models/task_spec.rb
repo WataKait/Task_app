@@ -3,89 +3,40 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  let(:user) { create(:user) }
-  let(:priority) { create(:priority) }
-  let(:status) { create(:status) }
-  let(:task) { build(:task, name: name, user: user, priority: priority, status: status) }
-
-  describe '全ての入力値' do
-    context '正常な値の場合' do
-      let(:name) { 'task_name' }
-
-      it 'エラーにならない' do
-        expect(task).to be_valid
-      end
-    end
-  end
-
   describe 'name' do
-    context 'nil の場合' do
-      let(:name) { nil }
-
-      before do
-        task.valid?
-      end
-
-      it 'エラーになる' do
-        expect(task.errors[:name]).to include(I18n.t('errors.messages.blank'))
-      end
-    end
-
-    context '256 文字以上の場合' do
-      let(:name) { 'a' * 256 }
-
-      before do
-        task.valid?
-      end
-
-      it 'エラーになる' do
-        expect(task.errors[:name]).to include(I18n.t('errors.messages.too_long', count: 255))
-      end
+    it '1文字以上 255文字以内 であること' do
+      expect(build(:task, name: nil).valid?).to be(false)
+      expect(build(:task, name: '').valid?).to be(false)
+      expect(build(:task, name: 'a').valid?).to be(true)
+      expect(build(:task, name: 'a' * 255).valid?).to be(true)
+      expect(build(:task, name: 'a' * 256).valid?).to be(false)
     end
   end
 
   describe 'user' do
-    context 'nil の場合' do
-      let(:name) { 'task_name' }
-      let(:user) { nil }
+    let(:user) { create(:user) }
 
-      before do
-        task.valid?
-      end
-
-      it 'エラーになる' do
-        expect(task.errors[:user]).to include(I18n.t('errors.messages.required'))
-      end
+    it 'nil でないこと' do
+      expect(build(:task, user: nil).valid?).to be(false)
+      expect(build(:task, user: user).valid?).to be(true)
     end
   end
 
   describe 'priority' do
-    context 'nil の場合' do
-      let(:name) { 'task_name' }
-      let(:priority) { nil }
+    let(:priority) { create(:priority) }
 
-      before do
-        task.valid?
-      end
-
-      it 'エラーになる' do
-        expect(task.errors[:priority]).to include(I18n.t('errors.messages.required'))
-      end
+    it 'nil でないこと' do
+      expect(build(:task, priority: nil).valid?).to be(false)
+      expect(build(:task, priority: priority).valid?).to be(true)
     end
   end
 
   describe 'status' do
-    context 'nil の場合' do
-      let(:name) { 'task_name' }
-      let(:status) { nil }
+    let(:status) { create(:status) }
 
-      before do
-        task.valid?
-      end
-
-      it 'エラーになる' do
-        expect(task.errors[:status]).to include(I18n.t('errors.messages.required'))
-      end
+    it 'nil でないこと' do
+      expect(build(:task, status: nil).valid?).to be(false)
+      expect(build(:task, status: status).valid?).to be(true)
     end
   end
 end

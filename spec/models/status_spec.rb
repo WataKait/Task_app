@@ -3,51 +3,21 @@
 require 'rails_helper'
 
 RSpec.describe Status, type: :model do
-  let(:status) { build(:status, name: name) }
-
   describe 'name' do
-    context '正常な値の場合' do
-      let(:name) { 'status_name' }
-
-      it 'エラーにならない' do
-        expect(status).to be_valid
-      end
+    it '1文字以上 255文字以内 であること' do
+      expect(build(:status, name: nil).valid?).to be(false)
+      expect(build(:status, name: '').valid?).to be(false)
+      expect(build(:status, name: 'a').valid?).to be(true)
+      expect(build(:status, name: 'a' * 255).valid?).to be(true)
+      expect(build(:status, name: 'a' * 256).valid?).to be(false)
     end
 
-    context 'nil の場合' do
-      let(:name) { nil }
+    context '一意性が保たれていること' do
+      let!(:persisted_status) { create(:status) }
 
-      before do
-        status.valid?
-      end
-
-      it 'エラーになる' do
-        expect(status.errors[:name]).to include(I18n.t('errors.messages.blank'))
-      end
-    end
-
-    context '登録済みの場合' do
-      let(:persisted_status) { create(:status) }
-      let(:name) { persisted_status.name }
-
-      before do
-        status.valid?
-      end
-
-      it 'エラーになる' do
-        expect(status.errors[:name]).to include(I18n.t('errors.messages.taken'))
-      end
-    end
-
-    context '256 文字以上の場合' do
-      let(:name) { 'a' * 256 }
-
-      before do
-        status.valid?
-      end
-
-      it 'エラーになる' do
-        expect(status.errors[:name]).to include(I18n.t('errors.messages.too_long', count: 255))
+      it '登録済みでないこと' do
+        expect(build(:status, name: 'hoge').valid?).to be(true)
+        expect(build(:status, name: persisted_status.name).valid?).to be(false)
       end
     end
   end
