@@ -13,10 +13,10 @@ RSpec.describe Status, type: :model do
     end
 
     it '一意性が保たれていること' do
-      create(:status, name: 'foo')
+      create(:status, name: '着手')
 
-      expect(build(:status, name: 'hoge').valid?).to be(true)
-      expect(build(:status, name: 'foo').valid?).to be(false)
+      expect(build(:status, name: '未着手').valid?).to be(true)
+      expect(build(:status, name: '着手').valid?).to be(false)
     end
   end
 end

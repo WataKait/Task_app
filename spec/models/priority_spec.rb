@@ -13,10 +13,10 @@ RSpec.describe Priority, type: :model do
     end
 
     it '一意性が保たれていること' do
-      create(:priority, name: 'foo')
+      create(:priority, name: '高')
 
-      expect(build(:priority, name: 'hoge').valid?).to be(true)
-      expect(build(:priority, name: 'foo').valid?).to be(false)
+      expect(build(:priority, name: '低').valid?).to be(true)
+      expect(build(:priority, name: '高').valid?).to be(false)
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe Priority, type: :model do
 
     it '数値であること' do
       expect(build(:priority, priority: 10).valid?).to be(true)
-      expect(build(:priority, priority: 'hoge').valid?).to be(false)
+      expect(build(:priority, priority: '高').valid?).to be(false)
     end
 
     it '一意性が保たれていること' do

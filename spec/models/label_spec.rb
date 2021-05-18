@@ -13,10 +13,10 @@ RSpec.describe Label, type: :model do
     end
 
     it '一意性が保たれていること' do
-      create(:label, name: 'foo')
+      create(:label, name: 'test')
 
-      expect(build(:label, name: 'hoge').valid?).to be(true)
-      expect(build(:label, name: 'foo').valid?).to be(false)
+      expect(build(:label, name: 'RSpec').valid?).to be(true)
+      expect(build(:label, name: 'test').valid?).to be(false)
     end
   end
 end

@@ -13,10 +13,10 @@ RSpec.describe User, type: :model do
     end
 
     it '一意性が保たれていること' do
-      create(:user, name: 'foo')
+      create(:user, name: '太郎')
 
-      expect(build(:user, name: 'hoge').valid?).to be(true)
-      expect(build(:user, name: 'foo').valid?).to be(false)
+      expect(build(:user, name: '花子').valid?).to be(true)
+      expect(build(:user, name: '太郎').valid?).to be(false)
     end
   end
 end
