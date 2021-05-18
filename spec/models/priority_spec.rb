@@ -21,15 +21,10 @@ RSpec.describe Priority, type: :model do
   end
 
   describe '比較値' do
-    it '空文字、nil でないこと' do
-      expect(build(:priority, priority: nil).valid?).to be(false)
-      expect(build(:priority, priority: '').valid?).to be(false)
-      expect(build(:priority, priority: 1).valid?).to be(true)
-    end
-
     it '数値であること' do
       expect(build(:priority, priority: 10).valid?).to be(true)
       expect(build(:priority, priority: '高').valid?).to be(false)
+      expect(build(:priority, priority: nil).valid?).to be(false)
     end
 
     it '一意性が保たれていること' do
