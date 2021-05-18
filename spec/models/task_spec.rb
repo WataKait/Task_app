@@ -13,30 +13,30 @@ RSpec.describe Task, type: :model do
     end
   end
 
-  describe 'user' do
+  describe 'user_id' do
     let(:user) { create(:user) }
 
     it 'nil でないこと' do
-      expect(build(:task, user: nil).valid?).to be(false)
-      expect(build(:task, user: user).valid?).to be(true)
+      expect(build(:task, user_id: nil).valid?).to be(false)
+      expect(build(:task, user_id: user.id).valid?).to be(true)
     end
   end
 
-  describe 'priority' do
+  describe 'priority_id' do
     let(:priority) { create(:priority) }
 
     it 'nil でないこと' do
-      expect(build(:task, priority: nil).valid?).to be(false)
-      expect(build(:task, priority: priority).valid?).to be(true)
+      expect(build(:task, priority_id: nil).valid?).to be(false)
+      expect(build(:task, priority_id: priority.id).valid?).to be(true)
     end
   end
 
-  describe 'status' do
+  describe 'status_id' do
     let(:status) { create(:status) }
 
     it 'nil でないこと' do
-      expect(build(:task, status: nil).valid?).to be(false)
-      expect(build(:task, status: status).valid?).to be(true)
+      expect(build(:task, status_id: nil).valid?).to be(false)
+      expect(build(:task, status_id: status.id).valid?).to be(true)
     end
   end
 end
