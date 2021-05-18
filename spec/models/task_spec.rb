@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
-  describe 'name' do
+  describe 'タスク名' do
     it '1文字以上 255文字以内 であること' do
       expect(build(:task, name: nil).valid?).to be(false)
       expect(build(:task, name: '').valid?).to be(false)

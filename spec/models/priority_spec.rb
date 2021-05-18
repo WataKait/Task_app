@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Priority, type: :model do
-  describe 'name' do
+  describe '優先度' do
     it '1文字以上 255文字以内 であること' do
       expect(build(:priority, name: nil).valid?).to be(false)
       expect(build(:priority, name: '').valid?).to be(false)
@@ -20,7 +20,7 @@ RSpec.describe Priority, type: :model do
     end
   end
 
-  describe 'priority' do
+  describe '比較値' do
     it '空文字、nil でないこと' do
       expect(build(:priority, priority: nil).valid?).to be(false)
       expect(build(:priority, priority: '').valid?).to be(false)

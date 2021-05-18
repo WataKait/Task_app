@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Status, type: :model do
-  describe 'name' do
+  describe 'ステータス名' do
     it '1文字以上 255文字以内 であること' do
       expect(build(:status, name: nil).valid?).to be(false)
       expect(build(:status, name: '').valid?).to be(false)

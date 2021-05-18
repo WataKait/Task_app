@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'user' do
+  describe '名前' do
     it '1文字以上 255文字以内 であること' do
       expect(build(:user, name: nil).valid?).to be(false)
       expect(build(:user, name: '').valid?).to be(false)

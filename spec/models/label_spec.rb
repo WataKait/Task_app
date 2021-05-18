@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Label, type: :model do
-  describe 'name' do
+  describe 'ラベル名' do
     it '1文字以上 255文字以内 であること' do
       expect(build(:label, name: nil).valid?).to be(false)
       expect(build(:label, name: '').valid?).to be(false)
