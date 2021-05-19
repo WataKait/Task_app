@@ -1,4 +1,7 @@
 ja:
+  errors:
+    messages:
+      required: を選択してください
   helpers:
     submit:
       create: "作成"
