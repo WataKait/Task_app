@@ -76,6 +76,14 @@ ja:
         name: タスク
       label:
         name: ラベル
+    errors:
+      models:
+        task:
+          attributes:
+            priority:
+              required: を選択してください
+            status:
+              required: を選択してください
   attributes:
     priority: 優先度
     status: ステータス
