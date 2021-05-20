@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :system do
-  describe '' do
+  describe 'タスク機能' do
     let!(:label) { create(:label, name: 'System Spec') }
     let!(:priority) { create(:priority, name: '中') }
     let!(:status) { create(:status, name: '着手') }
