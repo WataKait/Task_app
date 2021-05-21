@@ -80,6 +80,15 @@ RSpec.describe 'Tasks', type: :system do
         expect(page).to have_current_path tasks_path, ignore_query: true
         expect(page).to have_selector 'td', text: '作業タスクA'
       end
+
+      it '"タスクを入力してください" と画面に表示され、更新に失敗する' do
+        click_link '編集', href: edit_task_path(task)
+
+        fill_in('task_name', with: '')
+
+        click_button '更新'
+        expect(page).to have_content 'タスクを入力してください'
+      end
     end
   end
 end
