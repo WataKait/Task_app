@@ -2,15 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Tasks', type: :system do
+RSpec.describe 'Tasks', js: true, type: :system do
   describe 'タスク機能' do
     let!(:label) { create(:label, name: 'System Spec') }
     let!(:priority) { create(:priority, name: '中') }
     let!(:status) { create(:status, name: '着手') }
-
-    before do
-      create(:user, id: 1, name: '太郎')
-    end
+    let!(:user) { create(:user, id: 1, name: '太郎') }
 
     context 'タスク詳細' do
       let!(:task) { create(:task) }
@@ -64,6 +61,20 @@ RSpec.describe 'Tasks', type: :system do
 
         click_button '作成'
         expect(page).to have_content 'ステータスを選択してください'
+      end
+    end
+
+    context 'タスク削除' do
+      let!(:task) { create(:task, user_id: user.id) }
+
+      before do
+        visit root_path
+      end
+
+      it '削除確認ダイアログでキャンセルを押下したら、タスクが削除されない' do
+        click_link '削除', href: task_path(task)
+        expect(page.dismiss_confirm).to eq '本当に削除しますか？'
+        expect(page).to have_selector 'td', text: task.name
       end
     end
   end
