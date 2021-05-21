@@ -96,7 +96,7 @@ RSpec.describe 'Tasks', type: :system do
         expect(page).to have_content 'タスクを入力してください'
       end
     end
-    
+
     context 'タスク削除', js: true do
       let!(:task) { create(:task, user_id: user.id) }
 
@@ -113,6 +113,7 @@ RSpec.describe 'Tasks', type: :system do
       it '削除確認ダイアログで OK を押下したら、タスクが削除される' do
         expect(page.accept_confirm).to eq '本当に削除しますか？'
         expect(page).to have_content 'タスクを削除しました'
-=======
+      end
+    end
   end
 end
