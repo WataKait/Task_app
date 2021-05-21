@@ -36,7 +36,7 @@ RSpec.describe 'Tasks', type: :system do
         select(label.name, from: 'task_label_id')
         select(priority.name, from: 'task_priority_id')
         select(status.name, from: 'task_status_id')
-        fill_in('task_time_limit', with: '002021-01-01T00:00')
+        fill_in('task_time_limit', with: '2021-01-01T00:00')
         fill_in('task_description', with: "Aという作業.\nテストです.")
       end
 
