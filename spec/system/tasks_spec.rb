@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Tasks', js: true, type: :system do
+RSpec.describe 'Tasks', type: :system do
   describe 'タスク機能' do
     let!(:label) { create(:label, name: 'System Spec') }
     let!(:priority) { create(:priority, name: '中') }
@@ -64,7 +64,7 @@ RSpec.describe 'Tasks', js: true, type: :system do
       end
     end
 
-    context 'タスク削除' do
+    context 'タスク削除', js: true do
       let!(:task) { create(:task, user_id: user.id) }
 
       before do
