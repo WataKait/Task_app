@@ -69,11 +69,19 @@ RSpec.describe 'Tasks', type: :system do
 
       before do
         visit root_path
+        click_link '編集', href: edit_task_path(task)
+      end
+
+      it 'タスクの情報が正しく入力欄に表示されている' do
+        expect(page).to have_field('task_name', with: task.name)
+        expect(page).to have_select('task_label_id', selected: task.label.name)
+        expect(page).to have_select('task_priority_id', selected: task.priority.name)
+        expect(page).to have_select('task_status_id', selected: task.status.name)
+        expect(page).to have_field('task_time_limit', with: task.time_limit.strftime('%Y-%m-%dT%H:%M:%S'))
+        expect(page).to have_field('task_description', with: task.description)
       end
 
       it 'ボタンを押下したら更新に成功し、一覧画面へ遷移する' do
-        click_link '編集', href: edit_task_path(task)
-
         fill_in('task_name', with: '作業タスクA')
 
         click_button '更新'
@@ -82,8 +90,6 @@ RSpec.describe 'Tasks', type: :system do
       end
 
       it '"タスクを入力してください" と画面に表示され、更新に失敗する' do
-        click_link '編集', href: edit_task_path(task)
-
         fill_in('task_name', with: '')
 
         click_button '更新'
