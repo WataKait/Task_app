@@ -41,26 +41,12 @@ RSpec.describe 'Tasks', type: :system do
       end
 
       it '入力値が正しく、ボタンを押下したら一覧画面へ遷移する' do
-        expect(page).to have_field('task_name', with: '作業タスクA')
-        expect(page).to have_select('task_label_id', selected: label.name)
-        expect(page).to have_select('task_priority_id', selected: priority.name)
-        expect(page).to have_select('task_status_id', selected: status.name)
-        expect(page).to have_field('task_time_limit', with: '2021-01-01T00:00')
-        expect(page).to have_field('task_description', with: "Aという作業.\nテストです.")
-
         click_button '作成'
         expect(page).to have_current_path tasks_path, ignore_query: true
       end
 
       it '"タスクを入力してください" と画面に表示され、作成に失敗する' do
         fill_in('task_name', with: nil)
-
-        expect(page).to have_field('task_name', with: nil)
-        expect(page).to have_select('task_label_id', selected: label.name)
-        expect(page).to have_select('task_priority_id', selected: priority.name)
-        expect(page).to have_select('task_status_id', selected: status.name)
-        expect(page).to have_field('task_time_limit', with: '2021-01-01T00:00')
-        expect(page).to have_field('task_description', with: "Aという作業.\nテストです.")
 
         click_button '作成'
         expect(page).to have_content 'タスクを入力してください'
@@ -69,26 +55,12 @@ RSpec.describe 'Tasks', type: :system do
       it '"優先度を選択してください" と画面に表示され、作成に失敗する' do
         select('優先度を選択', from: 'task_priority_id')
 
-        expect(page).to have_field('task_name', with: '作業タスクA')
-        expect(page).to have_select('task_label_id', selected: label.name)
-        expect(page).to have_select('task_priority_id', selected: '優先度を選択')
-        expect(page).to have_select('task_status_id', selected: status.name)
-        expect(page).to have_field('task_time_limit', with: '2021-01-01T00:00')
-        expect(page).to have_field('task_description', with: "Aという作業.\nテストです.")
-
         click_button '作成'
         expect(page).to have_content '優先度を選択してください'
       end
 
       it '"ステータスを選択してください" と画面に表示され、作成に失敗する' do
         select('ステータスを選択', from: 'task_status_id')
-
-        expect(page).to have_field('task_name', with: '作業タスクA')
-        expect(page).to have_select('task_label_id', selected: label.name)
-        expect(page).to have_select('task_priority_id', selected: priority.name)
-        expect(page).to have_select('task_status_id', selected: 'ステータスを選択')
-        expect(page).to have_field('task_time_limit', with: '2021-01-01T00:00')
-        expect(page).to have_field('task_description', with: "Aという作業.\nテストです.")
 
         click_button '作成'
         expect(page).to have_content 'ステータスを選択してください'
