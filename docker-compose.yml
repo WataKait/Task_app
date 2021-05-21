@@ -15,8 +15,11 @@ services:
       LESSCHARSET: utf-8
     ports:
       - "3000:3000"
+    volumes:
+      - node_modules_volume:/workspaces/node_modules
     depends_on:
       - db
 
 volumes:
   data:
+  node_modules_volume:
