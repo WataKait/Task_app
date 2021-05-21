@@ -7,10 +7,7 @@ RSpec.describe 'Tasks', type: :system do
     let!(:label) { create(:label, name: 'System Spec') }
     let!(:priority) { create(:priority, name: '中') }
     let!(:status) { create(:status, name: '着手') }
-
-    before do
-      create(:user, id: 1, name: '太郎')
-    end
+    let!(:user) { create(:user, id: 1, name: '太郎') }
 
     context 'タスク詳細' do
       let!(:task) { create(:task) }
@@ -64,6 +61,39 @@ RSpec.describe 'Tasks', type: :system do
 
         click_button '作成'
         expect(page).to have_content 'ステータスを選択してください'
+      end
+    end
+
+    context 'タスク編集' do
+      let!(:task) { create(:task, user_id: user.id) }
+
+      before do
+        visit root_path
+        click_link '編集', href: edit_task_path(task)
+      end
+
+      it 'タスクの情報が正しく入力欄に表示されている' do
+        expect(page).to have_field('task_name', with: task.name)
+        expect(page).to have_select('task_label_id', selected: task.label.name)
+        expect(page).to have_select('task_priority_id', selected: task.priority.name)
+        expect(page).to have_select('task_status_id', selected: task.status.name)
+        expect(page).to have_field('task_time_limit', with: task.time_limit.strftime('%Y-%m-%dT%H:%M:%S'))
+        expect(page).to have_field('task_description', with: task.description)
+      end
+
+      it 'ボタンを押下したら更新に成功し、一覧画面へ遷移する' do
+        fill_in('task_name', with: '作業タスクA')
+
+        click_button '更新'
+        expect(page).to have_current_path tasks_path, ignore_query: true
+        expect(page).to have_selector 'td', text: '作業タスクA'
+      end
+
+      it '"タスクを入力してください" と画面に表示され、更新に失敗する' do
+        fill_in('task_name', with: '')
+
+        click_button '更新'
+        expect(page).to have_content 'タスクを入力してください'
       end
     end
   end
