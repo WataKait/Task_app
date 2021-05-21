@@ -69,12 +69,17 @@ RSpec.describe 'Tasks', js: true, type: :system do
 
       before do
         visit root_path
+        click_link '削除', href: task_path(task)
       end
 
       it '削除確認ダイアログでキャンセルを押下したら、タスクが削除されない' do
-        click_link '削除', href: task_path(task)
         expect(page.dismiss_confirm).to eq '本当に削除しますか？'
         expect(page).to have_selector 'td', text: task.name
+      end
+
+      it '削除確認ダイアログで OK を押下したら、タスクが削除される' do
+        expect(page.accept_confirm).to eq '本当に削除しますか？'
+        expect(page).to have_content 'タスクを削除しました'
       end
     end
   end
