@@ -40,7 +40,7 @@ RSpec.describe 'Tasks', type: :system do
         fill_in('task_description', with: "Aという作業.\nテストです.")
       end
 
-      it '入力値が正しく、ボタンを押下したら一覧画面へ遷移する' do
+      it 'ボタンを押下したら作成に成功し、一覧画面へ遷移する' do
         click_button '作成'
         expect(page).to have_current_path tasks_path, ignore_query: true
       end
