@@ -46,7 +46,7 @@ RSpec.describe 'Tasks', type: :system do
       end
 
       it '"タスクを入力してください" と画面に表示され、作成に失敗する' do
-        fill_in('task_name', with: nil)
+        fill_in('task_name', with: '')
 
         click_button '作成'
         expect(page).to have_content 'タスクを入力してください'
