@@ -96,5 +96,25 @@ RSpec.describe 'Tasks', type: :system do
         expect(page).to have_content 'タスクを入力してください'
       end
     end
+
+    context 'タスク削除', js: true do
+      let!(:task) { create(:task, user_id: user.id) }
+
+      before do
+        visit root_path
+        click_link '削除', href: task_path(task)
+      end
+
+      it '削除確認ダイアログでキャンセルを押下したら、タスクが削除されない' do
+        expect(page.dismiss_confirm).to eq '本当に削除しますか？'
+        expect(page).to have_selector 'td', text: task.name
+      end
+
+      it '削除確認ダイアログで OK を押下したら、タスクが削除される' do
+        expect(page.accept_confirm).to eq '本当に削除しますか？'
+        expect(page).to have_content 'タスクを削除しました'
+        expect(page).not_to have_selector 'td', text: task.name
+      end
+    end
   end
 end
