@@ -29,7 +29,8 @@ RSpec.describe 'Tasks', type: :system do
 
     context 'タスク作成' do
       before do
-        visit new_task_path
+        visit root_path
+        click_link '+ タスク作成', href: new_task_path
         fill_in('task_name', with: '作業タスクA')
         select(label.name, from: 'task_label_id')
         select(priority.name, from: 'task_priority_id')
