@@ -29,7 +29,8 @@ RSpec.describe 'Tasks', type: :system do
 
     context 'タスク作成' do
       before do
-        visit new_task_path
+        visit root_path
+        click_link '+ タスク作成', href: new_task_path
         fill_in('task_name', with: '作業タスクA')
         select(label.name, from: 'task_label_id')
         select(priority.name, from: 'task_priority_id')
@@ -41,6 +42,7 @@ RSpec.describe 'Tasks', type: :system do
       it 'ボタンを押下したら作成に成功し、一覧画面へ遷移する' do
         click_button '作成'
         expect(page).to have_current_path tasks_path, ignore_query: true
+        expect(page).to have_selector 'td', text: '作業タスクA'
       end
 
       it '"タスクを入力してください" と画面に表示され、作成に失敗する' do
