@@ -10,10 +10,11 @@ RSpec.describe 'Tasks', type: :system do
     let!(:user) { create(:user, id: 1, name: '太郎') }
 
     context 'タスク詳細' do
-      let!(:task) { create(:task) }
+      let!(:task) { create(:task, user_id: user.id) }
 
       before do
-        visit task_path(task)
+        visit root_path
+        click_link '詳細', href: task_path(task)
       end
 
       it 'タスクの情報が正しく画面に表示されている' do
