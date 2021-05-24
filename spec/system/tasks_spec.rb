@@ -113,6 +113,7 @@ RSpec.describe 'Tasks', type: :system do
       it '削除確認ダイアログで OK を押下したら、タスクが削除される' do
         expect(page.accept_confirm).to eq '本当に削除しますか？'
         expect(page).to have_content 'タスクを削除しました'
+        expect(page).not_to have_selector 'td', text: task.name
       end
     end
   end
