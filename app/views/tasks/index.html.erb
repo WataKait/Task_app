@@ -29,8 +29,8 @@
         <td><%= task.label&.name %></td>
         <td><%= task.priority.name %></td>
         <td><%= task.status.name %></td>
-        <td class = 'time_limits'><%= task.time_limit %></td>
-        <td><%= task.created_at %></td>
+        <td><%= task.time_limit %></td>
+        <td class = 'date_created'><%= task.created_at %></td>
         <td><%= link_to t('.transition_detail'), task %></td>
         <td><%= link_to t('.transition_edit'), edit_task_path(task) %></td>
         <td><%= link_to t('.delete_label'), task, method: :delete, data: { confirm: t('.delete_confirm') } %></td>
