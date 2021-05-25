@@ -13,7 +13,7 @@ RSpec.describe 'Tasks', type: :system do
       let!(:first_task) { create(:task, user_id: user.id, created_at: '2021-01-01T00:00') }
       let!(:second_task) { create(:task, user_id: user.id, created_at: '2021-02-01T00:00') }
       let!(:third_task) { create(:task, user_id: user.id, created_at: '2021-03-01T00:00') }
-      let(:tds) { page.all('.date_created') }
+      let(:tds) { page.all('.created-date') }
 
       before do
         visit root_path
