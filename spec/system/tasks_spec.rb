@@ -9,6 +9,23 @@ RSpec.describe 'Tasks', type: :system do
     let!(:status) { create(:status, name: '着手') }
     let!(:user) { create(:user, id: 1, name: '太郎') }
 
+    context 'タスク一覧' do
+      let!(:first_task) { create(:task, user_id: user.id, created_at: '2021-01-01T00:00') }
+      let!(:second_task) { create(:task, user_id: user.id, created_at: '2021-02-01T00:00') }
+      let!(:third_task) { create(:task, user_id: user.id, created_at: '2021-03-01T00:00') }
+      let(:tds) { page.all('.created-date') }
+
+      before do
+        visit root_path
+      end
+
+      it '作成日時の降順で並んでいる' do
+        expect(tds[2]).to have_content first_task.created_at
+        expect(tds[1]).to have_content second_task.created_at
+        expect(tds[0]).to have_content third_task.created_at
+      end
+    end
+
     context 'タスク詳細' do
       let!(:task) { create(:task, user_id: user.id) }
 

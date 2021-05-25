@@ -10,6 +10,7 @@ ja:
       priority: 優先度
       status: ステータス
       time_limit: 終了期限
+      created_at: 作成日時
       task_list: タスク一覧
       transition_detail: 詳細
       transition_create: + タスク作成

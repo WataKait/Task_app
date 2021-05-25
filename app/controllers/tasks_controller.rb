@@ -9,7 +9,7 @@ class TasksController < ApplicationController
   def index
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
-    @tasks = Task.where(user_id: user_id)
+    @tasks = Task.where(user_id: user_id).order(created_at: :desc)
   end
 
   def show; end
