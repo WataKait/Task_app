@@ -67,11 +67,18 @@ class TasksController < ApplicationController
     @statuses = Status.all
   end
 
+  DEFAULT_SORT_COLUMN = :created_at
+
+  SORTABLE_COLUMN = {
+    created_at: :created_at,
+    time_limit: :time_limit,
+  }.freeze
+
   def switch_order
     %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
   end
 
   def sort_criteria_column
-    Task.column_names.include?(params[:sort]) ? params[:sort] : 'created_at'
+    SORTABLE_COLUMN[params[:sort]&.to_sym] || DEFAULT_SORT_COLUMN
   end
 end
