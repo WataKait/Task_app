@@ -66,6 +66,10 @@ RSpec/ExampleLength:
 RSpec/ContextWording:
   Enabled: false
 
+# 三項演算子の括弧の扱いに関するオプション
+Style/TernaryParentheses:
+  EnforcedStyle: require_parentheses_when_complex
+
 # TODO: Rubyのバージョンをあげたときにコメントを解除する
 # Gemspec/DateAssignment: # (new in 1.10)
 #   Enabled: true
