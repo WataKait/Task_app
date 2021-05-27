@@ -11,7 +11,7 @@ RSpec.describe 'Tasks', type: :system do
 
     context 'タスク一覧' do
       let!(:first_task) { create(:task, user_id: user.id, time_limit: '2021-01-08T00:00', created_at: '2021-01-01T00:00') }
-      let!(:second_task) { create(:task, user_id: user.id, time_limit: '2021-02-08T00:00', created_at: '2021-02-01T00:00') }
+      let!(:second_task) { create(:task, user_id: user.id, time_limit: '2021-04-08T00:00', created_at: '2021-02-01T00:00') }
       let!(:third_task) { create(:task, user_id: user.id, time_limit: '2021-03-08T00:00', created_at: '2021-03-01T00:00') }
       let(:time_limit_tds) { page.all('.time-limits') }
       let(:created_at_tds) { page.all('.created-date') }
@@ -29,16 +29,16 @@ RSpec.describe 'Tasks', type: :system do
       it '終了日時を奇数回押下すると昇順で並ぶ' do
         click_link '終了期限'
         expect(time_limit_tds[0]).to have_content first_task.time_limit
-        expect(time_limit_tds[1]).to have_content second_task.time_limit
-        expect(time_limit_tds[2]).to have_content third_task.time_limit
+        expect(time_limit_tds[1]).to have_content third_task.time_limit
+        expect(time_limit_tds[2]).to have_content second_task.time_limit
       end
 
       it '終了日時を偶数回押下すると降順で並ぶ' do
         click_link '終了期限'
         click_link '終了期限'
         expect(time_limit_tds[2]).to have_content first_task.time_limit
-        expect(time_limit_tds[1]).to have_content second_task.time_limit
-        expect(time_limit_tds[0]).to have_content third_task.time_limit
+        expect(time_limit_tds[1]).to have_content third_task.time_limit
+        expect(time_limit_tds[0]).to have_content second_task.time_limit
       end
     end
 
