@@ -5,12 +5,12 @@ class TasksController < ApplicationController
   before_action :set_labels, only: %i[new create edit update]
   before_action :set_priorities, only: %i[new create edit update]
   before_action :set_statuses, only: %i[new create edit update]
-  helper_method :sort_criteria_column, :switch_order
+  helper_method :set_sort_criteria, :switch_order
 
   def index
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
-    @tasks = Task.where(user_id: user_id).order("#{sort_criteria_column} desc")
+    @tasks = Task.where(user_id: user_id).order("#{set_sort_criteria} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
   end
 
@@ -79,7 +79,7 @@ class TasksController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
   end
 
-  def sort_criteria_column
+  def set_sort_criteria
     SORTABLE_COLUMN[params[:sort]&.to_sym] || DEFAULT_SORT_COLUMN
   end
 end
