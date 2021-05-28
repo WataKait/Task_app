@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
+  DEFAULT_SORT_COLUMN = :created_at
+
+  SORTABLE_COLUMN = {
+    created_at: :created_at,
+    time_limit: :time_limit,
+  }.freeze
+
   before_action :set_task, only: %i[show edit update destroy]
   before_action :set_labels, only: %i[new create edit update]
   before_action :set_priorities, only: %i[new create edit update]
@@ -67,13 +74,6 @@ class TasksController < ApplicationController
   def set_statuses
     @statuses = Status.all
   end
-
-  DEFAULT_SORT_COLUMN = :created_at
-
-  SORTABLE_COLUMN = {
-    created_at: :created_at,
-    time_limit: :time_limit,
-  }.freeze
 
   def switch_order
     %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
