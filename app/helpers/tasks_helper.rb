@@ -2,8 +2,13 @@
 
 module TasksHelper
   def create_sort_link(column, title)
-    truth_value = (column == set_sort_criteria && switch_order == 'asc')
-    direction = truth_value ? 'desc' : 'asc'
+    direction = sorted_with_asc?(column) ? 'desc' : 'asc'
     link_to title, sort: column, direction: direction
+  end
+
+  def sorted_with_asc?(column)
+    current_sort_column = set_sort_criteria
+    current_sort_order = switch_order
+    current_sort_column == column && current_sort_order == 'asc'
   end
 end
