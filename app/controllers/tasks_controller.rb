@@ -1,15 +1,24 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
+  DEFAULT_SORT_COLUMN = :created_at
+
+  SORTABLE_COLUMN = {
+    created_at: :created_at,
+    time_limit: :time_limit,
+  }.freeze
+
   before_action :set_task, only: %i[show edit update destroy]
   before_action :set_labels, only: %i[new create edit update]
   before_action :set_priorities, only: %i[new create edit update]
   before_action :set_statuses, only: %i[new create edit update]
+  helper_method :current_sort_order, :current_sort_column
 
   def index
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
-    @tasks = Task.where(user_id: user_id).order(created_at: :desc)
+    @tasks = Task.where(user_id: user_id).order("#{current_sort_column} desc")
+    @tasks = @tasks.reverse_order if params[:direction] == 'asc'
   end
 
   def show; end
@@ -64,5 +73,13 @@ class TasksController < ApplicationController
 
   def set_statuses
     @statuses = Status.all
+  end
+
+  def current_sort_order
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
+  end
+
+  def current_sort_column
+    SORTABLE_COLUMN[params[:sort]&.to_sym] || DEFAULT_SORT_COLUMN
   end
 end
