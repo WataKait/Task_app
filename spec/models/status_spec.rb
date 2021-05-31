@@ -19,4 +19,22 @@ RSpec.describe Status, type: :model do
       expect(build(:status, name: '着手').valid?).to be(false)
     end
   end
+
+  describe 'search メソッド' do
+    let!(:unstarted) { create(:status, name: '未着手') }
+    let!(:started) { create(:status, name: '着手') }
+    let!(:completed) { create(:status, name: '完了') }
+
+    it "'未着手' で検索したら '未着手' が返る" do
+      expect(described_class.search('未着手')).to include(unstarted)
+    end
+
+    it "'これから' で検索したら 空の値が返る" do
+      expect(described_class.search('これから')).to be_empty
+    end
+
+    it "'' で検索したら 全て返る" do
+      expect(described_class.search('')).to include(unstarted, started, completed)
+    end
+  end
 end
