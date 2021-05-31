@@ -9,7 +9,7 @@ class Task < ApplicationRecord
 
   def self.search(keyword, status_ids, user_id)
     if keyword.present?
-      Task.where('name like ? or status_id in (?)', "%#{keyword}%", status_ids).and(Task.where('user_id = ?', user_id))
+      User.find(user_id).tasks.where('name like ? or status_id in (?)', "%#{keyword}%", status_ids).and(Task.where('user_id = ?', user_id))
     else
       Task.where('user_id = ?', user_id)
     end
