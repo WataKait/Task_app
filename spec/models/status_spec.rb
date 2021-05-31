@@ -27,10 +27,12 @@ RSpec.describe Status, type: :model do
 
     it "'未着手' で検索したら '未着手' が返る" do
       expect(described_class.search('未着手')).to include(unstarted)
+      expect(described_class.search('未着手')).not_to include(started, completed)
     end
 
     it "'着手' で検索したら '未着手・着手' が返る" do
       expect(described_class.search('着手')).to include(unstarted, started)
+      expect(described_class.search('着手')).not_to include(completed)
     end
 
     it "'これから' で検索したら 空の値が返る" do
