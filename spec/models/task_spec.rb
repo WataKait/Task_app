@@ -41,19 +41,21 @@ RSpec.describe Task, type: :model do
   end
 
   describe 'search メソッド' do
-    let!(:abc_task) { create(:task, name: 'abcタスク') }
-    let!(:other_task) { create(:task, name: 'xyz') }
+    let!(:abc_task) { create(:task, name: 'abcタスク', user_id: user.id) }
+    let!(:other_task) { create(:task, name: 'xyz', user_id: user.id) }
+    let!(:user) { create(:user) }
+    let(:status_ids) { [] }
 
     it "'abc' で検索したら 'abcタスク' が返る" do
-      expect(described_class.search('abc')).to include(abc_task)
+      expect(described_class.search('abc', status_ids, user.id)).to include(abc_task)
     end
 
     it "'abcd' で検索したら 空の値が返る" do
-      expect(described_class.search('abcd')).to be_empty
+      expect(described_class.search('abcd', status_ids, user.id)).to be_empty
     end
 
     it "'' で検索したら 全て返る" do
-      expect(described_class.search('')).to include(abc_task, other_task)
+      expect(described_class.search('', status_ids, user.id)).to include(abc_task, other_task)
     end
   end
 end
