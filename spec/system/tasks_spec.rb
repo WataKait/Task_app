@@ -136,5 +136,44 @@ RSpec.describe 'Tasks', type: :system do
         expect(page).not_to have_selector 'td', text: task.name
       end
     end
+
+    context 'タスク検索' do
+      let!(:abc_task) { create(:task, name: 'abcタスク', status_id: completed.id, user_id: user.id) }
+      let!(:other_task) { create(:task, name: 'xyz', status_id: unstarted.id, user_id: user.id) }
+      let(:unstarted) { create(:status, name: '未着手') }
+      let(:completed) { create(:status, name: '完了') }
+
+      before do
+        visit root_path
+      end
+
+      it "'abc' で検索したら 'abcタスク' が表示される" do
+        fill_in('search', with: 'abc')
+        click_button '検索'
+        expect(page).to have_selector 'td', text: abc_task.name
+        expect(page).not_to have_selector 'td', text: other_task.name
+      end
+
+      it "'未' で検索したら 'xyz' が表示される" do
+        fill_in('search', with: '未')
+        click_button '検索'
+        expect(page).to have_selector 'td', text: other_task.name
+        expect(page).not_to have_selector 'td', text: abc_task.name
+      end
+
+      it "'abcd' で検索したら 表示されない" do
+        fill_in('search', with: 'abcd')
+        click_button '検索'
+        expect(page).not_to have_selector 'td', text: abc_task.name
+        expect(page).not_to have_selector 'td', text: other_task.name
+      end
+
+      it "'' で検索したら 全て表示される" do
+        fill_in('search', with: '')
+        click_button '検索'
+        expect(page).to have_selector 'td', text: abc_task.name
+        expect(page).to have_selector 'td', text: other_task.name
+      end
+    end
   end
 end
