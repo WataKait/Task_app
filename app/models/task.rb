@@ -11,7 +11,7 @@ class Task < ApplicationRecord
     if keyword.present?
       Task.where('name like ? or status_id in (?)', "%#{keyword}%", status_ids).and(Task.where('user_id = ?', user_id))
     else
-      Task.where('user_id = ?', user_id).order(created_at: :desc)
+      Task.where('user_id = ?', user_id)
     end
   end
 end

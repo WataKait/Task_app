@@ -57,7 +57,7 @@ class TasksController < ApplicationController
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
     status_ids = Status.search(params[:search]).ids
-    @tasks = Task.search(params[:search], status_ids, user_id)
+    @tasks = Task.search(params[:search], status_ids, user_id).order("#{current_sort_column} desc")
     render :index
   end
 
