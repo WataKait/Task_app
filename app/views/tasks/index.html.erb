@@ -9,7 +9,7 @@
 <p><%= link_to t('.transition_create'), new_task_path %></p>
 
 <div class="search-form">
-  <%= form_with url: search_path, method: :get, local: true do |f| %>
+  <%= form_with url: search_tasks_path, method: :get, local: true do |f| %>
     <%= f.text_field :search %>
     <%= f.submit t('.search') %>
   <% end %>
