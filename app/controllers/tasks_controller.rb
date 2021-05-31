@@ -44,6 +44,14 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice: t('.notice')
   end
 
+  def search
+    # TODO: ログイン機能実装後、user_idを取得してくる
+    user_id = 1
+    status_ids = Status.search(params[:search]).ids
+    @tasks = Task.search(params[:search], status_ids, user_id)
+    render :index
+  end
+
   private
 
   def set_task
