@@ -20,7 +20,7 @@ RSpec.describe Status, type: :model do
     end
   end
 
-  describe 'search メソッド' do
+  describe '.search' do
     let!(:unstarted) { create(:status, name: '未着手') }
     let!(:started) { create(:status, name: '着手') }
     let!(:completed) { create(:status, name: '完了') }

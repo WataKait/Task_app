@@ -40,7 +40,7 @@ RSpec.describe Task, type: :model do
     end
   end
 
-  describe 'search メソッド' do
+  describe '.search' do
     let!(:abc_task) { create(:task, name: 'abcタスク', user_id: user.id) }
     let!(:xyz_task) { create(:task, name: 'xyzタスク', user_id: user.id) }
     let!(:other_task) { create(:task, name: 'other', user_id: user.id) }
