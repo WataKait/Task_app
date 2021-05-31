@@ -18,6 +18,7 @@ ja:
       delete_label: 削除
       delete_confirm: 本当に削除しますか？
       transition_label_index: ラベル一覧へ →
+      search: "検索"
     show:
       task: タスク
       label: ラベル
