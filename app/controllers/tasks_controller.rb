@@ -53,6 +53,14 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice: t('.notice')
   end
 
+  def search
+    # TODO: ログイン機能実装後、user_idを取得してくる
+    user_id = 1
+    status_ids = search_statuses(params[:search]).ids
+    @tasks = search_tasks(params[:search], status_ids, user_id).order("#{current_sort_column} desc")
+    render :index
+  end
+
   private
 
   def set_task
@@ -81,5 +89,22 @@ class TasksController < ApplicationController
 
   def current_sort_column
     SORTABLE_COLUMN[params[:sort]&.to_sym] || DEFAULT_SORT_COLUMN
+  end
+
+  def search_statuses(keyword)
+    if keyword.present?
+      Status.where('name LIKE ?', "%#{keyword}%")
+    else
+      Status.all
+    end
+  end
+
+  def search_tasks(keyword, status_ids, user_id)
+    if keyword.present?
+      tasks = User.find(user_id).tasks
+      tasks.where('name LIKE ?', "%#{keyword}%").or(tasks.where(status_id: status_ids))
+    else
+      Task.where('user_id = ?', user_id)
+    end
   end
 end
