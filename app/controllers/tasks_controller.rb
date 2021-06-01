@@ -101,7 +101,8 @@ class TasksController < ApplicationController
 
   def search_tasks(keyword, status_ids, user_id)
     if keyword.present?
-      User.find(user_id).tasks.where('name like ? or status_id in (?)', "%#{keyword}%", status_ids)
+      tasks = User.find(user_id).tasks
+      tasks.where('name like ?', "%#{keyword}%").or(tasks.where(status_id: status_ids))
     else
       Task.where('user_id = ?', user_id)
     end
