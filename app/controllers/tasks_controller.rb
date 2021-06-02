@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   SORTABLE_COLUMN = {
     created_at: :created_at,
     time_limit: :time_limit,
-    "priorities.priority": :"priorities.priority",
+    'priorities.priority': :'priorities.priority',
   }.freeze
 
   before_action :set_task, only: %i[show edit update destroy]
