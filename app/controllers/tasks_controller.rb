@@ -19,6 +19,7 @@ class TasksController < ApplicationController
     user_id = 1
     @tasks = Task.where(user_id: user_id).order("#{current_sort_column} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
+    @tasks = @tasks.page(params[:page]).per(10)
   end
 
   def show; end
