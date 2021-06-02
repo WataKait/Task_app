@@ -6,6 +6,7 @@ class TasksController < ApplicationController
   SORTABLE_COLUMN = {
     created_at: :created_at,
     time_limit: :time_limit,
+    "priorities.priority": :"priorities.priority",
   }.freeze
 
   before_action :set_task, only: %i[show edit update destroy]
@@ -17,7 +18,7 @@ class TasksController < ApplicationController
   def index
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
-    @tasks = Task.where(user_id: user_id).order("#{current_sort_column} desc")
+    @tasks = Task.joins(:priority).where(user_id: user_id).order("#{current_sort_column} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
   end
 
