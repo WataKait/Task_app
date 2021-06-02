@@ -5,14 +5,17 @@ require 'rails_helper'
 RSpec.describe 'Tasks', type: :system do
   describe 'タスク機能' do
     let!(:label) { create(:label, name: 'System Spec') }
-    let!(:priority) { create(:priority, name: '中') }
+    let!(:priority) { create(:priority, name: '中', priority: 50) }
     let!(:status) { create(:status, name: '着手') }
     let!(:user) { create(:user, id: 1, name: '太郎') }
 
     context 'タスク一覧' do
-      let!(:first_task) { create(:task, user_id: user.id, time_limit: '2021-01-08T00:00', created_at: '2021-01-01T00:00') }
-      let!(:second_task) { create(:task, user_id: user.id, time_limit: '2021-04-08T00:00', created_at: '2021-02-01T00:00') }
-      let!(:third_task) { create(:task, user_id: user.id, time_limit: '2021-03-08T00:00', created_at: '2021-03-01T00:00') }
+      let!(:first_task) { create(:task, user_id: user.id, priority_id: priority.id, time_limit: '2021-01-08T00:00', created_at: '2021-01-01T00:00') }
+      let!(:second_task) { create(:task, user_id: user.id, priority_id: low_priority.id, time_limit: '2021-04-08T00:00', created_at: '2021-02-01T00:00') }
+      let!(:third_task) { create(:task, user_id: user.id, priority_id: high_priority.id, time_limit: '2021-03-08T00:00', created_at: '2021-03-01T00:00') }
+      let(:low_priority) { create(:priority, name: '低', priority: 1) }
+      let(:high_priority) { create(:priority, name: '高', priority: 100) }
+      let(:priority_tds) { page.all('.priorities') }
       let(:time_limit_tds) { page.all('.time-limits') }
       let(:created_at_tds) { page.all('.created-date') }
 
@@ -24,6 +27,21 @@ RSpec.describe 'Tasks', type: :system do
         expect(created_at_tds[2]).to have_content first_task.created_at
         expect(created_at_tds[1]).to have_content second_task.created_at
         expect(created_at_tds[0]).to have_content third_task.created_at
+      end
+
+      it '優先度を奇数回押下すると昇順で並ぶ' do
+        click_link '優先度'
+        expect(priority_tds[0]).to have_content second_task.priority.name
+        expect(priority_tds[1]).to have_content first_task.priority.name
+        expect(priority_tds[2]).to have_content third_task.priority.name
+      end
+
+      it '優先度を偶数回押下すると降順で並ぶ' do
+        click_link '優先度'
+        click_link '優先度'
+        expect(priority_tds[2]).to have_content second_task.priority.name
+        expect(priority_tds[1]).to have_content first_task.priority.name
+        expect(priority_tds[0]).to have_content third_task.priority.name
       end
 
       it '終了日時を奇数回押下すると昇順で並ぶ' do
