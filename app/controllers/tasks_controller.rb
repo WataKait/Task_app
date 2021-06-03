@@ -58,7 +58,8 @@ class TasksController < ApplicationController
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
     status_ids = search_statuses(params[:search]).ids
-    @tasks = search_tasks(params[:search], status_ids, user_id).order("#{current_sort_column} desc")
+    @tasks = search_tasks(params[:search], status_ids, user_id).joins(:priority).order("#{current_sort_column} desc")
+    @tasks = @tasks.reverse_order if params[:direction] == 'asc'
     render :index
   end
 
@@ -103,7 +104,7 @@ class TasksController < ApplicationController
   def search_tasks(keyword, status_ids, user_id)
     if keyword.present?
       tasks = User.find(user_id).tasks
-      tasks.where('name LIKE ?', "%#{keyword}%").or(tasks.where(status_id: status_ids))
+      tasks.where('tasks.name LIKE ?', "%#{keyword}%").or(tasks.where(status_id: status_ids))
     else
       Task.where('user_id = ?', user_id)
     end
