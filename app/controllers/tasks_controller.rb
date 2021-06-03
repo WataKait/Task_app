@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   SORTABLE_COLUMN = {
     created_at: :created_at,
     time_limit: :time_limit,
-    priority: :priority,
+    priority: :'priorities.priority',
   }.freeze
 
   before_action :set_task, only: %i[show edit update destroy]
@@ -18,7 +18,7 @@ class TasksController < ApplicationController
   def index
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
-    @tasks = Task.joins(:priority).where(user_id: user_id).order("#{current_sort_column} desc")
+    @tasks = Task.joins(:priority).where(user_id: user_id).order("#{column_for_sort} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
   end
 
@@ -58,7 +58,7 @@ class TasksController < ApplicationController
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
     status_ids = search_statuses(params[:search]).ids
-    @tasks = search_tasks(params[:search], status_ids, user_id).joins(:priority).order("#{current_sort_column} desc")
+    @tasks = search_tasks(params[:search], status_ids, user_id).joins(:priority).order("#{column_for_sort} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
     render :index
   end
@@ -90,6 +90,10 @@ class TasksController < ApplicationController
   end
 
   def current_sort_column
+    params[:sort]&.to_sym || DEFAULT_SORT_COLUMN
+  end
+
+  def column_for_sort
     SORTABLE_COLUMN[params[:sort]&.to_sym] || DEFAULT_SORT_COLUMN
   end
 
