@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  DEFAULT_SORT_COLUMN = :created_at
+  DEFAULT_SORT_COLUMN = :'tasks.created_at'
 
   SORTABLE_COLUMN = {
     created_at: :created_at,
@@ -18,7 +18,7 @@ class TasksController < ApplicationController
   def index
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
-    @tasks = Task.joins(:priority).where(user_id: user_id).order("#{column_for_sort} desc")
+    @tasks = Task.eager_load(:label, :priority, :status).where('user_id': user_id).order("#{column_for_sort} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
   end
 
