@@ -12,12 +12,12 @@ class TasksController < ApplicationController
   before_action :set_labels, only: %i[new create edit update]
   before_action :set_priorities, only: %i[new create edit update]
   before_action :set_statuses, only: %i[new create edit update]
-  helper_method :current_sort_order, :visible_sort_column
+  helper_method :current_sort_order, :current_sort_column
 
   def index
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
-    @tasks = Task.eager_load(:label, :priority, :status).where(user_id: user_id).order("#{current_sort_column} desc")
+    @tasks = Task.eager_load(:label, :priority, :status).where(user_id: user_id).order("#{database_sort_column} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
   end
 
@@ -57,7 +57,7 @@ class TasksController < ApplicationController
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
     status_ids = search_statuses(params[:search]).ids
-    @tasks = search_tasks(params[:search], status_ids, user_id).eager_load(:label, :priority, :status).order("#{current_sort_column} desc")
+    @tasks = search_tasks(params[:search], status_ids, user_id).eager_load(:label, :priority, :status).order("#{database_sort_column} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
     render :index
   end
@@ -88,11 +88,11 @@ class TasksController < ApplicationController
     %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
   end
 
-  def visible_sort_column
+  def current_sort_column
     params[:sort]&.to_sym || DEFAULT_SORT_COLUMN
   end
 
-  def current_sort_column
+  def database_sort_column
     SORTABLE_COLUMN[params[:sort]&.to_sym] || DEFAULT_SORT_COLUMN
   end
 

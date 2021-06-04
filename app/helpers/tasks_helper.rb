@@ -7,6 +7,6 @@ module TasksHelper
   end
 
   def sorted_with_asc?(column)
-    visible_sort_column == column && current_sort_order == 'asc'
+    current_sort_column == column && current_sort_order == 'asc'
   end
 end
