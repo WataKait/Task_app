@@ -60,6 +60,7 @@ class TasksController < ApplicationController
     status_ids = search_statuses(params[:search]).ids
     @tasks = search_tasks(params[:search], status_ids, user_id).eager_load(:label, :priority, :status).order("#{database_sort_column} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
+    @tasks = @tasks.page(params[:page]).per(10)
     render :index
   end
 
