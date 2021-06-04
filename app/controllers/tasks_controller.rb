@@ -57,7 +57,7 @@ class TasksController < ApplicationController
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
     status_ids = search_statuses(params[:search]).ids
-    @tasks = search_tasks(params[:search], status_ids, user_id).joins(:priority).order("#{column_for_sort} desc")
+    @tasks = search_tasks(params[:search], status_ids, user_id).eager_load(:label, :priority, :status).order("#{column_for_sort} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
     render :index
   end
