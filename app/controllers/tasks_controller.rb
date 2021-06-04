@@ -4,7 +4,6 @@ class TasksController < ApplicationController
   DEFAULT_SORT_COLUMN = :'tasks.created_at'
 
   SORTABLE_COLUMN = {
-    created_at: :created_at,
     time_limit: :time_limit,
     priority: :'priorities.priority',
   }.freeze
