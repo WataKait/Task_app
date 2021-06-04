@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  DEFAULT_SORT_COLUMN = :created_at
+  DEFAULT_SORT_COLUMN = :'tasks.created_at'
 
   SORTABLE_COLUMN = {
-    created_at: :created_at,
     time_limit: :time_limit,
+    priority: :'priorities.priority',
   }.freeze
 
   before_action :set_task, only: %i[show edit update destroy]
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   def index
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
-    @tasks = Task.where(user_id: user_id).order("#{current_sort_column} desc")
+    @tasks = Task.eager_load(:label, :priority, :status).where(user_id: user_id).order("#{database_sort_column} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
     @tasks = @tasks.page(params[:page]).per(10)
   end
@@ -58,7 +58,8 @@ class TasksController < ApplicationController
     # TODO: ログイン機能実装後、user_idを取得してくる
     user_id = 1
     status_ids = search_statuses(params[:search]).ids
-    @tasks = search_tasks(params[:search], status_ids, user_id).order("#{current_sort_column} desc")
+    @tasks = search_tasks(params[:search], status_ids, user_id).eager_load(:label, :priority, :status).order("#{database_sort_column} desc")
+    @tasks = @tasks.reverse_order if params[:direction] == 'asc'
     render :index
   end
 
@@ -89,6 +90,10 @@ class TasksController < ApplicationController
   end
 
   def current_sort_column
+    params[:sort]&.to_sym || DEFAULT_SORT_COLUMN
+  end
+
+  def database_sort_column
     SORTABLE_COLUMN[params[:sort]&.to_sym] || DEFAULT_SORT_COLUMN
   end
 
@@ -103,7 +108,7 @@ class TasksController < ApplicationController
   def search_tasks(keyword, status_ids, user_id)
     if keyword.present?
       tasks = User.find(user_id).tasks
-      tasks.where('name LIKE ?', "%#{keyword}%").or(tasks.where(status_id: status_ids))
+      tasks.where('tasks.name LIKE ?', "%#{keyword}%").or(tasks.where(status_id: status_ids))
     else
       Task.where('user_id = ?', user_id)
     end

@@ -20,7 +20,7 @@
     <tr>
       <th><%= t('.task') %></th>
       <th><%= t('.label') %></th>
-      <th><%= t('.priority') %></th>
+      <th><%= create_sort_link (:priority), t('.priority') %></th>
       <th><%= t('.status') %></th>
       <th><%= create_sort_link (:time_limit), t('.time_limit') %></th>
       <th><%= t('.created_at') %></th>
@@ -34,7 +34,7 @@
       <tr>
         <td><%= task.name %></td>
         <td><%= task.label&.name %></td>
-        <td><%= task.priority.name %></td>
+        <td class='priorities'><%= task.priority.name %></td>
         <td><%= task.status.name %></td>
         <td class='time-limits'><%= task.time_limit %></td>
         <td class='created-date'><%= task.created_at %></td>
