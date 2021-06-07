@@ -21,18 +21,21 @@ RSpec.describe '4ページ分のページネーションについて', type: :sy
       click_link '3', href: '/tasks?page=3'
       expect(page).to have_current_path '/tasks?page=3'
       expect(page).to have_css '.names'
+      expect(page).to have_css '.pagination'
     end
 
     it 'Nextを押下すると次のページに遷移' do
       click_link 'Next', href: "/tasks?page=#{next_page}"
       expect(page).to have_current_path "/tasks?page=#{next_page}"
       expect(page).to have_css '.names'
+      expect(page).to have_css '.pagination'
     end
 
     it 'Lastを押下すると最後のページに遷移' do
       click_link 'Last', href: "/tasks?page=#{last_page}"
       expect(page).to have_current_path "/tasks?page=#{last_page}"
       expect(page).to have_css '.names'
+      expect(page).to have_css '.pagination'
     end
   end
 
@@ -47,12 +50,40 @@ RSpec.describe '4ページ分のページネーションについて', type: :sy
       click_link 'First', href: tasks_path
       expect(page).to have_current_path tasks_path
       expect(page).to have_css '.names'
+      expect(page).to have_css '.pagination'
     end
 
     it 'Previousを押下すると前のページに遷移' do
       click_link 'Previous', href: "/tasks?page=#{previous_page}"
       expect(page).to have_current_path "/tasks?page=#{previous_page}"
       expect(page).to have_css '.names'
+      expect(page).to have_css '.pagination'
+    end
+  end
+
+  context '検索結果が10件を超えない時' do
+    before do
+      visit root_path
+      fill_in('search', with: '0')
+      click_button '検索'
+    end
+
+    it 'ページネーションが表示されない' do
+      expect(page).to have_css '.names'
+      expect(page).not_to have_css '.pagination'
+    end
+  end
+
+  context '検索結果が10件を超える時' do
+    before do
+      visit root_path
+      fill_in('search', with: '1')
+      click_button '検索'
+    end
+
+    it 'ページネーションが表示される' do
+      expect(page).to have_css '.names'
+      expect(page).to have_css '.pagination'
     end
   end
 end
