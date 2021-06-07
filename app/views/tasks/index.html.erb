@@ -32,7 +32,7 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= task.name %></td>
+        <td class='names'><%= task.name %></td>
         <td><%= task.label&.name %></td>
         <td class='priorities'><%= task.priority.name %></td>
         <td><%= task.status.name %></td>
