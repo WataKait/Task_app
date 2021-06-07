@@ -2,16 +2,18 @@
 
 require 'rails_helper'
 
-RSpec.describe '4ページ分のページネーションについて', type: :system do
+RSpec.describe '3ページ分のページネーションについて', type: :system do
   let!(:user) { create(:user, id: 1, name: '太郎') }
+  let!(:task) { create(:task, name: 'abc_task', user_id: user.id) }
 
   before do
-    create_list(:task, 31, user_id: user.id)
+    create_list(:task, 2, user_id: user.id)
+    stub_const('TasksController::RECORDS_NUMBER_TO_DISPLAY', 1)
   end
 
   context '1ページ目にいる時' do
     let!(:next_page) { 2 }
-    let!(:last_page) { 4 }
+    let!(:last_page) { 3 }
 
     before do
       visit root_path
@@ -39,7 +41,7 @@ RSpec.describe '4ページ分のページネーションについて', type: :sy
     end
   end
 
-  context '4ページ目にいる時' do
+  context '3ページ目にいる時' do
     let!(:previous_page) { 3 }
 
     before do
@@ -61,23 +63,23 @@ RSpec.describe '4ページ分のページネーションについて', type: :sy
     end
   end
 
-  context '検索結果が10件を超えない時' do
+  context '検索結果が1件を超えない時', js: true do
     before do
       visit root_path
-      fill_in('search', with: '0')
+      fill_in('search', with: 'abc')
       click_button '検索'
     end
 
     it 'ページネーションが表示されない' do
-      expect(page).to have_css '.names'
+      expect(page).to have_selector 'td', text: task.name
       expect(page).not_to have_css '.pagination'
     end
   end
 
-  context '検索結果が10件を超える時' do
+  context '検索結果が1件を超える時' do
     before do
       visit root_path
-      fill_in('search', with: '1')
+      fill_in('search', with: 'task')
       click_button '検索'
     end
 
