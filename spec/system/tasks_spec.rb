@@ -172,9 +172,9 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     context 'タスク検索' do
-      let!(:abc_task) { create(:task, name: 'abcタスク', status_id: completed.id, user_id: user.id) }
-      let!(:xyz_task) { create(:task, name: 'xyzタスク', status_id: unstarted.id, user_id: user.id) }
-      let!(:other_task) { create(:task, name: 'other', status_id: completed.id, user_id: user.id) }
+      let!(:abc_task) { create(:task, name: 'abcタスク', status_id: completed.id, user_id: user.id, priority_id: priority.id) }
+      let!(:xyz_task) { create(:task, name: 'xyzタスク', status_id: unstarted.id, user_id: user.id, priority_id: priority.id) }
+      let!(:other_task) { create(:task, name: 'other', status_id: completed.id, user_id: user.id, priority_id: priority.id) }
       let(:unstarted) { create(:status, name: '未着手') }
       let(:completed) { create(:status, name: '完了') }
 

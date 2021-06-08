@@ -8,6 +8,8 @@ class TasksController < ApplicationController
     priority: :'priorities.priority',
   }.freeze
 
+  RECORDS_NUMBER_TO_DISPLAY = 10
+
   before_action :set_task, only: %i[show edit update destroy]
   before_action :set_labels, only: %i[new create edit update]
   before_action :set_priorities, only: %i[new create edit update]
@@ -19,6 +21,7 @@ class TasksController < ApplicationController
     user_id = 1
     @tasks = Task.eager_load(:label, :priority, :status).where(user_id: user_id).order("#{database_sort_column} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
+    @tasks = @tasks.page(params[:page]).per(RECORDS_NUMBER_TO_DISPLAY)
   end
 
   def show; end
@@ -59,6 +62,7 @@ class TasksController < ApplicationController
     status_ids = search_statuses(params[:search]).ids
     @tasks = search_tasks(params[:search], status_ids, user_id).eager_load(:label, :priority, :status).order("#{database_sort_column} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
+    @tasks = @tasks.page(params[:page]).per(RECORDS_NUMBER_TO_DISPLAY)
     render :index
   end
 
