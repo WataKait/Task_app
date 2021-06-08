@@ -24,6 +24,7 @@ RSpec.describe '3ページ分のページネーションについて', type: :sy
       expect(page).to have_current_path '/tasks?page=3'
       expect(page).to have_css '.names'
       expect(page).to have_css '.pagination'
+      expect(page.all('.names').count).to eq TasksController::RECORDS_NUMBER_TO_DISPLAY
     end
 
     it 'Nextを押下すると次のページに遷移' do
@@ -31,6 +32,7 @@ RSpec.describe '3ページ分のページネーションについて', type: :sy
       expect(page).to have_current_path "/tasks?page=#{next_page}"
       expect(page).to have_css '.names'
       expect(page).to have_css '.pagination'
+      expect(page.all('.names').count).to eq TasksController::RECORDS_NUMBER_TO_DISPLAY
     end
 
     it 'Lastを押下すると最後のページに遷移' do
@@ -38,6 +40,7 @@ RSpec.describe '3ページ分のページネーションについて', type: :sy
       expect(page).to have_current_path "/tasks?page=#{last_page}"
       expect(page).to have_css '.names'
       expect(page).to have_css '.pagination'
+      expect(page.all('.names').count).to eq TasksController::RECORDS_NUMBER_TO_DISPLAY
     end
   end
 
@@ -53,6 +56,7 @@ RSpec.describe '3ページ分のページネーションについて', type: :sy
       expect(page).to have_current_path tasks_path
       expect(page).to have_css '.names'
       expect(page).to have_css '.pagination'
+      expect(page.all('.names').count).to eq TasksController::RECORDS_NUMBER_TO_DISPLAY
     end
 
     it 'Previousを押下すると前のページに遷移' do
@@ -60,6 +64,7 @@ RSpec.describe '3ページ分のページネーションについて', type: :sy
       expect(page).to have_current_path "/tasks?page=#{previous_page}"
       expect(page).to have_css '.names'
       expect(page).to have_css '.pagination'
+      expect(page.all('.names').count).to eq TasksController::RECORDS_NUMBER_TO_DISPLAY
     end
   end
 
@@ -73,6 +78,7 @@ RSpec.describe '3ページ分のページネーションについて', type: :sy
     it 'ページネーションが表示されない' do
       expect(page).to have_selector 'td', text: task.name
       expect(page).not_to have_css '.pagination'
+      expect(page.all('.names').count).to eq TasksController::RECORDS_NUMBER_TO_DISPLAY
     end
   end
 
@@ -86,6 +92,7 @@ RSpec.describe '3ページ分のページネーションについて', type: :sy
     it 'ページネーションが表示される' do
       expect(page).to have_css '.names'
       expect(page).to have_css '.pagination'
+      expect(page.all('.names').count).to eq TasksController::RECORDS_NUMBER_TO_DISPLAY
     end
   end
 end
