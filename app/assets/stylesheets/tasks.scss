@@ -2,6 +2,25 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-table, th, td{
-  border:1px solid #000;
+input[type=text] {
+  width: 45vw;
+}
+
+table,
+th,
+td {
+  border: 1px solid #000;
+}
+
+th {
+  text-align: center;
+  background-color: #ddd;
+}
+
+.search-form {
+  margin-bottom: 1vh;
+}
+
+.pagination {
+  display: block;
 }
