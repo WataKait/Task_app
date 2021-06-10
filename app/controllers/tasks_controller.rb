@@ -10,6 +10,7 @@ class TasksController < ApplicationController
 
   RECORDS_NUMBER_TO_DISPLAY = 10
 
+  before_action :logged_in_user
   before_action :set_task, only: %i[show edit update destroy]
   before_action :set_labels, only: %i[new create edit update]
   before_action :set_priorities, only: %i[new create edit update]
@@ -94,6 +95,10 @@ class TasksController < ApplicationController
 
   def database_sort_column
     SORTABLE_COLUMN[params[:sort]&.to_sym] || DEFAULT_SORT_COLUMN
+  end
+
+  def logged_in_user
+    redirect_to login_path unless logged_in?
   end
 
   def search_statuses(keyword)

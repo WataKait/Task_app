@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class LabelsController < ApplicationController
+  before_action :logged_in_user
   before_action :set_label, only: %i[edit update destroy]
 
   def index
@@ -45,5 +46,9 @@ class LabelsController < ApplicationController
 
   def label_params
     params.require(:label).permit(:name)
+  end
+
+  def logged_in_user
+    redirect_to login_path unless logged_in?
   end
 end
