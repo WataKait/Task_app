@@ -1,5 +1,4 @@
-<%# TODO ログイン機能実装後、user_id を取得してくる %>
-<%= task.hidden_field :user_id, value: 1 %>
+<%= task.hidden_field :user_id, value: current_user.id %>
 
 <table>
   <tr>

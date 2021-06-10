@@ -17,9 +17,7 @@ class TasksController < ApplicationController
   helper_method :current_sort_order, :current_sort_column
 
   def index
-    # TODO: ログイン機能実装後、user_idを取得してくる
-    user_id = 1
-    @tasks = Task.eager_load(:label, :priority, :status).where(user_id: user_id).order("#{database_sort_column} desc")
+    @tasks = Task.eager_load(:label, :priority, :status).where(user_id: current_user.id).order("#{database_sort_column} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
     @tasks = @tasks.page(params[:page]).per(RECORDS_NUMBER_TO_DISPLAY)
   end
@@ -57,10 +55,8 @@ class TasksController < ApplicationController
   end
 
   def search
-    # TODO: ログイン機能実装後、user_idを取得してくる
-    user_id = 1
     status_ids = search_statuses(params[:search]).ids
-    @tasks = search_tasks(params[:search], status_ids, user_id).eager_load(:label, :priority, :status).order("#{database_sort_column} desc")
+    @tasks = search_tasks(params[:search], status_ids, current_user.id).eager_load(:label, :priority, :status).order("#{database_sort_column} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
     @tasks = @tasks.page(params[:page]).per(RECORDS_NUMBER_TO_DISPLAY)
     render :index

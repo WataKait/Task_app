@@ -1,5 +1,7 @@
 <%= stylesheet_link_tag "tasks" %>
 
+<%= current_user.name %>
+
 <%= flash[:notice] if flash[:notice].present? %>
 
 <h1><%= t('.task_list') %></h1>
