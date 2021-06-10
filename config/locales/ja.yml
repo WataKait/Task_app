@@ -3,6 +3,11 @@ ja:
     submit:
       create: "作成"
       update: "更新"
+  sessions:
+    new:
+      user_name: 'ユーザ名'
+      password: 'パスワード'
+      login: 'ログイン'
   tasks:
     index:
       task: タスク
