@@ -24,6 +24,7 @@ ja:
       delete_confirm: 本当に削除しますか？
       transition_label_index: ラベル一覧へ →
       search: 検索
+      logout: 'ログアウト'
     show:
       task: タスク
       label: ラベル
