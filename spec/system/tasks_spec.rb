@@ -20,7 +20,10 @@ RSpec.describe 'Tasks', type: :system do
       let(:created_at_tds) { page.all('.created-date') }
 
       before do
-        visit root_path
+        visit login_path
+        fill_in('name', with: user.name)
+        fill_in('password', with: user.password)
+        click_button 'ログイン'
       end
 
       it '作成日時の降順で並んでいる' do
@@ -64,7 +67,10 @@ RSpec.describe 'Tasks', type: :system do
       let!(:task) { create(:task, user_id: user.id) }
 
       before do
-        visit root_path
+        visit login_path
+        fill_in('name', with: user.name)
+        fill_in('password', with: user.password)
+        click_button 'ログイン'
         click_link '詳細', href: task_path(task)
       end
 
@@ -80,7 +86,10 @@ RSpec.describe 'Tasks', type: :system do
 
     context 'タスク作成' do
       before do
-        visit root_path
+        visit login_path
+        fill_in('name', with: user.name)
+        fill_in('password', with: user.password)
+        click_button 'ログイン'
         click_link '+ タスク作成', href: new_task_path
         fill_in('task_name', with: '作業タスクA')
         select(label.name, from: 'task_label_id')
@@ -122,7 +131,10 @@ RSpec.describe 'Tasks', type: :system do
       let!(:task) { create(:task, user_id: user.id) }
 
       before do
-        visit root_path
+        visit login_path
+        fill_in('name', with: user.name)
+        fill_in('password', with: user.password)
+        click_button 'ログイン'
         click_link '編集', href: edit_task_path(task)
       end
 
@@ -155,7 +167,10 @@ RSpec.describe 'Tasks', type: :system do
       let!(:task) { create(:task, user_id: user.id) }
 
       before do
-        visit root_path
+        visit login_path
+        fill_in('name', with: user.name)
+        fill_in('password', with: user.password)
+        click_button 'ログイン'
         click_link '削除', href: task_path(task)
       end
 
@@ -179,7 +194,10 @@ RSpec.describe 'Tasks', type: :system do
       let(:completed) { create(:status, name: '完了') }
 
       before do
-        visit root_path
+        visit login_path
+        fill_in('name', with: user.name)
+        fill_in('password', with: user.password)
+        click_button 'ログイン'
       end
 
       it "'abc' で検索したら 'abcタスク' が表示される" do

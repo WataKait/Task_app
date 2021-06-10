@@ -9,15 +9,15 @@ RSpec.describe '3ページ分のページネーションについて', type: :sy
   before do
     create_list(:task, 2, user_id: user.id)
     stub_const('TasksController::RECORDS_NUMBER_TO_DISPLAY', 1)
+    visit login_path
+    fill_in('name', with: user.name)
+    fill_in('password', with: user.password)
+    click_button 'ログイン'
   end
 
   context '1ページ目にいる時' do
     let!(:next_page) { 2 }
     let!(:last_page) { 3 }
-
-    before do
-      visit root_path
-    end
 
     it '3を押下すると3ページ目に遷移' do
       click_link '3', href: '/tasks?page=3'
@@ -70,7 +70,6 @@ RSpec.describe '3ページ分のページネーションについて', type: :sy
 
   context '検索結果が1件を超えない時', js: true do
     before do
-      visit root_path
       fill_in('search', with: 'abc')
       click_button '検索'
     end
@@ -84,7 +83,6 @@ RSpec.describe '3ページ分のページネーションについて', type: :sy
 
   context '検索結果が1件を超える時' do
     before do
-      visit root_path
       fill_in('search', with: 'task')
       click_button '検索'
     end
