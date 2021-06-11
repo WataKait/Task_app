@@ -5,11 +5,12 @@ ja:
       update: "更新"
   sessions:
     new:
-      user_name: 'ユーザ名'
-      password: 'パスワード'
-      login: 'ログイン'
+      user_name: ユーザ名
+      password: パスワード
+      login: ログイン
+      task_application: タスク管理アプリケーション
     create:
-      alert: 'ユーザ名またはパスワードが違います'
+      alert: ユーザ名またはパスワードが違います
   tasks:
     index:
       task: タスク
