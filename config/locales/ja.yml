@@ -8,6 +8,8 @@ ja:
       user_name: 'ユーザ名'
       password: 'パスワード'
       login: 'ログイン'
+    create:
+      alert: 'ユーザ名またはパスワードが違います'
   tasks:
     index:
       task: タスク

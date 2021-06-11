@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to tasks_path
     else
+      flash.now[:alert] = t('.alert')
       render 'new'
     end
   end

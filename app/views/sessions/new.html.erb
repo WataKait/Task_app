@@ -1,3 +1,5 @@
+<%= flash[:alert] if flash[:alert].present? %>
+
 <h1>タスク管理アプリケーション</h1>
 
 <%= form_with(url:login_path) do |form| %>
