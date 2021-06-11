@@ -72,6 +72,11 @@ ja:
       alert: ラベルを更新できませんでした
     destroy:
       notice: ラベルを削除しました
+  users:
+    index:
+      name: ユーザ名
+      number_of_tasks: タスク数
+      user_list: ユーザ一覧
   activerecord:
     attributes:
       task:
