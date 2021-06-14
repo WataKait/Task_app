@@ -19,4 +19,20 @@ RSpec.describe User, type: :model do
       expect(build(:user, name: '太郎').valid?).to be(false)
     end
   end
+
+  describe 'パスワード' do
+    it 'パスワード確認と一致すること' do
+      expect(build(:user, password: 'password', password_confirmation: 'pass_word').valid?).to be(false)
+      expect(build(:user, password: 'password', password_confirmation: 'password').valid?).to be(true)
+    end
+
+    it '8文字以上 255文字以内 であること' do
+      expect(build(:user, password: nil, password_confirmation: nil).valid?).to be(false)
+      expect(build(:user, password: '', password_confirmation: '').valid?).to be(false)
+      expect(build(:user, password: 'a' * 7, password_confirmation: 'a' * 7).valid?).to be(false)
+      expect(build(:user, password: 'a' * 8, password_confirmation: 'a' * 8).valid?).to be(true)
+      expect(build(:user, password: 'a' * 255, password_confirmation: 'a' * 255).valid?).to be(true)
+      expect(build(:user, password: 'a' * 256, password_confirmation: 'a' * 256).valid?).to be(false)
+    end
+  end
 end
