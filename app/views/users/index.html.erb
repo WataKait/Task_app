@@ -8,10 +8,10 @@
     </tr>
   </thead>
   <tbody>
-    <% @users.each do |user| %>
+    <% @users.each_with_index do |user, i| %>
       <tr>
-        <td><%= user.name %></td>
-        <td><%= user.tasks.size %></td>
+        <td class='user_names'><%= user.name %></td>
+        <td id='<%= i %>'><%= user.tasks.size %></td>
       </tr>
     <% end %>
   </tbody>
