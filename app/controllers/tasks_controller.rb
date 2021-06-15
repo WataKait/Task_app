@@ -18,7 +18,7 @@ class TasksController < ApplicationController
   helper_method :current_sort_order, :current_sort_column
 
   def index
-    @tasks = Task.eager_load(:label, :priority, :status).where(user_id: current_user.id).order("#{database_sort_column} desc")
+    @tasks = current_user.tasks.eager_load(:label, :priority, :status).order("#{database_sort_column} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
     @tasks = @tasks.page(params[:page]).per(RECORDS_NUMBER_TO_DISPLAY)
   end
@@ -57,7 +57,7 @@ class TasksController < ApplicationController
 
   def search
     status_ids = search_statuses(params[:search]).ids
-    @tasks = search_tasks(params[:search], status_ids, current_user.id).eager_load(:label, :priority, :status).order("#{database_sort_column} desc")
+    @tasks = search_tasks(params[:search], status_ids).eager_load(:label, :priority, :status).order("#{database_sort_column} desc")
     @tasks = @tasks.reverse_order if params[:direction] == 'asc'
     @tasks = @tasks.page(params[:page]).per(RECORDS_NUMBER_TO_DISPLAY)
     render :index
@@ -109,12 +109,12 @@ class TasksController < ApplicationController
     end
   end
 
-  def search_tasks(keyword, status_ids, user_id)
+  def search_tasks(keyword, status_ids)
     if keyword.present?
-      tasks = User.find(user_id).tasks
+      tasks = current_user.tasks
       tasks.where('tasks.name LIKE ?', "%#{keyword}%").or(tasks.where(status_id: status_ids))
     else
-      Task.where('user_id = ?', user_id)
+      current_user.tasks
     end
   end
 end
