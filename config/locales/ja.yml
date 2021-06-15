@@ -93,6 +93,9 @@ ja:
       name: ユーザ名
       password: パスワード
       user_create: ユーザ登録
+    create:
+      notice: ユーザを登録しました
+      alert: ユーザを登録できませんでした
   activerecord:
     attributes:
       task:

@@ -1,3 +1,5 @@
+<%= flash[:alert] if flash[:alert].present? %>
+
 <h1><%= t('.user_create') %></h1>
 
 <%= form_with(model: @user, url: { action: "create" }) do |user| %>
