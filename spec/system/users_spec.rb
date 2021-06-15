@@ -11,7 +11,11 @@ RSpec.describe 'Users', type: :system do
 
   context 'ユーザ一覧' do
     before do
-      visit users_path
+      visit login_path
+      fill_in('name', with: user.name)
+      fill_in('password', with: user.password)
+      click_button 'ログイン'
+      click_link 'ユーザ一覧へ →'
     end
 
     it 'hoge' do
