@@ -18,7 +18,7 @@ RSpec.describe 'Users', type: :system do
       click_link 'ユーザ一覧へ →'
     end
 
-    it 'hoge' do
+    it 'ユーザ名とタスク数が表示されていること' do
       expect(page).to have_selector '.user_names', text: user.name
       expect(page).to have_selector '#0', text: user.tasks.size
     end
