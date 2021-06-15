@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  skip_before_action :logged_in_user
+  skip_before_action :require_logged_in
 
   def new; end
 
