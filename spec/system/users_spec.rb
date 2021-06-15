@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
-  let!(:task) { create(:task, priority: priority, status: status, user: user) }
   let!(:user) { create(:user, name: 'Taro') }
 
   let(:priority) { create(:priority, name: 'low', priority: 1) }
   let(:status) { create(:status, name: 'unstarted') }
+  let(:task) { create(:task, priority: priority, status: status, user: user) }
 
   context 'ユーザ一覧' do
     before do
