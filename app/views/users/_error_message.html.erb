@@ -1,0 +1,7 @@
+<% if user.errors.present? %>
+  <ul>
+    <% user.errors.full_messages.each do |message| %>
+      <li class='text-danger'><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
