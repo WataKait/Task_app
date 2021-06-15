@@ -102,6 +102,10 @@ ja:
         name: タスク
       label:
         name: ラベル
+      user:
+        name: ユーザ名
+        password: パスワード
+        password_confirmation: パスワード確認
     errors:
       models:
         task:
