@@ -3,6 +3,14 @@ ja:
     submit:
       create: "作成"
       update: "更新"
+  sessions:
+    new:
+      user_name: ユーザ名
+      password: パスワード
+      login: ログイン
+      task_application: タスク管理アプリケーション
+    create:
+      alert: ユーザ名またはパスワードが違います
   tasks:
     index:
       task: タスク
@@ -19,6 +27,7 @@ ja:
       delete_confirm: 本当に削除しますか？
       transition_label_index: ラベル一覧へ →
       search: 検索
+      logout: 'ログアウト'
     show:
       task: タスク
       label: ラベル

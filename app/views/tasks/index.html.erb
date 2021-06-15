@@ -1,5 +1,10 @@
 <%= stylesheet_link_tag "tasks" %>
 
+<div>
+  <%= "#{current_user.name} / " %>
+  <%= link_to t('.logout'), logout_path, method: :delete %>
+</div>
+
 <%= flash[:notice] if flash[:notice].present? %>
 
 <h1><%= t('.task_list') %></h1>
