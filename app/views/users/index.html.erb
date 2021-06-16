@@ -15,7 +15,7 @@
     <% @users.each_with_index do |user, i| %>
       <tr>
         <td class='user_names'><%= user.name %></td>
-        <td id='<%= i %>'><%= user.tasks.size %></td>
+        <%= content_tag(:td, user.tasks.size, id: i)%>
       </tr>
     <% end %>
   </tbody>

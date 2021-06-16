@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   def index
-    @users = User.all.eager_load(:tasks)
+    @users = User.all.preload(:tasks)
   end
 
   def new
