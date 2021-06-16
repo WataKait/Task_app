@@ -62,4 +62,41 @@ RSpec.describe 'Users', type: :system do
       expect(page).to have_content 'パスワード確認とパスワードの入力が一致しません'
     end
   end
+
+  context 'ユーザ編集' do
+    before do
+      click_link '編集', href: edit_user_path(user)
+    end
+
+    it 'ユーザの情報が正しく入力欄に表示されている' do
+      expect(page).to have_field('user[name]', with: user.name)
+    end
+
+    it 'ユーザを更新したら、ユーザ一覧に更新したユーザが表示される' do
+      fill_in('user[name]', with: 'TaroYamada')
+
+      click_button '更新'
+      expect(page).to have_current_path users_path
+      expect(page).to have_selector '.user_names', text: 'TaroYamada'
+    end
+
+    it '"ユーザ名を入力してください" と画面に表示され、更新に失敗する' do
+      fill_in('user[name]', with: '')
+      click_button '更新'
+      expect(page).to have_content 'ユーザ名を入力してください'
+    end
+
+    it '"パスワードは8文字以上で入力してください" と画面に表示され、更新に失敗する' do
+      fill_in('user[password]', with: 'passwd')
+      click_button '更新'
+      expect(page).to have_content 'パスワードは8文字以上で入力してください'
+    end
+
+    it '"パスワード確認とパスワードの入力が一致しません" と画面に表示され、更新に失敗する' do
+      fill_in('user[password]', with: 'password')
+      fill_in('user[password_confirmation]', with: '')
+      click_button '更新'
+      expect(page).to have_content 'パスワード確認とパスワードの入力が一致しません'
+    end
+  end
 end
