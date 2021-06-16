@@ -84,9 +84,13 @@ ja:
       notice: ラベルを削除しました
   users:
     index:
+      delete_confirm: 本当に削除しますか？
+      delete_label: 削除
       name: ユーザ名
       number_of_tasks: タスク数
       user_list: ユーザ一覧
+    destroy:
+      notice: ユーザを削除しました
   activerecord:
     attributes:
       task:
