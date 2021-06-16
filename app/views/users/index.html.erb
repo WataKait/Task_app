@@ -1,0 +1,18 @@
+<h1><%= t('.user_list') %></h1>
+
+<table class="table table-bordered">
+  <thead class="table-secondary">
+    <tr>
+      <th><%= t('.name') %></th>
+      <th><%= t('.number_of_tasks') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each_with_index do |user, i| %>
+      <tr>
+        <td class='user_names'><%= user.name %></td>
+        <%= content_tag(:td, user.tasks.size, id: i)%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

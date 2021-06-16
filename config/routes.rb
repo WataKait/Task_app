@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     get :search, on: :collection
   end
   resources :labels
+  resources :users, path: 'admin/users'
   root 'tasks#index'
 end
