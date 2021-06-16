@@ -90,15 +90,13 @@ ja:
       transition_user_edit: 編集
       user_list: ユーザ一覧
     new:
-      confirm_password: パスワード確認
-      name: ユーザ名
-      password: パスワード
       user_create: ユーザ登録
     edit:
+      user_edit: ユーザ編集
+    form:
       confirm_password: パスワード確認
       name: ユーザ名
       password: パスワード
-      user_edit: ユーザ編集
     create:
       notice: ユーザを登録しました
       alert: ユーザを登録できませんでした
