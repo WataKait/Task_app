@@ -1,0 +1,24 @@
+<%= flash[:alert] if flash[:alert].present? %>
+
+<h1><%= t('.user_edit') %></h1>
+
+<%= render partial: 'error_message', locals: { user: @user } %>
+
+<%= form_with(model: @user, url: { action: "update" }) do |user| %>
+  <table>
+    <tr>
+      <th><%= t('.name') %></th>
+      <td><%= user.text_field :name %></td>
+    </tr>
+    <tr>
+      <th><%= t('.password') %></th>
+      <td><%= user.password_field :password %></td>
+    </tr>
+    <tr>
+      <th><%= t('.confirm_password') %></th>
+      <td><%= user.password_field :password_confirmation %></td>
+    </tr>
+  </table>
+
+  <%= user.submit %>
+<% end %>
