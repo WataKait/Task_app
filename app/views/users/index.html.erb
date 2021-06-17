@@ -9,6 +9,7 @@
     <tr>
       <th><%= t('.name') %></th>
       <th><%= t('.number_of_tasks') %></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,7 @@
       <tr>
         <td class='user_names'><%= user.name %></td>
         <%= content_tag(:td, user.tasks.size, id: i)%>
+        <td><%= link_to t('.transition_user_edit'), edit_user_path(user) %></td>
       </tr>
     <% end %>
   </tbody>
