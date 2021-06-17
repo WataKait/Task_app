@@ -2,6 +2,8 @@
 
 <h1><%= t('.user_list') %></h1>
 
+<p><%= link_to t('.transition_user_create'), new_user_path %></p>
+
 <table class="table table-bordered">
   <thead class="table-secondary">
     <tr>
@@ -15,6 +17,7 @@
       <tr>
         <td class='user_names'><%= user.name %></td>
         <%= content_tag(:td, user.tasks.size, id: i)%>
+        <td><%= link_to t('.transition_user_edit'), edit_user_path(user) %></td>
         <td><%= link_to t('.delete_label'), user, method: :delete, data: { confirm: t('.delete_confirm') } %></td>
       </tr>
     <% end %>

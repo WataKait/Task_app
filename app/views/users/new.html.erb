@@ -1,0 +1,9 @@
+<%= flash[:alert] if flash[:alert].present? %>
+
+<h1><%= t('.user_create') %></h1>
+
+<%= render partial: 'error_message', locals: { user: @user } %>
+
+<%= form_with(model: @user, url: { action: "create" }) do |user| %>
+  <%= render partial: 'form', locals: { user: user } %>
+<% end %>
