@@ -86,13 +86,26 @@ ja:
     index:
       name: ユーザ名
       number_of_tasks: タスク数
+      transition_user_create: + ユーザ登録
       user_list: ユーザ一覧
+    new:
+      confirm_password: パスワード確認
+      name: ユーザ名
+      password: パスワード
+      user_create: ユーザ登録
+    create:
+      notice: ユーザを登録しました
+      alert: ユーザを登録できませんでした
   activerecord:
     attributes:
       task:
         name: タスク
       label:
         name: ラベル
+      user:
+        name: ユーザ名
+        password: パスワード
+        password_confirmation: パスワード確認
     errors:
       models:
         task:
