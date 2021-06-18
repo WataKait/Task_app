@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update]
+  before_action :set_user, only: %i[edit update show]
 
   def index
     @users = User.all.preload(:tasks)
@@ -36,6 +36,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     redirect_to users_path, notice: t('.notice')
+  end
+
+  def show
+    @tasks = @user&.tasks
   end
 
   private

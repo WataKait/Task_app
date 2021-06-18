@@ -1,0 +1,26 @@
+<h1><%= t('.user_tasks_list', name: current_user.name) %></h1>
+
+<table class="table table-bordered">
+  <thead class="table-secondary">
+    <tr>
+      <th><%= t('.task') %></th>
+      <th><%= t('.label') %></th>
+      <th><%= t('.priority') %></th>
+      <th><%= t('.status') %></th>
+      <th><%= t('.time_limit') %></th>
+      <th><%= t('.created_at') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td class='names'><%= task.name %></td>
+        <td><%= task.label&.name %></td>
+        <td class='priorities'><%= task.priority.name %></td>
+        <td><%= task.status.name %></td>
+        <td class='time-limits'><%= task.time_limit %></td>
+        <td class='created-date'><%= task.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

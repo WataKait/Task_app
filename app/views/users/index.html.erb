@@ -11,6 +11,7 @@
       <th><%= t('.number_of_tasks') %></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,7 @@
         <%= content_tag(:td, user.tasks.size, id: i)%>
         <td><%= link_to t('.transition_user_edit'), edit_user_path(user) %></td>
         <td><%= link_to t('.delete_label'), user, method: :delete, data: { confirm: t('.delete_confirm') } %></td>
+        <td><%= link_to t('.transition_user_tasks'), user %></td>
       </tr>
     <% end %>
   </tbody>
