@@ -35,4 +35,19 @@ RSpec.describe User, type: :model do
       expect(build(:user, password: 'a' * 256, password_confirmation: 'a' * 256).valid?).to be(false)
     end
   end
+
+  describe 'ユーザ削除' do
+    let!(:user) { create(:user, name: '太郎') }
+
+    before do
+      create(:task, user: user)
+    end
+
+    it '紐づいているタスクも削除されること' do
+      expect(Task.where(user: user).size).to eq 1
+
+      user.destroy
+      expect(Task.where(user: user).size).to eq 0
+    end
+  end
 end
