@@ -14,12 +14,12 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td class='names'><%= task.name %></td>
+        <td><%= task.name %></td>
         <td><%= task.label&.name %></td>
-        <td class='priorities'><%= task.priority.name %></td>
+        <td><%= task.priority.name %></td>
         <td><%= task.status.name %></td>
-        <td class='time-limits'><%= task.time_limit %></td>
-        <td class='created-date'><%= task.created_at %></td>
+        <td><%= task.time_limit %></td>
+        <td><%= task.created_at %></td>
       </tr>
     <% end %>
   </tbody>
