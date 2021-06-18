@@ -99,4 +99,23 @@ RSpec.describe 'Users', type: :system do
       expect(page).to have_content 'パスワード確認とパスワードの入力が一致しません'
     end
   end
+
+  context 'ユーザ削除', js: true do
+    let!(:be_deleted_user) { create(:user, name: 'Hanako') }
+
+    before do
+      click_link '削除', href: user_path(be_deleted_user)
+    end
+
+    it '削除確認ダイアログでキャンセルを押下したら、ユーザが削除されない' do
+      expect(page.dismiss_confirm).to eq '本当に削除しますか？'
+      expect(page).to have_selector 'td', text: be_deleted_user.name
+    end
+
+    it '削除確認ダイアログで OK を押下したら、ユーザが削除される' do
+      expect(page.accept_confirm).to eq '本当に削除しますか？'
+      expect(page).to have_content 'ユーザを削除しました'
+      expect(page).not_to have_selector 'td', text: be_deleted_user.name
+    end
+  end
 end
