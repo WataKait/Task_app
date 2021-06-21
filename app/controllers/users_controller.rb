@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update show]
+  before_action :set_user, only: %i[edit update destroy show]
 
   def index
     @users = User.all.preload(:tasks)
@@ -33,7 +33,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     redirect_to users_path, notice: t('.notice')
   end
