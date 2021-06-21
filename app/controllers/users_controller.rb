@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @tasks = @user.tasks
+    @tasks = @user.tasks.eager_load(:label, :priority, :status)
   end
 
   private
