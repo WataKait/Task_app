@@ -95,7 +95,11 @@ ja:
       number_of_tasks: タスク数
       transition_user_create: + ユーザ登録
       transition_user_edit: 編集
+      user_admin:
+        false: 一般ユーザ
+        true: 管理者ユーザ
       user_list: ユーザ一覧
+      user_type: ユーザの種類
     new:
       user_create: ユーザ登録
     edit:
