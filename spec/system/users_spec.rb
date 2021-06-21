@@ -118,4 +118,22 @@ RSpec.describe 'Users', type: :system do
       expect(page).not_to have_selector 'td', text: be_deleted_user.name
     end
   end
+
+  context '一般ユーザ' do
+    let!(:normal_user) { create(:user, name: 'Hanako', admin: false) }
+
+    before do
+      visit root_path
+      click_link 'ログアウト'
+
+      fill_in('name', with: normal_user.name)
+      fill_in('password', with: normal_user.password)
+      click_button 'ログイン'
+      click_link 'ユーザ一覧へ →'
+    end
+
+    it 'アクセスを制限すること' do
+      expect(page).to have_content '403 Forbidden'
+    end
+  end
 end
