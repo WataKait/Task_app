@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  before_action :restrict_access, only: %i[index]
   before_action :set_user, only: %i[edit update destroy]
 
   def index
@@ -38,6 +39,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def restrict_access
+    raise Forbidden unless current_user.admin?
+  end
 
   def set_user
     @user = User.find(params[:id])

@@ -11,6 +11,11 @@ ja:
       task_application: タスク管理アプリケーション
     create:
       alert: ユーザ名またはパスワードが違います
+  errors:
+    forbidden:
+      error_message: 指定されたページを表示する権限がありません
+      error_response: 403 Forbidden
+      transition_task_index: ← タスク一覧へ
   tasks:
     index:
       task: タスク
