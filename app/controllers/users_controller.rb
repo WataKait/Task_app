@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @tasks = @user&.tasks
+    @tasks = @user.tasks
   end
 
   private
