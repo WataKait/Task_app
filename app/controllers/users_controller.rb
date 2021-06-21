@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :restrict_access, only: %i[index]
+  before_action :restrict_delete, only: %i[destroy]
   before_action :set_user, only: %i[edit update destroy]
 
   def index
@@ -42,6 +43,10 @@ class UsersController < ApplicationController
 
   def restrict_access
     raise Forbidden unless current_user.admin?
+  end
+
+  def restrict_delete
+    redirect_to users_path, alert: t('.alert') if User.where(admin: true).size == 1
   end
 
   def set_user
