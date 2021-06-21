@@ -116,7 +116,7 @@ ja:
       alert: ユーザを更新できませんでした
     destroy:
       notice: ユーザを削除しました
-      alert: 管理者ユーザは1人以残す必要があります
+      alert: 管理者ユーザは1人以上残す必要があります
   activerecord:
     attributes:
       task:
