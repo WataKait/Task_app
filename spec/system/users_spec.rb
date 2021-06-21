@@ -3,11 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
+  let!(:task) { create(:task, priority: priority, status: status, user: user) }
   let!(:user) { create(:user, name: 'Taro') }
 
+  let(:jiro_task) { create(:task, priority: priority, status: status, user: other_user) }
+  let(:other_user) { create(:user, name: 'Jiro') }
   let(:priority) { create(:priority, name: 'low', priority: 1) }
   let(:status) { create(:status, name: 'unstarted') }
-  let(:task) { create(:task, priority: priority, status: status, user: user) }
 
   before do
     visit login_path
@@ -116,6 +118,23 @@ RSpec.describe 'Users', type: :system do
       expect(page.accept_confirm).to eq '本当に削除しますか？'
       expect(page).to have_content 'ユーザを削除しました'
       expect(page).not_to have_selector 'td', text: be_deleted_user.name
+    end
+  end
+
+  context 'ユーザが作成したタスクの一覧' do
+    before do
+      click_link '作成したタスク一覧', href: user_path(user)
+    end
+
+    it 'タスク名等が表示されていること' do
+      expect(page).to have_selector 'td', text: task.name
+      expect(page).to have_selector 'td', text: task.label.name
+      expect(page).to have_selector 'td', text: task.priority.name
+      expect(page).to have_selector 'td', text: task.status.name
+      expect(page).to have_selector 'td', text: task.time_limit
+      expect(page).to have_selector 'td', text: task.created_at
+
+      expect(page).not_to have_selector 'td', text: jiro_task.name
     end
   end
 end
