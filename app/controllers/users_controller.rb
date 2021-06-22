@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :restrict_access, only: %i[index]
+  before_action :restrict_access
   before_action :set_user, only: %i[edit update destroy show]
 
   def index
