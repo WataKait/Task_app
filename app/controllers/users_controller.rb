@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   before_action :restrict_access, only: %i[index]
   before_action :restrict_delete, only: %i[destroy]
-  before_action :set_user, only: %i[edit update destroy]
+  before_action :set_user, only: %i[edit update]
 
   def index
     @users = User.all.preload(:tasks)
@@ -46,7 +46,8 @@ class UsersController < ApplicationController
   end
 
   def restrict_delete
-    redirect_to users_path, alert: t('.alert') if User.where(admin: true).size == 1
+    set_user
+    redirect_to users_path, alert: t('.alert') if User.where(admin: true).size == 1 && @user.admin?
   end
 
   def set_user
