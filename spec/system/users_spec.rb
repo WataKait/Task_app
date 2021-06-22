@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
   let!(:task) { create(:task, priority: priority, status: status, user: user) }
-  let!(:user) { create(:user, name: 'Taro') }
+  let!(:user) { create(:admin, name: 'Taro') }
 
   let(:jiro_task) { create(:task, priority: priority, status: status, user: other_user) }
   let(:other_user) { create(:user, name: 'Jiro') }
@@ -139,7 +139,7 @@ RSpec.describe 'Users', type: :system do
   end
 
   context '一般ユーザ' do
-    let!(:normal_user) { create(:user, name: 'Hanako', admin: false) }
+    let!(:normal_user) { create(:user, name: 'Hanako') }
 
     before do
       visit root_path
