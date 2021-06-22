@@ -101,7 +101,7 @@ RSpec.describe 'Users', type: :system do
   end
 
   context 'ユーザ削除', js: true do
-    let!(:be_deleted_user) { create(:user, name: 'Hanako') }
+    let!(:be_deleted_user) { create(:user, name: 'Hanako', admin: false) }
 
     before do
       click_link '削除', href: user_path(be_deleted_user)
@@ -116,6 +116,14 @@ RSpec.describe 'Users', type: :system do
       expect(page.accept_confirm).to eq '本当に削除しますか？'
       expect(page).to have_content 'ユーザを削除しました'
       expect(page).not_to have_selector 'td', text: be_deleted_user.name
+    end
+
+    it '"管理者ユーザは1人以上残す必要があります" と表示され、ユーザが削除されない' do
+      expect(page.dismiss_confirm).to eq '本当に削除しますか？'
+
+      click_link '削除', href: user_path(user)
+      expect(page.accept_confirm).to eq '本当に削除しますか？'
+      expect(page).to have_content '管理者ユーザは1人以上残す必要があります'
     end
   end
 
