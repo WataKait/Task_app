@@ -151,7 +151,7 @@ RSpec.describe 'Users', type: :system do
       click_link 'ユーザ一覧へ →'
     end
 
-    it 'アクセスを制限すること' do
+    it 'アクセスした際に、エラーページを表示すること' do
       expect(page).to have_content '403 Forbidden'
     end
   end
