@@ -12,6 +12,7 @@
       <th><%= t('.user_type') %></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +23,7 @@
         <td><%= t(".user_admin.#{user.admin}") %></td>
         <td><%= link_to t('.transition_user_edit'), edit_user_path(user) %></td>
         <td><%= link_to t('.delete_label'), user, method: :delete, data: { confirm: t('.delete_confirm') } %></td>
+        <td><%= link_to t('.transition_user_tasks'), user %></td>
       </tr>
     <% end %>
   </tbody>

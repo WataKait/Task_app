@@ -95,6 +95,7 @@ ja:
       number_of_tasks: タスク数
       transition_user_create: + ユーザ登録
       transition_user_edit: 編集
+      transition_user_tasks: 作成したタスク一覧
       user_admin:
         false: 一般ユーザ
         true: 管理者ユーザ
@@ -116,6 +117,14 @@ ja:
       alert: ユーザを更新できませんでした
     destroy:
       notice: ユーザを削除しました
+    show:
+      created_at: 作成日時
+      label: ラベル
+      priority: 優先度
+      status: ステータス
+      task: タスク
+      time_limit: 終了期限
+      user_tasks_list: "%{name} が作成したタスク一覧"
   activerecord:
     attributes:
       task:
