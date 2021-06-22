@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   before_action :restrict_access, only: %i[index]
   before_action :restrict_delete, only: %i[destroy]
-  before_action :set_user, only: %i[edit update destroy show]
+  before_action :set_user, only: %i[edit update show]
 
   def index
     @users = User.all.preload(:tasks)
