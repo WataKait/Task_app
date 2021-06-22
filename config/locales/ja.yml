@@ -88,6 +88,7 @@ ja:
       delete_label: 削除
       name: ユーザ名
       number_of_tasks: タスク数
+      transition_task_index: ← タスク一覧へ
       transition_user_create: + ユーザ登録
       transition_user_edit: 編集
       transition_user_tasks: 作成したタスク一覧
