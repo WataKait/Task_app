@@ -89,17 +89,16 @@ ja:
       notice: ラベルを削除しました
   users:
     index:
+      admin: 管理ユーザ
       delete_confirm: 本当に削除しますか？
       delete_label: 削除
+      general: 一般ユーザ
       name: ユーザ名
       number_of_tasks: タスク数
       transition_task_index: ← タスク一覧へ
       transition_user_create: + ユーザ登録
       transition_user_edit: 編集
       transition_user_tasks: 作成したタスク一覧
-      user_admin:
-        false: 一般ユーザ
-        true: 管理者ユーザ
       user_list: ユーザ一覧
       user_type: ユーザの種類
     new:
