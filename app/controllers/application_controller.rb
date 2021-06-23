@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  class Forbidden < ActionController::ActionControllerError
+  end
+
+  rescue_from Forbidden, with: :render_forbidden_page
+
   private
 
   def current_user
@@ -16,5 +21,9 @@ class ApplicationController < ActionController::Base
 
   def require_logged_in
     redirect_to login_path if current_user.nil?
+  end
+
+  def render_forbidden_page
+    render 'errors/forbidden', status: 403
   end
 end

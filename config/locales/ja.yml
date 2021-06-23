@@ -11,6 +11,11 @@ ja:
       task_application: タスク管理アプリケーション
     create:
       alert: ユーザ名またはパスワードが違います
+  errors:
+    forbidden:
+      error_message: 指定されたページを表示する権限がありません
+      error_response: 403 Forbidden
+      transition_task_index: ← タスク一覧へ
   tasks:
     index:
       task: タスク
@@ -84,8 +89,10 @@ ja:
       notice: ラベルを削除しました
   users:
     index:
+      admin: 管理ユーザ
       delete_confirm: 本当に削除しますか？
       delete_label: 削除
+      general: 一般ユーザ
       name: ユーザ名
       number_of_tasks: タスク数
       transition_task_index: ← タスク一覧へ
@@ -93,6 +100,7 @@ ja:
       transition_user_edit: 編集
       transition_user_tasks: 作成したタスク一覧
       user_list: ユーザ一覧
+      user_type: ユーザの種類
     new:
       user_create: ユーザ登録
     edit:

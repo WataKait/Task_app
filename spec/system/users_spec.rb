@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
   let!(:task) { create(:task, priority: priority, status: status, user: user) }
-  let!(:user) { create(:user, name: 'Taro') }
+  let!(:user) { create(:admin, name: 'Taro') }
 
   let(:jiro_task) { create(:task, priority: priority, status: status, user: other_user) }
   let(:other_user) { create(:user, name: 'Jiro') }
@@ -135,6 +135,24 @@ RSpec.describe 'Users', type: :system do
       expect(page).to have_selector 'td', text: task.created_at
 
       expect(page).not_to have_selector 'td', text: jiro_task.name
+    end
+  end
+
+  context '一般ユーザ' do
+    let!(:normal_user) { create(:user, name: 'Hanako') }
+
+    before do
+      visit root_path
+      click_link 'ログアウト'
+
+      fill_in('name', with: normal_user.name)
+      fill_in('password', with: normal_user.password)
+      click_button 'ログイン'
+      click_link 'ユーザ一覧へ →'
+    end
+
+    it 'アクセスした際に、エラーページを表示すること' do
+      expect(page).to have_content '403 Forbidden'
     end
   end
 end
