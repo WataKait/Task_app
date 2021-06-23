@@ -55,5 +55,15 @@ jobs:
     - name: yarn install
       run: yarn install
 
+    - name: create screenshot dir
+      run: mkdir tmp/screenshots && touch tmp/screenshots/.keep
+
     - name: Run RSpec
       run: bundle exec rspec spec
+
+    - name: save screenshots
+      uses: actions/upload-artifact@v2
+      if: failure()
+      with:
+        name: screenshots
+        path: tmp/screenshots
