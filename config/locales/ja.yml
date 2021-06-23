@@ -117,7 +117,7 @@ ja:
       alert: ユーザを更新できませんでした
     destroy:
       notice: ユーザを削除しました
-      alert: 管理者ユーザは1人以上残す必要があります
+      alert: 管理ユーザは1人以上残す必要があります
     show:
       created_at: 作成日時
       label: ラベル
