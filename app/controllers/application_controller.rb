@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   class Forbidden < ActionController::ActionControllerError
   end
 
-  rescue_from Forbidden, with: :rescue403
+  rescue_from Forbidden, with: :render_forbidden_page
 
   private
 
@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     redirect_to login_path if current_user.nil?
   end
 
-  def rescue403
+  def render_forbidden_page
     render 'errors/forbidden', status: 403
   end
 end

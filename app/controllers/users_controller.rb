@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :restrict_access, only: %i[index]
+  before_action :access_authentication
   before_action :restrict_delete, only: %i[destroy]
   before_action :set_user, only: %i[edit update show]
 
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
   private
 
-  def restrict_access
+  def access_authentication
     raise Forbidden unless current_user.admin?
   end
 
