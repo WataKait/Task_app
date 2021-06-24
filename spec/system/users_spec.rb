@@ -142,7 +142,7 @@ RSpec.describe 'Users', type: :system do
       expect(page).to have_selector 'td', text: task.time_limit
       expect(page).to have_selector 'td', text: task.created_at
 
-      expect(page).not_to have_selector 'td', text: jiro_task.name
+      expect(page).not_to have_selector 'td', text: other_user_task.name
     end
   end
 
