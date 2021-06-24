@@ -3,11 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
+  let!(:general_user) { create(:user, name: 'Yamada') }
   let!(:task) { create(:task, priority: priority, status: status, user: user) }
   let!(:user) { create(:admin, name: 'Taro') }
 
-  let(:jiro_task) { create(:task, priority: priority, status: status, user: other_user) }
   let(:other_user) { create(:user, name: 'Jiro') }
+  let(:other_user_task) { create(:task, priority: priority, status: status, user: other_user) }
   let(:priority) { create(:priority, name: 'low', priority: 1) }
   let(:status) { create(:status, name: 'unstarted') }
 
@@ -22,7 +23,7 @@ RSpec.describe 'Users', type: :system do
   context 'ユーザ一覧' do
     it 'ユーザ名とタスク数が表示されていること' do
       expect(page).to have_selector '.user_names', text: user.name
-      expect(page).to have_selector '#0', text: user.tasks.size
+      expect(page).to have_selector "##{user.id}", text: user.tasks.size
     end
   end
 
@@ -103,21 +104,19 @@ RSpec.describe 'Users', type: :system do
   end
 
   context 'ユーザ削除', js: true do
-    let!(:be_deleted_user) { create(:user, name: 'Hanako', admin: false) }
-
     before do
-      click_link '削除', href: user_path(be_deleted_user)
+      click_link '削除', href: user_path(general_user)
     end
 
     it '削除確認ダイアログでキャンセルを押下したら、ユーザが削除されない' do
       expect(page.dismiss_confirm).to eq '本当に削除しますか？'
-      expect(page).to have_selector 'td', text: be_deleted_user.name
+      expect(page).to have_selector 'td', text: general_user.name
     end
 
     it '削除確認ダイアログで OK を押下したら、ユーザが削除される' do
       expect(page.accept_confirm).to eq '本当に削除しますか？'
       expect(page).to have_content 'ユーザを削除しました'
-      expect(page).not_to have_selector 'td', text: be_deleted_user.name
+      expect(page).not_to have_selector 'td', text: general_user.name
     end
 
     it '"管理ユーザは1人以上残す必要があります" と表示され、ユーザが削除されない' do
@@ -148,14 +147,12 @@ RSpec.describe 'Users', type: :system do
   end
 
   context '一般ユーザ' do
-    let!(:normal_user) { create(:user, name: 'Hanako') }
-
     before do
       visit root_path
       click_link 'ログアウト'
 
-      fill_in('name', with: normal_user.name)
-      fill_in('password', with: normal_user.password)
+      fill_in('name', with: general_user.name)
+      fill_in('password', with: general_user.password)
       click_button 'ログイン'
       click_link 'ユーザ一覧へ →'
     end

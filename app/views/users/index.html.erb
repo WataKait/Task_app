@@ -19,10 +19,10 @@
     </tr>
   </thead>
   <tbody>
-    <% @users.each_with_index do |user, i| %>
+    <% @users.each do |user| %>
       <tr>
         <td class='user_names'><%= user.name %></td>
-        <%= content_tag(:td, user.tasks.size, id: i)%>
+        <%= content_tag(:td, user.tasks.size, id: user.id)%>
         <td><%= user.admin? ? t('.admin') : t('.general') %></td>
         <td><%= link_to t('.transition_user_edit'), edit_user_path(user) %></td>
         <td><%= link_to t('.delete_label'), user, method: :delete, data: { confirm: t('.delete_confirm') } %></td>
