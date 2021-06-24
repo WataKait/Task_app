@@ -3,32 +3,34 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
-  let!(:general_user) { create(:user, name: 'Yamada') }
   let!(:task) { create(:task, priority: priority, status: status, user: user) }
   let!(:user) { create(:admin, name: 'Taro') }
 
-  let(:other_user) { create(:user, name: 'Jiro') }
-  let(:other_user_task) { create(:task, priority: priority, status: status, user: other_user) }
   let(:priority) { create(:priority, name: 'low', priority: 1) }
   let(:status) { create(:status, name: 'unstarted') }
 
-  before do
-    visit login_path
-    fill_in('name', with: user.name)
-    fill_in('password', with: user.password)
-    click_button 'ログイン'
-    click_link 'ユーザ一覧へ →'
-  end
-
   context 'ユーザ一覧' do
+    before do
+      visit login_path
+      fill_in('name', with: user.name)
+      fill_in('password', with: user.password)
+      click_button 'ログイン'
+      click_link 'ユーザ一覧へ →'
+    end
+
     it 'ユーザ名とタスク数が表示されていること' do
       expect(page).to have_selector '.user_names', text: user.name
-      expect(page).to have_selector "##{user.id}", text: user.tasks.size
+      expect(page).to have_selector '#0', text: user.tasks.size
     end
   end
 
   context 'ユーザ登録' do
     before do
+      visit login_path
+      fill_in('name', with: user.name)
+      fill_in('password', with: user.password)
+      click_button 'ログイン'
+      click_link 'ユーザ一覧へ →'
       click_link '+ ユーザ登録'
       fill_in('user[name]', with: 'Hanako')
       fill_in('user[password]', with: 'password')
@@ -68,6 +70,11 @@ RSpec.describe 'Users', type: :system do
 
   context 'ユーザ編集' do
     before do
+      visit login_path
+      fill_in('name', with: user.name)
+      fill_in('password', with: user.password)
+      click_button 'ログイン'
+      click_link 'ユーザ一覧へ →'
       click_link '編集', href: edit_user_path(user)
     end
 
@@ -104,19 +111,26 @@ RSpec.describe 'Users', type: :system do
   end
 
   context 'ユーザ削除', js: true do
+    let!(:other_user) { create(:user, name: 'Hanako') }
+
     before do
-      click_link '削除', href: user_path(general_user)
+      visit login_path
+      fill_in('name', with: user.name)
+      fill_in('password', with: user.password)
+      click_button 'ログイン'
+      click_link 'ユーザ一覧へ →'
+      click_link '削除', href: user_path(other_user)
     end
 
     it '削除確認ダイアログでキャンセルを押下したら、ユーザが削除されない' do
       expect(page.dismiss_confirm).to eq '本当に削除しますか？'
-      expect(page).to have_selector 'td', text: general_user.name
+      expect(page).to have_selector 'td', text: other_user.name
     end
 
     it '削除確認ダイアログで OK を押下したら、ユーザが削除される' do
       expect(page.accept_confirm).to eq '本当に削除しますか？'
       expect(page).to have_content 'ユーザを削除しました'
-      expect(page).not_to have_selector 'td', text: general_user.name
+      expect(page).not_to have_selector 'td', text: other_user.name
     end
 
     it '"管理ユーザは1人以上残す必要があります" と表示され、ユーザが削除されない' do
@@ -130,7 +144,15 @@ RSpec.describe 'Users', type: :system do
   end
 
   context 'ユーザが作成したタスクの一覧' do
+    let!(:other_user) { create(:user, name: 'Hanako') }
+    let(:other_user_task) { create(:task, priority: priority, status: status, user: other_user) }
+
     before do
+      visit login_path
+      fill_in('name', with: user.name)
+      fill_in('password', with: user.password)
+      click_button 'ログイン'
+      click_link 'ユーザ一覧へ →'
       click_link '作成したタスク一覧', href: user_path(user)
     end
 
@@ -147,12 +169,12 @@ RSpec.describe 'Users', type: :system do
   end
 
   context '一般ユーザ' do
-    before do
-      visit root_path
-      click_link 'ログアウト'
+    let!(:other_user) { create(:user, name: 'Hanako') }
 
-      fill_in('name', with: general_user.name)
-      fill_in('password', with: general_user.password)
+    before do
+      visit login_path
+      fill_in('name', with: other_user.name)
+      fill_in('password', with: other_user.password)
       click_button 'ログイン'
       click_link 'ユーザ一覧へ →'
     end
