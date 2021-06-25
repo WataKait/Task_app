@@ -2,8 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :access_authentication
-  before_action :restrict_delete, only: %i[destroy]
-  before_action :set_user, only: %i[edit update show]
+  before_action :set_user, only: %i[edit update destroy show]
 
   def index
     @users = User.all.preload(:tasks)
@@ -35,8 +34,11 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to users_path, notice: t('.notice')
+    if @user.destroy
+      redirect_to users_path, notice: t('.notice')
+    else
+      redirect_to users_path, alert: t('.alert')
+    end
   end
 
   def show
@@ -47,11 +49,6 @@ class UsersController < ApplicationController
 
   def access_authentication
     raise Forbidden unless current_user.admin?
-  end
-
-  def restrict_delete
-    set_user
-    redirect_to users_path, alert: t('.alert') if User.where(admin: true).size == 1 && @user.admin?
   end
 
   def set_user

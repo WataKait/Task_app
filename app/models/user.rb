@@ -6,8 +6,17 @@ class User < ApplicationRecord
   has_secure_password validations: false
   validates :password, presence: true, length: { minimum: 8, maximum: 255 }, confirmation: true, on: :create
   validates :password, presence: true, length: { minimum: 8, maximum: 255 }, confirmation: true, if: :password_was_entered?, on: :update
+  before_destroy :administrator_must_exist
 
   private
+
+  def administrator_must_exist
+    selected_user = self
+    return unless User.where(admin: true).size == 1 && selected_user.admin?
+
+    errors[:base] << 'hoge'
+    throw :abort
+  end
 
   def password_was_entered?
     password.present? || password_confirmation.present?
