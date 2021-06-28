@@ -133,12 +133,12 @@ RSpec.describe 'Users', type: :system do
       expect(page).not_to have_selector 'td', text: other_user.name
     end
 
-    it '"管理ユーザは1人以上残す必要があります" と表示され、ユーザが削除されない' do
+    it '"管理ユーザが1人もいなくなると、管理ユーザを作成することができなくなるので、管理ユーザは1人以上残す必要があります" と表示され、ユーザが削除されない' do
       expect(page.dismiss_confirm).to eq '本当に削除しますか？'
 
       click_link '削除', href: user_path(user)
       expect(page.accept_confirm).to eq '本当に削除しますか？'
-      expect(page).to have_content '管理ユーザは1人以上残す必要があります'
+      expect(page).to have_content '管理ユーザが1人もいなくなると、管理ユーザを作成することができなくなるので、管理ユーザは1人以上残す必要があります'
       expect(page).to have_selector 'td', text: user.name
     end
   end
