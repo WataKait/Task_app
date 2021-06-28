@@ -106,9 +106,12 @@ ja:
     edit:
       user_edit: ユーザ編集
     form:
+      admin: 管理ユーザ
       confirm_password: パスワード確認
+      general: 一般ユーザ
       name: ユーザ名
       password: パスワード
+      user_type: ユーザの種類
     create:
       notice: ユーザを登録しました
       alert: ユーザを登録できませんでした
