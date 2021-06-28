@@ -14,7 +14,6 @@ class User < ApplicationRecord
     selected_user = self
     return unless User.where(admin: true).size == 1 && selected_user.admin?
 
-    errors[:base] << 'hoge'
     throw :abort
   end
 
