@@ -34,8 +34,11 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to users_path, notice: t('.notice')
+    if @user.destroy
+      redirect_to users_path, notice: t('.notice')
+    else
+      redirect_to users_path, alert: t('.alert')
+    end
   end
 
   def show
