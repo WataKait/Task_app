@@ -50,4 +50,30 @@ RSpec.describe User, type: :model do
       expect(Task.where(user: user).size).to eq 0
     end
   end
+
+  describe 'ユーザ更新' do
+    let!(:admin_user) { create(:admin, name: '太郎') }
+
+    context '管理ユーザが2人以上の時' do
+      before do
+        create(:admin, name: '花子')
+      end
+
+      it '管理ユーザを一般ユーザにすることができる' do
+        expect(described_class.where(admin: true).size).to eq 2
+
+        admin_user.update(name: '太郎', admin: false)
+        expect(described_class.where(admin: true).size).to eq 1
+      end
+    end
+
+    context '管理ユーザが1人の時' do
+      it '管理ユーザを一般ユーザにすることはできない' do
+        expect(described_class.where(admin: true).size).to eq 1
+
+        admin_user.update(name: '太郎', admin: false)
+        expect(described_class.where(admin: true).size).to eq 1
+      end
+    end
+  end
 end
