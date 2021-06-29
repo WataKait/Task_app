@@ -118,6 +118,7 @@ ja:
     update:
       notice: ユーザを更新しました
       alert: ユーザを更新できませんでした
+      warning: 管理ユーザが1人もいなくなると、管理ユーザを作成することができなくなるので、管理ユーザは1人以上残す必要があります
     destroy:
       notice: ユーザを削除しました
       alert: 管理ユーザが1人もいなくなると、管理ユーザを作成することができなくなるので、管理ユーザは1人以上残す必要があります
@@ -139,6 +140,7 @@ ja:
         name: ユーザ名
         password: パスワード
         password_confirmation: パスワード確認
+        admin: ユーザの種類
     errors:
       models:
         task:
@@ -147,6 +149,10 @@ ja:
               required: を選択してください
             status:
               required: を選択してください
+        user:
+          attributes:
+            admin:
+              required: は変更できません
   attributes:
     priority: 優先度
     status: ステータス

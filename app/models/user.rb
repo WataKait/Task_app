@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8, maximum: 255 }, confirmation: true, on: :create
   validates :password, presence: true, length: { minimum: 8, maximum: 255 }, confirmation: true, if: :password_was_entered?, on: :update
   before_destroy :administrator_must_exist
+  validate :administrator_must_exist_at_update, on: :update
 
   private
 
@@ -15,6 +16,15 @@ class User < ApplicationRecord
     return unless User.where(admin: true).size == 1 && selected_user.admin?
 
     throw :abort
+  end
+
+  def administrator_must_exist_at_update
+    selected_user = User.find(id)
+    parameter_admin = admin
+    return unless User.where(admin: true).size == 1 && selected_user.admin? && parameter_admin == false
+
+    errors.add(:admin, :required)
+    false
   end
 
   def password_was_entered?
