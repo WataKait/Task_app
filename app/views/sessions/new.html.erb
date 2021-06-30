@@ -3,16 +3,25 @@
 <h1><%= t('.task_application') %></h1>
 
 <%= form_with(url:login_path) do |form| %>
-  <table>
-    <tr>
-      <th><%= form.label t('.user_name') %></th>
-      <td><%= form.text_field :name %></td>
-    </tr>
-
-    <tr>
-      <th><%= form.label t('.password') %></th>
-      <td><%= form.password_field :password %></td>
-    </tr>
-  </table>
-  <%= form.submit t('.login') %>
+  <div>
+    <div>
+      <%= form.label t('.user_name') %>
+    </div>
+    <div>
+      <%= form.text_field :name %>
+    </div>
+  </div>
+  
+  <div>
+    <div>
+      <%= form.label t('.password') %>
+    </div>
+    <div>
+      <%= form.password_field :password %>
+    </div>
+  </div>
+  
+  <div>
+    <%= form.submit t('.login') %>
+  </div>
 <% end %>
