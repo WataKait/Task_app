@@ -7,7 +7,9 @@
   </div>
 </div>
 
-<%= flash[:notice] if flash[:notice].present? %>
+<div class='fs-5 mb-3'>
+  <%= flash[:notice] if flash[:notice].present? %>
+</div>
 
 <div class='mb-3'>
   <%= link_to t('.transition_user_index'), users_path, class: 'btn btn-success col-3 me-2' %>
