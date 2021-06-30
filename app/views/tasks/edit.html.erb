@@ -1,6 +1,6 @@
-<%= flash[:alert] if flash[:alert].present? %>
+<h1 class='fw-bold mb-3'><%= t('.task_edit') %></h1>
 
-<h1><%= t('.task_edit') %></h1>
+<%= flash[:alert] if flash[:alert].present? %>
 
 <%= render partial: 'error_message', locals: { task: @task } %>
 

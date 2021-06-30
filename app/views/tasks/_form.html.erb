@@ -1,32 +1,36 @@
-<%= task.hidden_field :user_id, value: current_user.id %>
+<div class='bg-secondary fs-5 p-3 position-absolute rounded-3 start-50 text-center top-50 translate-middle w-50'>
+  <%= task.hidden_field :user_id, value: current_user.id %>
 
-<div>
   <div>
-    <div><%= t('.task') %></div>
-    <div><%= task.text_field :name %></div>
+    <div class='pb-3'>
+      <div><%= t('.task') %></div>
+      <div><%= task.text_field :name, class: 'w-100' %></div>
+    </div>
+    <div class='d-flex justify-content-around pb-3'>
+      <div class='w-25'>
+        <div><%= t('.label') %></div>
+        <div><%= task.collection_select :label_id, @labels, :id, :name, { prompt: t('.select_label') }, { class: 'w-100' } %></div>
+      </div>
+      <div class='w-25'>
+        <div><%= t('.priority') %></div>
+        <div><%= task.collection_select :priority_id, @priorities, :id, :name, { prompt: t('.select_priority') }, { class: 'w-100' } %></div>
+      </div>
+      <div class='w-25'>
+        <div><%= t('.status') %></div>
+        <div><%= task.collection_select :status_id, @statuses, :id, :name, { prompt: t('.select_status') }, { class: 'w-100' } %></div>
+      </div>
+    </div>
+    <div class='pb-3'>
+      <div><%= t('.time_limit') %></div>
+      <div><%= task.datetime_field :time_limit, class: 'w-100' %></div>
+    </div>
+    <div class='pb-3'>
+      <div><%= t('.description') %></div>
+      <div><%= task.text_area :description, class: 'w-100' %></div>
+    </div>
   </div>
-  <div>
-    <div><%= t('.label') %></div>
-    <div><%= task.collection_select :label_id, @labels, :id, :name, prompt: t('.select_label') %></div>
-  </div>
-  <div>
-    <div><%= t('.priority') %></div>
-    <div><%= task.collection_select :priority_id, @priorities, :id, :name, prompt: t('.select_priority') %></div>
-  </div>
-  <div>
-    <div><%= t('.status') %></div>
-    <div><%= task.collection_select :status_id, @statuses, :id, :name, prompt: t('.select_status') %></div>
-  </div>
-  <div>
-    <div><%= t('.time_limit') %></div>
-    <div><%= task.datetime_field :time_limit %></div>
-  </div>
-  <div>
-    <div><%= t('.description') %></div>
-    <div><%= task.text_area :description %></div>
-  </div>
-</div>
 
-<div>
-  <%= task.submit %>
+  <div class='pb-3'>
+    <%= task.submit class: 'btn btn-primary w-100' %>
+  </div>
 </div>
