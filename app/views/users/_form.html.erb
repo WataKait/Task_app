@@ -11,6 +11,16 @@
     <th><%= t('.confirm_password') %></th>
     <td><%= user.password_field :password_confirmation %></td>
   </tr>
+  <tr>
+    <th><%= t('.user_type') %></th>
+    <td>
+      <%= user.label :admin, t('.general'), value: false %>
+      <%= user.radio_button :admin, false, checked: true %>
+
+      <%= user.label :admin, t('.admin'), value: true %>
+      <%= user.radio_button :admin, true %>
+    </td>
+  </tr>
 </table>
 
 <%= user.submit %>

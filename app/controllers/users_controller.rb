@@ -27,6 +27,10 @@ class UsersController < ApplicationController
   def update
     if @user.update(user_params)
       redirect_to users_path, notice: t('.notice')
+    elsif @user.errors[:admin].present?
+      flash.now[:alert] = t('.alert')
+      flash.now[:warning] = t('.warning')
+      render :edit
     else
       flash.now[:alert] = t('.alert')
       render :edit
@@ -56,6 +60,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :password, :password_confirmation)
+    params.require(:user).permit(:name, :password, :password_confirmation, :admin)
   end
 end

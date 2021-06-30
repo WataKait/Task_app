@@ -69,20 +69,25 @@ RSpec.describe 'Users', type: :system do
   end
 
   context 'ユーザ編集' do
+    let!(:other_admin_user) { create(:admin, name: 'Hanako') }
+    let!(:general_user) { create(:user, name: 'Jiro') }
+
     before do
       visit login_path
       fill_in('name', with: user.name)
       fill_in('password', with: user.password)
       click_button 'ログイン'
-      click_link 'ユーザ一覧へ →'
-      click_link '編集', href: edit_user_path(user)
     end
 
     it 'ユーザの情報が正しく入力欄に表示されている' do
+      click_link 'ユーザ一覧へ →'
+      click_link '編集', href: edit_user_path(user)
       expect(page).to have_field('user[name]', with: user.name)
     end
 
     it 'ユーザを更新したら、ユーザ一覧に更新したユーザが表示される' do
+      click_link 'ユーザ一覧へ →'
+      click_link '編集', href: edit_user_path(user)
       fill_in('user[name]', with: 'TaroYamada')
 
       click_button '更新'
@@ -91,22 +96,70 @@ RSpec.describe 'Users', type: :system do
     end
 
     it '"ユーザ名を入力してください" と画面に表示され、更新に失敗する' do
+      click_link 'ユーザ一覧へ →'
+      click_link '編集', href: edit_user_path(user)
       fill_in('user[name]', with: '')
       click_button '更新'
       expect(page).to have_content 'ユーザ名を入力してください'
     end
 
     it '"パスワードは8文字以上で入力してください" と画面に表示され、更新に失敗する' do
+      click_link 'ユーザ一覧へ →'
+      click_link '編集', href: edit_user_path(user)
       fill_in('user[password]', with: 'passwd')
       click_button '更新'
       expect(page).to have_content 'パスワードは8文字以上で入力してください'
     end
 
     it '"パスワード確認とパスワードの入力が一致しません" と画面に表示され、更新に失敗する' do
+      click_link 'ユーザ一覧へ →'
+      click_link '編集', href: edit_user_path(user)
       fill_in('user[password]', with: 'password')
       fill_in('user[password_confirmation]', with: '')
       click_button '更新'
       expect(page).to have_content 'パスワード確認とパスワードの入力が一致しません'
+    end
+
+    it '一般ユーザを管理ユーザにすることができる' do
+      click_link 'ユーザ一覧へ →'
+      expect(page).to have_content '一般ユーザ', count: 1
+      expect(page).to have_content '管理ユーザ', count: 2
+
+      click_link '編集', href: edit_user_path(general_user)
+      choose '管理ユーザ'
+      click_button '更新'
+
+      expect(page).to have_current_path users_path
+      expect(page).not_to have_content '一般ユーザ'
+      expect(page).to have_content '管理ユーザ', count: 3
+    end
+
+    it '管理ユーザが2人以上の時、管理ユーザを一般ユーザにすることができる' do
+      click_link 'ユーザ一覧へ →'
+      expect(page).to have_content '管理ユーザ', count: 2
+
+      click_link '編集', href: edit_user_path(other_admin_user)
+      choose '一般ユーザ'
+      click_button '更新'
+
+      expect(page).to have_current_path users_path
+      expect(page).to have_content '管理ユーザ', count: 1
+    end
+
+    it '管理ユーザが1人の時は、管理ユーザを一般ユーザにすることはできない' do
+      other_admin_user.destroy
+
+      click_link 'ユーザ一覧へ →'
+      expect(page).to have_content '管理ユーザ', count: 1
+
+      click_link '編集', href: edit_user_path(user)
+      choose '一般ユーザ'
+      click_button '更新'
+      expect(page).to have_content '管理ユーザが1人もいなくなると、管理ユーザを作成することができなくなるので、管理ユーザは1人以上残す必要があります'
+      expect(page).to have_content 'ユーザの種類は変更できません'
+
+      visit users_path
+      expect(page).to have_content '管理ユーザ', count: 1
     end
   end
 
