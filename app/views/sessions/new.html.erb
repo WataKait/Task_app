@@ -1,27 +1,31 @@
-<%= flash[:alert] if flash[:alert].present? %>
+<h1 class='fw-bold mb-3'><%= t('.task_application') %></h1>
 
-<h1><%= t('.task_application') %></h1>
+<div class='fs-5'>
+  <%= flash[:alert] if flash[:alert].present? %>
+</div>
 
-<%= form_with(url:login_path) do |form| %>
-  <div>
-    <div>
-      <%= form.label t('.user_name') %>
+<div class="bg-secondary fs-4 p-3 position-absolute rounded-3 top-50 start-50 text-center translate-middle w-50">
+  <%= form_with(url:login_path) do |form| %>
+    <div class='pb-3'>
+      <div class='mb-3'>
+        <%= form.label t('.user_name'), class:'fw-bolder' %>
+      </div>
+      <div class='mb-3'>
+        <%= form.text_field :name, class: 'p-1 w-100' %>
+      </div>
     </div>
-    <div>
-      <%= form.text_field :name %>
+    
+    <div class='pb-3'>
+      <div class='mb-3'>
+        <%= form.label t('.password'), class:'fw-bolder' %>
+      </div>
+      <div class='mb-3'>
+        <%= form.password_field :password, class: 'p-1 w-100' %>
+      </div>
     </div>
-  </div>
-  
-  <div>
-    <div>
-      <%= form.label t('.password') %>
+    
+    <div class='mb-3'>
+      <%= form.submit t('.login'), class: 'btn btn-success fs-4' %>
     </div>
-    <div>
-      <%= form.password_field :password %>
-    </div>
-  </div>
-  
-  <div>
-    <%= form.submit t('.login') %>
-  </div>
-<% end %>
+  <% end %>
+</div>
