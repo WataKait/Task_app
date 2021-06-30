@@ -19,9 +19,7 @@ class User < ApplicationRecord
   end
 
   def administrator_must_exist_at_update
-    selected_user = User.find(id)
-    parameter_admin = admin
-    return unless User.where(admin: true).size == 1 && selected_user.admin? && parameter_admin == false
+    return unless User.where(admin: true).size == 1 && admin_was && admin == false
 
     errors.add(:admin, :required)
     false
