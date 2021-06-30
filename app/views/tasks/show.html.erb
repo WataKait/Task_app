@@ -1,28 +1,28 @@
-<h1><%= t('.task_detail') %></h1>
+<h1 class='fw-bold mb-3'><%= t('.task_detail') %></h1>
 
-<div>
-  <div>
-    <div><%= t('.task') %>：</div>
+<div class='fs-5 w-50'>
+  <div class='d-flex mb-3 w-75'>
+    <div class='pe-1 text-end w-25'><%= t('.task') %>：</div>
     <div><%= @task.name %></div>
   </div>
-  <div>
-    <div><%= t('.label') %>：</div>
+  <div class='d-flex mb-3 w-75'>
+    <div class='pe-1 text-end w-25'><%= t('.label') %>：</div>
     <div><%= @task.label&.name %></div>
   </div>
-  <div>
-    <div><%= t('.priority') %>：</div>
+  <div class='d-flex mb-3 w-75'>
+    <div class='pe-1 text-end w-25'><%= t('.priority') %>：</div>
     <div><%= @task.priority.name %></div>
   </div>
-  <div>
-    <div><%= t('.status') %>：</div>
+  <div class='d-flex mb-3 w-75'>
+    <div class='pe-1 text-end w-25'><%= t('.status') %>：</div>
     <div><%= @task.status.name %></div>
   </div>
-  <div>
-    <div><%= t('.time_limit') %>：</div>
+  <div class='d-flex mb-3 w-75'>
+    <div class='pe-1 text-end w-25'><%= t('.time_limit') %>：</div>
     <div><%= @task.time_limit %></div>
   </div>
-  <div>
-    <div><%= t('.description') %>：</div>
+  <div class='d-flex mb-3 w-75'>
+    <div class='pe-1 text-end w-25'><%= t('.description') %>：</div>
     <div><%= @task.description %></div>
   </div>
 </div>
