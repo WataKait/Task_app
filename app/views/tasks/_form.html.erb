@@ -1,30 +1,32 @@
 <%= task.hidden_field :user_id, value: current_user.id %>
 
-<table>
-  <tr>
-    <th><%= t('.task') %></th>
-    <td><%= task.text_field :name %></td>
-  </tr>
-  <tr>
-    <th><%= t('.label') %></th>
-    <td><%= task.collection_select :label_id, @labels, :id, :name, prompt: t('.select_label') %></td>
-  </tr>
-  <tr>
-    <th><%= t('.priority') %></th>
-    <td><%= task.collection_select :priority_id, @priorities, :id, :name, prompt: t('.select_priority') %></td>
-  </tr>
-  <tr>
-    <th><%= t('.status') %></th>
-    <td><%= task.collection_select :status_id, @statuses, :id, :name, prompt: t('.select_status') %></td>
-  </tr>
-  <tr>
-    <th><%= t('.time_limit') %></th>
-    <td><%= task.datetime_field :time_limit %></td>
-  </tr>
-  <tr>
-    <th><%= t('.description') %></th>
-    <td><%= task.text_area :description %></td>
-  </tr>
-</table>
+<div>
+  <div>
+    <div><%= t('.task') %></div>
+    <div><%= task.text_field :name %></div>
+  </div>
+  <div>
+    <div><%= t('.label') %></div>
+    <div><%= task.collection_select :label_id, @labels, :id, :name, prompt: t('.select_label') %></div>
+  </div>
+  <div>
+    <div><%= t('.priority') %></div>
+    <div><%= task.collection_select :priority_id, @priorities, :id, :name, prompt: t('.select_priority') %></div>
+  </div>
+  <div>
+    <div><%= t('.status') %></div>
+    <div><%= task.collection_select :status_id, @statuses, :id, :name, prompt: t('.select_status') %></div>
+  </div>
+  <div>
+    <div><%= t('.time_limit') %></div>
+    <div><%= task.datetime_field :time_limit %></div>
+  </div>
+  <div>
+    <div><%= t('.description') %></div>
+    <div><%= task.text_area :description %></div>
+  </div>
+</div>
 
-<%= task.submit %>
+<div>
+  <%= task.submit %>
+</div>
