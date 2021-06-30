@@ -13,13 +13,13 @@ class User < ApplicationRecord
 
   def administrator_must_exist
     selected_user = self
-    return unless User.where(admin: true).size == 1 && selected_user.admin?
+    return unless User.where(admin: true).one? && selected_user.admin?
 
     throw :abort
   end
 
   def administrator_must_exist_at_update
-    return unless User.where(admin: true).size == 1 && admin_was && admin == false
+    return unless User.where(admin: true).one? && admin_was && admin == false
 
     errors.add(:admin, :required)
     false
