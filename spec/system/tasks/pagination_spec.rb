@@ -75,7 +75,7 @@ RSpec.describe '3ページ分のページネーションについて', type: :sy
     end
 
     it 'ページネーションが表示されない' do
-      expect(page).to have_selector 'td', text: task.name
+      expect(page).to have_content task.name
       expect(page).not_to have_css '.pagination'
       expect(page.all('.names').count).to eq TasksController::RECORDS_NUMBER_TO_DISPLAY
     end

@@ -75,12 +75,12 @@ RSpec.describe 'Tasks', type: :system do
       end
 
       it 'タスクの情報が正しく画面に表示されている' do
-        expect(page).to have_selector 'td', text: task.name
-        expect(page).to have_selector 'td', text: task.label.name
-        expect(page).to have_selector 'td', text: task.priority.name
-        expect(page).to have_selector 'td', text: task.status.name
-        expect(page).to have_selector 'td', text: task.time_limit
-        expect(page).to have_selector 'td', text: task.description
+        expect(page).to have_content task.name
+        expect(page).to have_content task.label.name
+        expect(page).to have_content task.priority.name
+        expect(page).to have_content task.status.name
+        expect(page).to have_content task.time_limit
+        expect(page).to have_content task.description
       end
     end
 
@@ -102,7 +102,7 @@ RSpec.describe 'Tasks', type: :system do
       it 'ボタンを押下したら作成に成功し、一覧画面へ遷移する' do
         click_button '作成'
         expect(page).to have_current_path tasks_path, ignore_query: true
-        expect(page).to have_selector 'td', text: '作業タスクA'
+        expect(page).to have_content '作業タスクA'
       end
 
       it '"タスクを入力してください" と画面に表示され、作成に失敗する' do
@@ -152,7 +152,7 @@ RSpec.describe 'Tasks', type: :system do
 
         click_button '更新'
         expect(page).to have_current_path tasks_path, ignore_query: true
-        expect(page).to have_selector 'td', text: '作業タスクA'
+        expect(page).to have_content '作業タスクA'
       end
 
       it '"タスクを入力してください" と画面に表示され、更新に失敗する' do
@@ -176,13 +176,13 @@ RSpec.describe 'Tasks', type: :system do
 
       it '削除確認ダイアログでキャンセルを押下したら、タスクが削除されない' do
         expect(page.dismiss_confirm).to eq '本当に削除しますか？'
-        expect(page).to have_selector 'td', text: task.name
+        expect(page).to have_content task.name
       end
 
       it '削除確認ダイアログで OK を押下したら、タスクが削除される' do
         expect(page.accept_confirm).to eq '本当に削除しますか？'
         expect(page).to have_content 'タスクを削除しました'
-        expect(page).not_to have_selector 'td', text: task.name
+        expect(page).not_to have_content task.name
       end
     end
 
@@ -203,49 +203,49 @@ RSpec.describe 'Tasks', type: :system do
       it "'abc' で検索したら 'abcタスク' が表示される" do
         fill_in('search', with: 'abc')
         click_button '検索'
-        expect(page).to have_selector 'td', text: abc_task.name
-        expect(page).not_to have_selector 'td', text: xyz_task.name
-        expect(page).not_to have_selector 'td', text: other_task.name
+        expect(page).to have_content abc_task.name
+        expect(page).not_to have_content xyz_task.name
+        expect(page).not_to have_content other_task.name
       end
 
       it "'未' で検索したら 'xyzタスク' が表示される" do
         fill_in('search', with: '未')
         click_button '検索'
-        expect(page).to have_selector 'td', text: xyz_task.name
-        expect(page).not_to have_selector 'td', text: abc_task.name
-        expect(page).not_to have_selector 'td', text: other_task.name
+        expect(page).to have_content xyz_task.name
+        expect(page).not_to have_content abc_task.name
+        expect(page).not_to have_content other_task.name
       end
 
       it "'タスク' で検索したら 'abcタスク・xyzタスク' が表示される" do
         fill_in('search', with: 'タスク')
         click_button '検索'
-        expect(page).to have_selector 'td', text: abc_task.name
-        expect(page).to have_selector 'td', text: xyz_task.name
-        expect(page).not_to have_selector 'td', text: other_task.name
+        expect(page).to have_content abc_task.name
+        expect(page).to have_content xyz_task.name
+        expect(page).not_to have_content other_task.name
       end
 
       it "'完了' で検索したら 'abcタスク・otherタスク' が表示される" do
         fill_in('search', with: '完了')
         click_button '検索'
-        expect(page).to have_selector 'td', text: abc_task.name
-        expect(page).to have_selector 'td', text: other_task.name
-        expect(page).not_to have_selector 'td', text: xyz_task.name
+        expect(page).to have_content abc_task.name
+        expect(page).to have_content other_task.name
+        expect(page).not_to have_content xyz_task.name
       end
 
       it "'abcd' で検索したら 表示されない" do
         fill_in('search', with: 'abcd')
         click_button '検索'
-        expect(page).not_to have_selector 'td', text: abc_task.name
-        expect(page).not_to have_selector 'td', text: xyz_task.name
-        expect(page).not_to have_selector 'td', text: other_task.name
+        expect(page).not_to have_content abc_task.name
+        expect(page).not_to have_content xyz_task.name
+        expect(page).not_to have_content other_task.name
       end
 
       it "'' で検索したら 全て表示される" do
         fill_in('search', with: '')
         click_button '検索'
-        expect(page).to have_selector 'td', text: abc_task.name
-        expect(page).to have_selector 'td', text: xyz_task.name
-        expect(page).to have_selector 'td', text: other_task.name
+        expect(page).to have_content abc_task.name
+        expect(page).to have_content xyz_task.name
+        expect(page).to have_content other_task.name
       end
     end
   end
