@@ -1,6 +1,8 @@
-<%= flash[:alert] if flash[:alert].present? %>
-
 <h1><%= t('.user_create') %></h1>
+
+<div class='fs-5'>
+  <%= flash[:alert] if flash[:alert].present? %>
+</div>
 
 <%= render partial: 'error_message', locals: { user: @user } %>
 

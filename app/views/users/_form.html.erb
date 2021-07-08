@@ -1,26 +1,35 @@
-<table>
-  <tr>
-    <th><%= t('.name') %></th>
-    <td><%= user.text_field :name %></td>
-  </tr>
-  <tr>
-    <th><%= t('.password') %></th>
-    <td><%= user.password_field :password %></td>
-  </tr>
-  <tr>
-    <th><%= t('.confirm_password') %></th>
-    <td><%= user.password_field :password_confirmation %></td>
-  </tr>
-  <tr>
-    <th><%= t('.user_type') %></th>
-    <td>
-      <%= user.label :admin, t('.general'), value: false %>
-      <%= user.radio_button :admin, false, checked: true %>
+<div class='fs-5 p-3 position-absolute rounded-3 start-50 text-center top-50 translate-middle w-50'>
+  <div>
+    <div class='pb-3'>
+      <div><%= t('.name') %></div>
+      <div><%= user.text_field :name, class: 'w-100' %></div>
+    </div>
+    <div class='pb-3'>
+      <div><%= t('.password') %></div>
+      <div><%= user.password_field :password, class: 'w-100' %></div>
+    </div>
+    <div class='pb-3'>
+      <div><%= t('.confirm_password') %></div>
+      <div><%= user.password_field :password_confirmation, class: 'w-100' %></div>
+    </div>
+    <div class='pb-3'>
+      <div><%= t('.user_type') %></div>
+      <div class='d-flex justify-content-around'>
+        <div>
+          <%= user.label :admin, t('.general'), value: false %>
+          <%= user.radio_button :admin, false, checked: true %>
+        </div>
 
-      <%= user.label :admin, t('.admin'), value: true %>
-      <%= user.radio_button :admin, true %>
-    </td>
-  </tr>
-</table>
+        <div>
+          <%= user.label :admin, t('.admin'), value: true %>
+          <%= user.radio_button :admin, true %>
+        </div>
+      </div>
+    </div>
 
-<%= user.submit %>
+  </div>
+
+  <div>
+    <%= user.submit class: 'btn btn-primary w-100' %>
+  </div>
+</div>

@@ -40,7 +40,7 @@ RSpec.describe 'Users', type: :system do
     it 'ユーザを登録したら、ユーザ一覧に登録したユーザが表示される' do
       click_button '作成'
       expect(page).to have_current_path users_path
-      expect(page).to have_selector 'td', text: 'Hanako'
+      expect(page).to have_content 'Hanako'
     end
 
     it '"ユーザ名を入力してください" と画面に表示され、登録に失敗する' do
@@ -177,13 +177,13 @@ RSpec.describe 'Users', type: :system do
 
     it '削除確認ダイアログでキャンセルを押下したら、ユーザが削除されない' do
       expect(page.dismiss_confirm).to eq '本当に削除しますか？'
-      expect(page).to have_selector 'td', text: other_user.name
+      expect(page).to have_content other_user.name
     end
 
     it '削除確認ダイアログで OK を押下したら、ユーザが削除される' do
       expect(page.accept_confirm).to eq '本当に削除しますか？'
       expect(page).to have_content 'ユーザを削除しました'
-      expect(page).not_to have_selector 'td', text: other_user.name
+      expect(page).not_to have_content other_user.name
     end
 
     it '"管理ユーザが1人もいなくなると、管理ユーザを作成することができなくなるので、管理ユーザは1人以上残す必要があります" と表示され、ユーザが削除されない' do
@@ -192,7 +192,7 @@ RSpec.describe 'Users', type: :system do
       click_link '削除', href: user_path(user)
       expect(page.accept_confirm).to eq '本当に削除しますか？'
       expect(page).to have_content '管理ユーザが1人もいなくなると、管理ユーザを作成することができなくなるので、管理ユーザは1人以上残す必要があります'
-      expect(page).to have_selector 'td', text: user.name
+      expect(page).to have_content user.name
     end
   end
 
@@ -210,14 +210,14 @@ RSpec.describe 'Users', type: :system do
     end
 
     it 'タスク名等が表示されていること' do
-      expect(page).to have_selector 'td', text: task.name
-      expect(page).to have_selector 'td', text: task.label.name
-      expect(page).to have_selector 'td', text: task.priority.name
-      expect(page).to have_selector 'td', text: task.status.name
-      expect(page).to have_selector 'td', text: task.time_limit
-      expect(page).to have_selector 'td', text: task.created_at
+      expect(page).to have_content task.name
+      expect(page).to have_content task.label.name
+      expect(page).to have_content task.priority.name
+      expect(page).to have_content task.status.name
+      expect(page).to have_content task.time_limit
+      expect(page).to have_content task.created_at
 
-      expect(page).not_to have_selector 'td', text: other_user_task.name
+      expect(page).not_to have_content other_user_task.name
     end
   end
 

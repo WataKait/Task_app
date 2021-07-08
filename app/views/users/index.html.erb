@@ -1,14 +1,17 @@
-<%= flash[:alert] if flash[:alert].present? %>
-<%= flash[:notice] if flash[:notice].present? %>
+<h1 class='fw-bold mb-3'><%= t('.user_list') %></h1>
 
-<h1><%= t('.user_list') %></h1>
+<div class='fs-5'>
+  <%= flash[:alert] if flash[:alert].present? %>
+  <%= flash[:notice] if flash[:notice].present? %>
+</div>
 
-<p><%= link_to t('.transition_task_index'), tasks_path %></p>
+<div class='mb-3'>
+  <%= link_to t('.transition_task_index'), tasks_path, class: 'btn btn-success col-3 me-2' %>
+  <%= link_to t('.transition_user_create'), new_user_path, class: 'btn btn-primary col-3' %>
+</div>
 
-<p><%= link_to t('.transition_user_create'), new_user_path %></p>
-
-<table class="table table-bordered">
-  <thead class="table-secondary">
+<table class='border-secondary table table-bordered table-dark table-striped text-center'>
+  <thead class='align-middle'>
     <tr>
       <th><%= t('.name') %></th>
       <th><%= t('.number_of_tasks') %></th>
@@ -24,9 +27,9 @@
         <td class='user_names'><%= user.name %></td>
         <%= content_tag(:td, user.tasks.size, id: i)%>
         <td><%= user.admin? ? t('.admin') : t('.general') %></td>
-        <td><%= link_to t('.transition_user_edit'), edit_user_path(user) %></td>
-        <td><%= link_to t('.delete_label'), user, method: :delete, data: { confirm: t('.delete_confirm') } %></td>
-        <td><%= link_to t('.transition_user_tasks'), user %></td>
+        <td><%= link_to t('.transition_user_tasks'), user, class: 'btn btn-success btn-sm' %></td>
+        <td><%= link_to t('.transition_user_edit'), edit_user_path(user), class: 'btn btn-primary btn-sm' %></td>
+        <td><%= link_to t('.delete_label'), user, method: :delete, data: { confirm: t('.delete_confirm') }, class: 'btn btn-danger btn-sm' %></td>
       </tr>
     <% end %>
   </tbody>

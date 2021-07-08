@@ -1,8 +1,12 @@
-<table>
-  <tr>
-    <th><%= t('.label') %></th>
-    <td><%= label.text_field :name %></td>
-  </tr>
-</table>
+<div class='fs-5 p-3 position-absolute rounded-3 start-50 text-center top-50 translate-middle w-50'>
+  <div>
+    <div class='pb-5'>
+      <div class='pb-2'><%= t('.label') %></div>
+      <div><%= label.text_field :name, class: 'w-100' %></div>
+    </div>
+  </div>
 
-<%= label.submit %>
+  <div>
+    <%= label.submit class: 'btn btn-primary w-100' %>
+  </div>
+</div>

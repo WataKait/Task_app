@@ -1,9 +1,7 @@
-<%= stylesheet_link_tag "error_message" %>
-
 <% if label.errors.present? %>
   <ul>
     <% label.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+      <li class='fs-5 text-danger'><%= message %></li>
     <% end %>
   </ul>
 <% end %>

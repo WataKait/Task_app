@@ -1,7 +1,9 @@
-<div><%= flash[:alert] if flash[:alert].present? %></div>
-<div><%= flash[:warning] if flash[:warning].present? %></div>
-
 <h1><%= t('.user_edit') %></h1>
+
+<div class='fs-5'>
+  <div><%= flash[:alert] if flash[:alert].present? %></div>
+  <div><%= flash[:warning] if flash[:warning].present? %></div>
+</div>
 
 <%= render partial: 'error_message', locals: { user: @user } %>
 
